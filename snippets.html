@@ -1,0 +1,18 @@
+---
+layout: default
+title: Snippets
+---
+
+<h4>A collection of (somewhat) useful snippets.</h4>
+For the full feed with comments and
+all, check out my <a href={{ site.socials.gist }}>Gists</a> page.
+
+<section class="snippets-container">
+{% for snippet in site.data.gist_snippets %}
+  <article class="card">
+    <a href="{{ snippet.html_url }}" class="filename">{{ snippet.filename }}</a>
+    <span class="desc">{{ snippet.description }}</span>
+    {% gist snippet.id %}
+  </article>
+{% endfor %}
+</section>

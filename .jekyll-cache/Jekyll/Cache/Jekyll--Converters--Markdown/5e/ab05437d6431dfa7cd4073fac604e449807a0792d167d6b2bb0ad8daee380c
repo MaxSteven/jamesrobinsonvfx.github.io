@@ -1,0 +1,110 @@
+I"�<blockquote>
+  <p>Hipfile: <a href="/assets/posts/decay-values/jamesr_decay.hiplc">jamesr_decay.hip</a></p>
+</blockquote>
+
+<h2 id="overview">Overview</h2>
+<ul>
+  <li><a href="#overview">Overview</a>
+    <ul>
+      <li><a href="#accumulating--substeps">Accumulating &amp; Substeps</a></li>
+      <li><a href="#decaying--substeps">Decaying &amp; Substeps</a></li>
+      <li><a href="#get-to-the-solution-already">Get to the solution already!</a>
+        <ul>
+          <li><a href="#subtract-and-clamp">Subtract and Clamp</a></li>
+          <li><a href="#power-function">Power Function</a></li>
+          <li><a href="#linear-combination-dop">Linear Combination DOP</a></li>
+        </ul>
+      </li>
+      <li><a href="#conclusion">Conclusion</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>One of the most common use cases for the <strong>Solver SOP</strong> is to accumulate values
+over time.</p>
+
+<h3 id="accumulating--substeps">Accumulating &amp; Substeps</h3>
+
+<p>Accumulating a value like color or density over time is pretty straightforward.</p>
+<ul>
+  <li>Add to the value from the previous timestep</li>
+  <li>Clamp as needed</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="err">@</span><span class="n">density</span> <span class="o">+=</span> <span class="n">chf</span><span class="p">(</span><span class="s">"accumulate"</span><span class="p">);</span>
+<span class="n">f</span><span class="err">@</span><span class="n">density</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">f</span><span class="err">@</span><span class="n">density</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>When you introduce substeps, the accumulation can get a little crazy! Since the
+solver is doing this addition <em>each timestep</em>, you’ll wind up increasing the
+value much more quickly than with just one substep. Luckily
+the solution is pretty straight forward: multiply your accumulation scale by
+<code class="language-plaintext highlighter-rouge">f@TimeInc</code> before adding.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="err">@</span><span class="n">density</span> <span class="o">+=</span> <span class="n">chf</span><span class="p">(</span><span class="s">"accumulate"</span><span class="p">)</span> <span class="o">*</span> <span class="n">f</span><span class="err">@</span><span class="n">TimeInc</span><span class="p">;</span>
+<span class="n">f</span><span class="err">@</span><span class="n">density</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">f</span><span class="err">@</span><span class="n">density</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="decaying--substeps">Decaying &amp; Substeps</h3>
+<p>Accumulating was easy enough right? At first you might think the same could be
+done for decaying or fading a value over time
+(<a href="https://forums.odforce.net/topic/30990-solver-sop-and-substeps/">like I did</a>…oof!).</p>
+
+<p>If you’re decreasing the value by subtracting, multiplying by <code class="language-plaintext highlighter-rouge">f@TimeInc</code> is
+just fine.</p>
+
+<p>But if you’re doing a fading effect where you’re multiplying by some value
+between 0 and 1, multiplying by the time increment will actually have <em>the opposite</em>
+effect!</p>
+
+<p>Imagine you start with a <code class="language-plaintext highlighter-rouge">f@density</code> value of <code class="language-plaintext highlighter-rouge">1.0</code>, and you have a decay rate of <code class="language-plaintext highlighter-rouge">0.98</code>. At
+1 substep, each frame you are multiplying the previous value by <code class="language-plaintext highlighter-rouge">0.98</code>. So by
+frame 2, your <code class="language-plaintext highlighter-rouge">f@density</code> attribute is <code class="language-plaintext highlighter-rouge">0.98</code>, frame 3 <code class="language-plaintext highlighter-rouge">0.9604</code>…and so on.</p>
+
+<p>But if you multiply your decay rate by the time increment, you get a number
+that’s much much lower!</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// f@Timeinc = 0.0416
+0.98 * f@Timeinc = 0.040768
+</code></pre></div></div>
+<p>in this case, each <em>substep</em> we’d be multiplying the value by <code class="language-plaintext highlighter-rouge">0.040768</code>. Even
+after just a single step we’d probably have all our value eaten away, which is
+exactly the problem we want to avoid.</p>
+
+<h3 id="get-to-the-solution-already">Get to the solution already!</h3>
+<p>Alright alright, we actually have a few ways to solve this one.</p>
+
+<h4 id="subtract-and-clamp">Subtract and Clamp</h4>
+<p>This first way is similar to the additive accumulation method above (subtraction
+is really just addition in disguise anyways). Instead of decreasing the value by
+mulitplying, we’ll just subtract some small amount each timestep:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>v@Cd.x = max(0, v@Cd.x - (chf("decay") * f@Timeinc));
+</code></pre></div></div>
+
+<h4 id="power-function">Power Function</h4>
+<p>The second way uses VEX’s <code class="language-plaintext highlighter-rouge">pow()</code> function to decay the value over time.</p>
+
+<blockquote>
+  <p>This method will have a different decaying behaviour vs just doing a simple
+multiplication on a single substep. But it tends to look pretty natural so go ahead and
+try it out</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>v@Cd.x *= pow(chf("decay"), f@Timeinc);
+</code></pre></div></div>
+
+<p>Easy as that! Try it in a Solver SOP with different substep values and see the
+comparison (or take a look at the attached hipfile). Should be pretty close.</p>
+
+<h4 id="linear-combination-dop">Linear Combination DOP</h4>
+<p>This method is less for when you’re trying to do this in a SOP solver, and more
+for if you’re building a setup in DOPs (and want to use this microsolver for
+something!)</p>
+
+<p>It’s really as simple and changing the dropdown next to the <strong>Coefficient</strong>
+parameter from <strong>None</strong> to <code class="language-plaintext highlighter-rouge">e^Timestep</code>. Looks pretty similar to what we just
+did above!</p>
+
+<h3 id="conclusion">Conclusion</h3>
+:ET

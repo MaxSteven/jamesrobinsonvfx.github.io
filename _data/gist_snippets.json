@@ -1,0 +1,65 @@
+[
+    {
+        "description": "Easiest way to get multiparm instance index",
+        "id": "3e751c7cb7e6d51bee4ae257cd917d5d",
+        "html_url": "https://gist.github.com/3e751c7cb7e6d51bee4ae257cd917d5d",
+        "created_at": "2021-08-24T17:32:22Z",
+        "filename": "multiparm_instance_index.py"
+    },
+    {
+        "description": "Quick 'n' dirty script to include as part of a custom cache node, or a shelf tool to calculate cache times for frame sequences (Python 3)",
+        "id": "27bbdd97777f7b80400b90d809066471",
+        "html_url": "https://gist.github.com/27bbdd97777f7b80400b90d809066471",
+        "created_at": "2021-08-20T18:51:59Z",
+        "filename": "first_last_filetime.py"
+    },
+    {
+        "description": "Convert RBDs (Fetch Packed Geometry from DOP network style) to instancepoints. Pretty sure this is lifted from one of Henry Foster (Toadstorm)'s odforce/sidefx forum replies.",
+        "id": "25d18103a64cfc7873111ac3ea8fe799",
+        "html_url": "https://gist.github.com/25d18103a64cfc7873111ac3ea8fe799",
+        "created_at": "2021-08-17T23:21:03Z",
+        "filename": "rbd_to_instancepoints.h"
+    },
+    {
+        "description": "Set viewport to camera",
+        "id": "058ac44d400db20286691254ddc06f1f",
+        "html_url": "https://gist.github.com/058ac44d400db20286691254ddc06f1f",
+        "created_at": "2021-07-20T03:53:31Z",
+        "filename": "set_viewer_to_cam.py"
+    },
+    {
+        "description": "Pick a random value of a bitmask per point",
+        "id": "39907b3977f2f020843da6bc97c57417",
+        "html_url": "https://gist.github.com/39907b3977f2f020843da6bc97c57417",
+        "created_at": "2021-07-17T03:08:15Z",
+        "filename": "random_from_bitmask.h"
+    },
+    {
+        "description": "Action button script to copy the value of a parameter to the clipboard (linux)",
+        "id": "f1a14c93e1046100c1f886b939ffbecb",
+        "html_url": "https://gist.github.com/f1a14c93e1046100c1f886b939ffbecb",
+        "created_at": "2021-07-14T19:06:29Z",
+        "filename": "copy_parm_to_clipboard.py"
+    },
+    {
+        "description": "Houdini Version in a Houdini Package",
+        "id": "b186f389b261dab47b813004df5aa980",
+        "html_url": "https://gist.github.com/b186f389b261dab47b813004df5aa980",
+        "created_at": "2021-04-25T04:02:45Z",
+        "filename": "houdini_version_package.json"
+    },
+    {
+        "description": "Cook Topnet on the Command Line",
+        "id": "1cfaba7eadae52c2d59d2df35904c4d3",
+        "html_url": "https://gist.github.com/1cfaba7eadae52c2d59d2df35904c4d3",
+        "created_at": "2021-03-21T18:43:53Z",
+        "filename": "top_cook_cli.py"
+    },
+    {
+        "description": "Python Attribute Menu",
+        "id": "7eb7eb9823c1907763a165eeb9f9be27",
+        "html_url": "https://gist.github.com/7eb7eb9823c1907763a165eeb9f9be27",
+        "created_at": "2021-03-17T19:52:55Z",
+        "filename": "attrib_menu.py"
+    }
+]

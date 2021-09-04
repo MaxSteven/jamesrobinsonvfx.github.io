@@ -1,0 +1,38 @@
+---
+layout: default
+title: Work
+---
+
+
+< Reel Goes Here >
+<br>
+<h4>Some commercial projects I've worked on</h4>
+
+<!-- Work Project Cards -->
+<section class="work-container">
+{% for project in site.data.work %}
+  {% if project.ignore == true %}
+    {% continue %}
+  {% endif %}
+  <article class="card">
+    <div class="content">
+      <span class="brand">{{ project.brand }}: </span><span class="name">{{ project.name }}</span>
+      <span class="studio">{{ project.studio }}</span>
+      <span class="responsibilities-title">Responsibilites</span>
+      <ul class="responsibility-list">
+        {% for responsibility in project.responsibilities %}
+        <li class="responsibility-item">{{ responsibility }}</li>
+        {% endfor %}
+      </ul>
+      <span class="desc">{{ project.description }}</span>
+    </div>
+    <div class="video">
+    {% if project.embed_platform == "youtube" %}
+      {% include youtube-player.html id=project.embed_link title=project.name %}
+    {% elsif project.embed_platform == "vimeo" %}
+    {% include vimeo-player.html id=project.embed_link %}
+    {% endif %}
+    </div>
+  </article>
+  {% endfor %}
+  </section>

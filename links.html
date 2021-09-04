@@ -1,0 +1,17 @@
+---
+layout: default
+title: Links
+---
+
+<h4>Useful links, cool blogs, etc...</h4>
+
+<section class="links-container">
+    {% for link in site.data.links_and_resources %}
+    <a href="{{ link.link }}" class="card">
+        <div class="content">
+            <span class="title">{{ link.title }}</span>
+            <span class="desc">{{ link.description }}</span>
+        </div>
+        </a>
+    {% endfor %}
+</section>

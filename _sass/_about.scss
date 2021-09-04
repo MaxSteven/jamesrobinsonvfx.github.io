@@ -1,0 +1,18 @@
+.about-me {
+    display: flex;
+    flex-direction: column;
+    max-width: 38rem;
+    margin: auto;
+
+    .photo {
+        max-width: 30%;
+        max-height: 30%;
+    }
+
+    .blurb {
+        display: inline-block;
+        margin-top: 1rem;
+        line-height: 1.25rem;
+    }
+
+}

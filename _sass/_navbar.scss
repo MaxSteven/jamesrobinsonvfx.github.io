@@ -1,0 +1,18 @@
+.navbar {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    padding-top: 0.25rem;
+    align-items: center;
+}
+
+.navlink {
+    color: $nord10;
+    margin-right: 1rem;
+    font-size: medium;
+}
+
+.fab {
+    font-size: 1.25rem;
+    color: $nord13;
+  }

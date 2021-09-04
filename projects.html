@@ -1,0 +1,21 @@
+---
+layout: default
+title: Projects
+---
+<h4>Personal tools and projects</h4>
+
+<!-- Personal Project Cards -->
+<section class="projects-container">
+  {% for project in site.projects %}
+    <a href="{{ project.url }}" class="card">
+      <div class="content">
+        <span class="brand">{{ project.title }}</span>
+        <span class="desc">{{ project.description }}</span>
+      </div>
+      {% if project.thumbnail %}
+        <img class="image" src="{{ project.thumbnail }}">
+      {% endif %}
+      <!-- <a href="{{ project.url }}">Read More</a> -->
+    </a>
+  {% endfor %}
+</section>

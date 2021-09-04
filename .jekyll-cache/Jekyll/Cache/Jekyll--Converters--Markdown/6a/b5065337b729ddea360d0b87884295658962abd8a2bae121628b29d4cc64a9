@@ -1,0 +1,32 @@
+I"d
+<blockquote>
+  <p>Hipfile: <a href="/assets/posts/decay-values/jamesr_decayvalues.hiplc">jamesr_decayvalues.hip</a></p>
+</blockquote>
+
+<p>One of the most common use cases for the <strong>Solver SOP</strong> is to accumulate values
+over time.</p>
+
+<h4 id="accumulating--substeps">Accumulating &amp; Substeps</h4>
+
+<p>Accumulating a value like color or density over time is pretty straightforward.</p>
+<ul>
+  <li>Add to the value from the previous timestep</li>
+  <li>Clamp as needed</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="err">@</span><span class="n">density</span> <span class="o">+=</span> <span class="n">chf</span><span class="p">(</span><span class="s">"accumulate"</span><span class="p">);</span>
+<span class="n">f</span><span class="err">@</span><span class="n">density</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">f</span><span class="err">@</span><span class="n">density</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>When you introduce substeps, the accumulation can get a little crazy! Luckily
+the solution is pretty straight forward: multiply your accumulation scale by
+<code class="language-plaintext highlighter-rouge">f@TimeInc</code> before adding.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="err">@</span><span class="n">density</span> <span class="o">+=</span> <span class="n">chf</span><span class="p">(</span><span class="s">"accumulate"</span><span class="p">)</span> <span class="o">*</span> <span class="n">f</span><span class="err">@</span><span class="n">TimeInc</span><span class="p">;</span>
+<span class="n">f</span><span class="err">@</span><span class="n">density</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">f</span><span class="err">@</span><span class="n">density</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="decaying--substeps">Decaying &amp; Substeps</h4>
+<p>Accumulating was easy enough right? At first you might think the same could be
+done for decaying or fading a value over time (<a href="https://forums.odforce.net/topic/30990-solver-sop-and-substeps/">like I did</a>…oof!)</p>
+:ET

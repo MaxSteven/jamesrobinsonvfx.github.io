@@ -1,0 +1,340 @@
+[
+    {
+        "name": "Dark Alliance Cinematic Launch",
+        "brand": "Dungeons & Dragons",
+        "studio": "The Mill",
+        "embed_link": "I0xKXOQJaT4",
+        "embed_platform": "youtube",
+        "thumbnail": "/work/assets/dd_darkalliance/images/thumbnail.jpg",
+        "supporting_images": [
+            "/test/path1",
+            "/test/path2"
+        ],
+        "responsibilities": [
+            "All Bow & Arrow FX",
+            "All Dragon Ice Breath FX",
+            "Arrow Impact FX",
+            "Balista Destruction",
+            "Ground Kickup Setup"
+        ],
+        "timestamps": [],
+        "description": "Created FX setups and ran shots for all of the bow & arrow FX, dragon breath, and balista destruction. Created a procedural ground kickup setup for artists to run over all the characters.",
+        "ignore": false
+    },
+    {
+        "name": "Hey, the bug lady’s here. And she’s not here for a play date.",
+        "brand": "Orkin",
+        "studio": "The Mill",
+        "embed_link": "hF3r3SYQnLs",
+        "embed_platform": "youtube",
+        "thumbnail": "/work/assets/orkin_sheepnmoon/images/thumbnail.jpg",
+        "supporting_images": [
+            "/test/path1",
+            "/test/path2"
+        ],
+        "responsibilities": [
+            "Procedural yarn thread generation tool for mouth shapes",
+            "Procedural felt tool for better integration"
+        ],
+        "timestamps": [],
+        "description": "Created tools for procedurally generating photo-realistic, art-directable CG thread and felt. Animators provided simple curves, and lighters had control over thread plies, twisting, color, fray, frizz, and profile. Felt layer was used to help get nice shadow interaction where the thread meets the live-action Sheep and Moon crafts.",
+        "ignore": false
+    },
+    {
+        "name": "Flat Matthew Super Bowl LV",
+        "brand": "Doritos 3D",
+        "studio": "The Mill",
+        "embed_link": "BLuqtTn4610",
+        "embed_platform": "youtube",
+        "thumbnail": "/work/assets/flat_matthew/images/thumbnail.jpg",
+        "supporting_images": [
+            "/test/path1",
+            "/test/path2"
+        ],
+        "responsibilities": [
+            "Cloth Rig R&D for the Kimmel suit",
+            "Bathroom Outfit R&D and Simulation",
+            "Shot Execution"
+        ],
+        "timestamps": [],
+        "description": "Did some cloth stuff here.",
+        "ignore": false
+    },
+    {
+        "name": "Season 8 - Mayhem",
+        "brand": "Apex Legends",
+        "studio": "The Mill",
+        "embed_link": "8KWMwl-Qd0E",
+        "embed_platform": "youtube",
+        "thumbnail": "/work/assets/apex8/images/thumbnail.jpg",
+        "supporting_images": [
+            "/testtest/1"
+        ],
+        "responsibilities": [
+            "Ground Destruction FX",
+            "Dirt Explosion R&D and Layout/Instancing",
+            "Ship & Cliff Destruction"
+        ],
+        "timestamps": [],
+        "description": "wow did so much ooh",
+        "ignore": false
+    },
+    {
+        "name": "Season 7 - Ascension",
+        "brand": "Apex Legends",
+        "studio": "The Mill",
+        "embed_link": "_ZpLbriJXvM",
+        "embed_platform": "youtube",
+        "thumbnail": "",
+        "supporting_images": [],
+        "responsibilities": [
+            "Procedural Hovercraft Thruster & Environment Interaction FX R&D and Setup",
+            "Hovercraft FX rig Shot Execution"
+        ],
+        "timestamps": [],
+        "description": "",
+        "ignore": false
+    },
+    {
+        "name": "Season 6 - Boosted",
+        "brand": "Apex Legends",
+        "studio": "The Mill",
+        "embed_link": "qzdGo7FBndA",
+        "embed_platform": "youtube",
+        "thumbnail": "",
+        "supporting_images": [],
+        "responsibilities": [
+            "Shield FX",
+            "Green Toxic Gas",
+            "All FX Inside Gun"
+        ],
+        "timestamps": [],
+        "description": "",
+        "ignore": false
+    },
+    {
+        "name": "Season 4 - Assimilation",
+        "brand": "Apex Legends",
+        "studio": "The Mill",
+        "embed_link": "QzfsGxrCD4o",
+        "embed_platform": "youtube",
+        "thumbnail": "",
+        "supporting_images": [],
+        "responsibilities": [],
+        "timestamps": [],
+        "description": "",
+        "ignore": false
+    },
+    {
+        "name": "Season 3 - Meltdown",
+        "brand": "Apex Legends",
+        "studio": "The Mill",
+        "embed_link": "NEAWC9eK1Ts",
+        "embed_platform": "youtube",
+        "thumbnail": "",
+        "supporting_images": [],
+        "responsibilities": [
+            "Wattson Electricity - R&D and Execution",
+            "Energy",
+            "Drone FX"
+        ],
+        "timestamps": [],
+        "description": "",
+        "ignore": false
+    },
+    {
+        "name": "Season 2 - Battle Charge",
+        "brand": "Apex Legends",
+        "studio": "The Mill",
+        "embed_link": "ThSKocfe5QE",
+        "embed_platform": "youtube",
+        "thumbnail": "",
+        "supporting_images": [],
+        "responsibilities": [
+            "Wattson Electricity - R&D and Execution",
+            "Blood",
+            "Plasma",
+            "Ground Interaction"
+        ],
+        "timestamps": [],
+        "description": "",
+        "ignore": false
+    },
+    {
+        "name": "Beyond Light Reveal Trailer",
+        "brand": "Destiny",
+        "studio": "The Mill",
+        "embed_link": "h-5S82ETKvI",
+        "embed_platform": "youtube",
+        "thumbnail": "",
+        "supporting_images": [],
+        "responsibilities": [
+            "Cloth and Fur FX R&D, Setup, and Shot Execution",
+            "Pipeline Automation"
+        ],
+        "timestamps": [],
+        "description": "",
+        "ignore": false
+    },
+    {
+        "name": "What's Your Warrior?",
+        "brand": "US Army",
+        "studio": "The Mill",
+        "embed_link": "7TprgnuYfyQ",
+        "embed_platform": "youtube",
+        "thumbnail": "",
+        "supporting_images": [],
+        "responsibilities": [
+            "Procedural Cell Modelling",
+            "Some Shading",
+            "All FX & Instancing Setup"
+        ],
+        "timestamps": [],
+        "description": "",
+        "ignore": false
+    },
+    {
+        "name": "The Art of Fast",
+        "brand": "Maserati",
+        "studio": "The Mill",
+        "embed_link": "AlmfGuxLWvQ",
+        "embed_platform": "youtube",
+        "thumbnail": "",
+        "supporting_images": [],
+        "responsibilities": [
+            "Tornado Simulation",
+            "Shading & Rendering"
+        ],
+        "timestamps": [],
+        "description": "",
+        "ignore": false
+    },
+    {
+        "name": "Famous Cars",
+        "brand": "Walmart",
+        "studio": "The Mill",
+        "embed_link": "W79Hr2GxomA",
+        "embed_platform": "youtube",
+        "thumbnail": "",
+        "supporting_images": [],
+        "responsibilities": [
+            "All Pumpkin Transformation FX",
+            "Grass Growth",
+            "Instancing Setup"
+        ],
+        "timestamps": [],
+        "description": "",
+        "ignore": false
+    },
+    {
+        "name": "Green Means Go",
+        "brand": "Mountain Dew",
+        "studio": "The Mill",
+        "embed_link": "NLRcHzgUBs0",
+        "embed_platform": "youtube",
+        "thumbnail": "",
+        "supporting_images": [],
+        "responsibilities": [
+            "Ocean Modelling",
+            "Ocean Simulation",
+            "Splashes",
+            "Digital Transformation FX",
+            "Pipeline Caching Tools"
+        ],
+        "timestamps": [],
+        "description": "",
+        "ignore": false
+    },
+    {
+        "name": "OptiPlex 7070 Ultra (2019)",
+        "brand": "Dell",
+        "studio": "The Mill",
+        "embed_link": "S4pjymJ3aVg",
+        "embed_platform": "youtube",
+        "thumbnail": "",
+        "supporting_images": [],
+        "responsibilities": [
+            "Sketch Lines Animation & Shading"
+        ],
+        "timestamps": [],
+        "description": "",
+        "ignore": false
+    },
+    {
+        "name": "Butterflies",
+        "brand": "BMW",
+        "studio": "The Mill",
+        "embed_link": "5G5B-gmy0VU",
+        "embed_platform": "youtube",
+        "thumbnail": "",
+        "supporting_images": [],
+        "responsibilities": [
+            "Butterfly System"
+        ],
+        "timestamps": [],
+        "description": "",
+        "ignore": false
+    },
+    {
+        "name": "Zen Apartment",
+        "brand": "Geico",
+        "studio": "The Mill",
+        "embed_link": "267248084",
+        "embed_platform": "vimeo",
+        "thumbnail": "",
+        "supporting_images": [],
+        "responsibilities": [
+            "Sand Pouring and Dumping"
+        ],
+        "timestamps": [],
+        "description": "",
+        "ignore": false
+    },
+    {
+        "name": "QLED 8K Launch Film",
+        "brand": "Samsung",
+        "studio": "The Mill",
+        "embed_link": "quwk7hb8E1M?start=5",
+        "embed_platform": "youtube",
+        "thumbnail": "",
+        "supporting_images": [],
+        "responsibilities": [
+            "Lighting",
+            "Shading",
+            "Instancing",
+            "Some Simulation"
+        ],
+        "timestamps": [],
+        "description": "",
+        "ignore": false
+    },
+    {
+        "name": "Run it",
+        "brand": "Nike Korea",
+        "studio": "The Mill",
+        "embed_link": "251443336",
+        "embed_platform": "vimeo",
+        "thumbnail": "",
+        "supporting_images": [],
+        "responsibilities": [
+            "CG Snow"
+        ],
+        "timestamps": [],
+        "description": "",
+        "ignore": false
+    },
+    {
+        "name": "Feel Something Again",
+        "brand": "KIA",
+        "studio": "The Mill",
+        "embed_link": "258563206",
+        "embed_platform": "vimeo",
+        "thumbnail": "",
+        "supporting_images": [],
+        "responsibilities": [
+            "Tire and Environment Smoke"
+        ],
+        "timestamps": [],
+        "description": ""
+    }
+]

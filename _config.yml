@@ -1,0 +1,47 @@
+# Permalinks
+permalink: pretty
+
+# Setup
+title: James Robinson
+tagline: Houdini FX TD
+url: https://jamesrobinsonvfx.com
+paginate: 25
+except_separator: <!--more-->
+baseurl: ""
+
+# Assets
+# We specify the directory for Jekyll so we can use @imports.
+sass:
+  sass_dir: _sass
+  style: :compressed
+
+# About/contact
+author:
+  name: James Robinson
+  url: http://jamesrobinsonvfx.com
+  email: james@jamesrobinsonvfx.com
+
+# Custom vars
+socials:
+  github: https://github.com/jamesrobinsonvfx
+  gist: https://gist.github.com/jamesrobinsonvfx
+  insta: https://www.instagram.com/jamesrobinsonvfx/
+  linkedin: https://www.linkedin.com/in/jamesrobinsonvfx/
+  vimeo: https://vimeo.com/jamesrobinsonvfx
+
+reel_link: 355489206/b87d2c92e4
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-gist
+
+# Collections
+collections:
+  projects:
+    output: true
+    order:
+      - /inspect-node-data.md
+      - /hair-cards-to-guide-curves
+      - /mplay-batch.md
+      - /colorpalette-ramp.md

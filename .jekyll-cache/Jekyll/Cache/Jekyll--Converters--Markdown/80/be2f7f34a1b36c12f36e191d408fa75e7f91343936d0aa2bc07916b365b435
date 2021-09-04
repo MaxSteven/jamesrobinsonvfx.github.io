@@ -1,0 +1,11 @@
+I"4<p><img src="/assets/posts/viewport-draw-modes/preview.png" alt="Viewport Modes" /></p>
+
+<p>I recently discovered that you can actually set the viewport drawing modes to be
+unique per Shading Mode. ie. when templating geo, you can shade with “Wireframe
+Ghost” instead of the default template wireframe.</p>
+
+<p><img src="/assets/posts/viewport-draw-modes/settings.png" alt="Viewport Settings" /></p>
+
+<p>This combined with a thinner wire width makes for a pretty pleasing experience!
+The ghost mode when templated also sort of helps show a bit more depth.</p>
+:ET

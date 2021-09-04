@@ -1,0 +1,35 @@
+I"S<blockquote>
+  <p>Hipfile: <a href="/assets/posts/ftrim-function/jamesr_ftrim.hiplc">jamesr_ftrim.hip</a></p>
+</blockquote>
+
+<h3 id="problem">Problem</h3>
+<p>Sometimes you want to reference the value of a parameter and display it as a
+string to put in a Font SOP, or the <a href="2012-02-07-example-content.md">Viewport
+Comment</a> of a Camera node when you’re wedging
+sims or making some sort of visualizer.</p>
+
+<p>But quite often, if you’re referencing a <code class="language-plaintext highlighter-rouge">float</code> parameter, you wind up getting
+allllll the digits that come with it, imprecision and all, rather than just a
+nice float</p>
+
+<p>ie.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.05
+</code></pre></div></div>
+<p>becomes</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.050000000000000009
+</code></pre></div></div>
+<p>which is probably <em>not</em> what you want!</p>
+
+<p>A possible solution might be something like</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>floor(ch("/some/parm") * 1000)/1000
+</code></pre></div></div>
+<p>Unfortunately, this fails too :(</p>
+
+<h3 id="fix">Fix</h3>
+
+<p>The solution is actually quite simple! We can use the <code class="language-plaintext highlighter-rouge">ftrim()</code> function from
+HScript. <code class="language-plaintext highlighter-rouge">ftrim()</code> will strip off all those unwanted digits and leave you with a
+nice clean value, pretty much as you typed it!</p>
+
+:ET
