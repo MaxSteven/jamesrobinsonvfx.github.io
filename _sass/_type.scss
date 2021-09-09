@@ -87,6 +87,10 @@ blockquote {
   }
 }
 
+.blockquote-dl {
+  @extend blockquote;
+  border-color: $nord8;
+}
 
 // Markdown footnotes
 //

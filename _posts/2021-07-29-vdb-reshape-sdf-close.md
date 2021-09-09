@@ -6,17 +6,10 @@ thumbnail: /assets/posts/vdb-reshape-sdf-close/images/preview.jpg
 categories: tips
 tags: houdini vdb sdf
 ---
-
-### Overview
-
-{:.toc}
-- [Old Way](#old-way)
-- [New Way](#new-way)
-- [Conclusion](#conclusion)
-
 > Hipfile: [jamesr_vdbreshapesdfclose.hip](/assets/posts/vdb-reshape-sdf-close/jamesr_vdbreshapesdfclose.hiplc)
+{:style="border-color: #d08770"}
 
-### Old Way
+### Dilate and Erode (Old)
 Most people are probably familiar with the following workflow for sealing up
 gaps and holes in an SDF using 2 **VDB Reshape SDF** nodes:
 
@@ -32,7 +25,7 @@ gaps and holes in an SDF using 2 **VDB Reshape SDF** nodes:
 ![Old way](/assets/posts/vdb-reshape-sdf-close/images/old-way.jpg)
 
 
-### New Way
+### Close (New)
 Not sure when this was added (or maybe it has been here the whole time!), but
 there is another method that does the exact same thing in one go: **Close**.
 

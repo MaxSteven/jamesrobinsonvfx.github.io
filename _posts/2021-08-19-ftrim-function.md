@@ -7,13 +7,6 @@ categories: tips
 tags: houdini hscript
 ---
 
-
-### Overview
-
-{:.toc}
-- [Problem](#problem)
-- [Solution](#solution)
-
 > Hipfile: [jamesr_ftrim.hip](/assets/posts/ftrim-function/jamesr_ftrim.hiplc)
 
 ## Problem
