@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Transform RBD Pieces with Alembic Layering
-description: Create two separate alembic caches for geometry and transforms and combine them later.
+description: Create two separate alembic caches for geometry and transforms and combine them later
 thumbnail: /assets/posts/xform-pieces-alembic-layering/images/preview.png
 categories: tips
 tags: houdini rbd alembic

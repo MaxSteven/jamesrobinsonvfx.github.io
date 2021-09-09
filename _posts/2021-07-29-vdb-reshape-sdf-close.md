@@ -1,7 +1,7 @@
 ---
 layout: post
 title: VDB Reshape SDF Close
-description: Faster way to dilate and erode an SDF.
+description: Faster way to dilate and erode an SDF
 thumbnail: /assets/posts/vdb-reshape-sdf-close/images/preview.jpg
 categories: tips
 tags: houdini vdb sdf
