@@ -20,8 +20,8 @@ Comment](2012-02-07-example-content.md) of a Camera node when you're wedging
 sims or making some sort of visualizer.
 
 But quite often, if you're referencing a `float` parameter, you wind up getting
-allllll the digits that come with it, imprecision and all, rather than just a
-nice float
+allllll the digits that come with it, full precision and all, rather than just
+the nice value you see in the interface.
 
 ![Problem](/assets/posts/ftrim-function/images/problem.png)
 
@@ -35,7 +35,7 @@ becomes
 ```
 which is probably *not* what you want!
 
-A possible solution to trim off some of the rounding error might look something like
+A possible solution to trim off some of the extra digits might look something like
 
 ```
 floor(ch("/some/parm") * 1000)/1000
