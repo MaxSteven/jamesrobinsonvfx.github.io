@@ -115,7 +115,7 @@ actually being treated as separate connected islands per-card. Otherwise either
 fix them, or delete them!
 
 ## Conclusion
-Enjoy! If you have any problems, pleaes feel welcome to add an issue to the
+Enjoy! If you have any problems, please feel welcome to add an issue to the
 github repo, or reach out to me directly.
 
 
