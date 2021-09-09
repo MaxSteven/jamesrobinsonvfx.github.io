@@ -7,18 +7,19 @@ categories: tips
 tags: houdini solver vex
 ---
 
-> Hipfile: [jamesr_decay.hip](/assets/posts/decay-values/jamesr_decay.hiplc)
 
-## Overview
+### Overview
+
 {:.toc}
-- [Overview](#overview)
-  - [Accumulating & Substeps](#accumulating--substeps)
-  - [Decaying & Substeps](#decaying--substeps)
-  - [Get to the solution already!](#get-to-the-solution-already)
-    - [Subtract and Clamp](#subtract-and-clamp)
-    - [Power Function](#power-function)
-    - [Linear Combination DOP](#linear-combination-dop)
-  - [Conclusion](#conclusion)
+- [Accumulating & Substeps](#accumulating--substeps)
+- [Decaying & Substeps](#decaying--substeps)
+- [Get to the solution already!](#get-to-the-solution-already)
+  - [Subtract and Clamp](#subtract-and-clamp)
+  - [Power Function](#power-function)
+  - [Linear Combination DOP](#linear-combination-dop)
+- [Conclusion](#conclusion)
+
+> Hipfile: [jamesr_decay.hip](/assets/posts/decay-values/jamesr_decay.hiplc)
 
 One of the most common use cases for the **Solver SOP** is to accumulate values
 over time.

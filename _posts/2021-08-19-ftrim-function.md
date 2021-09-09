@@ -7,13 +7,16 @@ categories: tips
 tags: houdini hscript
 ---
 
-> Hipfile: [jamesr_ftrim.hip](/assets/posts/ftrim-function/jamesr_ftrim.hiplc)
+
+### Overview
 
 {:.toc}
 - [Problem](#problem)
-- [Fix](#fix)
+- [Solution](#solution)
 
-### Problem
+> Hipfile: [jamesr_ftrim.hip](/assets/posts/ftrim-function/jamesr_ftrim.hiplc)
+
+## Problem
 Sometimes you want to reference the value of a parameter and display it as a
 string to put in a Font SOP, or the [Viewport
 Comment](2012-02-07-example-content.md) of a Camera node when you're wedging
@@ -42,7 +45,7 @@ floor(ch("/some/parm") * 1000)/1000
 ```
 Unfortunately, this fails too :(
 
-### Fix
+## Solution
 
 The solution is actually quite simple! We can use the `ftrim()` function from
 HScript. `ftrim()` will strip off all those unwanted digits and leave you with a

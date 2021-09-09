@@ -7,7 +7,7 @@ repo: colorpaletteramp
 ---
 ![Cover photo](/assets/projects/hair-cards-to-guide-curves/images/preview.png)
 
-- [Overview](#overview)
+{:.toc}
 - [Get it](#get-it)
 - [Process](#process)
   - [First Attempt](#first-attempt)

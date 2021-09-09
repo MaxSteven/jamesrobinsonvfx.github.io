@@ -7,6 +7,13 @@ categories: tips
 tags: houdini vdb sdf
 ---
 
+### Overview
+
+{:.toc}
+- [Old Way](#old-way)
+- [New Way](#new-way)
+- [Conclusion](#conclusion)
+
 > Hipfile: [jamesr_vdbreshapesdfclose.hip](/assets/posts/vdb-reshape-sdf-close/jamesr_vdbreshapesdfclose.hiplc)
 
 ### Old Way
