@@ -42,6 +42,6 @@ collections:
     output: true
     order:
       - /inspect-node-data.md
-      - /hair-cards-to-guide-curves
+      - /hair-cards-to-guide-curves.md
       - /mplay-batch.md
       - /colorpalette-ramp.md
