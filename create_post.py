@@ -103,7 +103,7 @@ class Post:
         content = ["\n"]
         if self.has_hipfile:
             content.extend([
-                f"> Hipfile: [{self.hipname()}]({self.hipfile_path()})]",
+                f"> Hipfile: [{self.hipname()}]({self.hipfile_path()})",
                 "{:style=\"border-color: #d08770\"}\n"
             ])
         content.append(

@@ -4,13 +4,147 @@
  <title>James Robinson</title>
  <link href="https://jamesrobinsonvfx.com/atom.xml" rel="self"/>
  <link href="https://jamesrobinsonvfx.com/"/>
- <updated>2021-09-10T10:22:00-07:00</updated>
+ <updated>2021-09-10T13:41:35-07:00</updated>
  <id>https://jamesrobinsonvfx.com</id>
  <author>
    <name>James Robinson</name>
    <email>james@jamesrobinsonvfx.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Vex Source</title>
+   <link href="https://jamesrobinsonvfx.com/tips/2021/09/10/vex-source/"/>
+   <updated>2021-09-10T00:00:00-07:00</updated>
+   <id>https://jamesrobinsonvfx.com/tips/2021/09/10/vex-source</id>
+   <content type="html">&lt;blockquote style=&quot;border-color: #d08770&quot;&gt;
+  &lt;p&gt;Hipfile: &lt;a href=&quot;/assets/posts/vex-source/jamesr_vexsource.hip&quot;&gt;jamesr_vexsource.hip&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/preview.png&quot; alt=&quot;Cover Photo&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Houdini offers several ways to duplicate and reuse nodes.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Copy and paste nodes (&lt;strong&gt;Ctrl + c&lt;/strong&gt;, &lt;strong&gt;Ctrl + v&lt;/strong&gt;).&lt;/li&gt;
+  &lt;li&gt;Create an HDA.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;RMB&lt;/strong&gt; &amp;gt; &lt;strong&gt;Actions&lt;/strong&gt; &amp;gt; &lt;strong&gt;Create Reference Copy&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;…to name a few.&lt;/p&gt;
+
+&lt;p&gt;Sometimes, you might find yourself re-using the same VOP network or VEX wrangle
+without changing the internal nodes or code. But what happens if you want to
+change them all at once?&lt;/p&gt;
+
+&lt;h2 id=&quot;scenario&quot;&gt;Scenario&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/noisey-flippy.mp4&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;video width=&quot;720&quot; height=&quot;405&quot; autoplay=&quot;&quot; loop=&quot;&quot;&gt;
+	&lt;source src=&quot;/assets/posts/vex-source/images/noisey-flippy.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+&lt;/video&gt;
+
+&lt;p&gt;Let’s say we have a VOP network that applies some noisey displacement animation
+to a character (see hipfile above). There are several other characters in the
+scene who need the same displacement effect applied to them. We have a few
+options:&lt;/p&gt;
+
+&lt;h3 id=&quot;option-1-copy-and-paste-the-vop-network&quot;&gt;Option 1: Copy and Paste the VOP Network&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/copy-paste.gif&quot; alt=&quot;Copy and Paste&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Simple as that. We can just duplicate it around and we’re all set. 90% of the
+time this will probably be what you do day-to-day. The downside though is that
+anytime you update the internal nodes/code, you’ll have to do the same thing to
+all the copies…&lt;/p&gt;
+
+&lt;h3 id=&quot;option-2-create-an-hda&quot;&gt;Option 2: Create an HDA&lt;/h3&gt;
+
+&lt;p&gt;HDAs are perfect for when you want to bundle up some nodes and reuse them all
+over the place. There are numerous advantages to using HDAs that I won’t go into
+in this post, but sometimes creating and tracking an HDA is just a bit overkill.
+In our case, we have one VOP that makes some noise…we don’t really need to go
+through the effort of creating an asset for it!&lt;/p&gt;
+
+&lt;h3 id=&quot;option-3-create-a-reference-copy&quot;&gt;Option 3: Create a Reference Copy&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/reference-copy.gif&quot; alt=&quot;Reference Copy&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;RMB&amp;gt; **Actions&lt;/strong&gt; &amp;gt; &lt;strong&gt;Create Reference Copy&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We could create a &lt;strong&gt;Reference Copy&lt;/strong&gt; which is really just like copying and
+pasting the node like in the first option, except the new pasted node has
+relative channel references back to all the parameters on the source node. This
+works just fine, and we get a copy of all the internal nodes as well. But even
+with the reference copy, if we were to change the internal nodes of the source
+VOP network like adding new nodes or removing old ones, those changes would
+&lt;em&gt;not&lt;/em&gt; be reflected in the copies.&lt;/p&gt;
+
+&lt;h3 id=&quot;option-4-change-the-vex-source&quot;&gt;Option 4: Change the Vex Source&lt;/h3&gt;
+
+&lt;p&gt;The last option we’ll go over is really the whole point of this post. On each VOP
+network, there is a parameter called &lt;strong&gt;Vex Source&lt;/strong&gt;. By default, this is is set
+to &lt;strong&gt;Myself&lt;/strong&gt;, which means it uses the operators inside itself to do all the work.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/vex-source.png&quot; alt=&quot;Vex Source Parameter&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If we change it instead to &lt;strong&gt;Shop&lt;/strong&gt;, the &lt;strong&gt;Shop Path&lt;/strong&gt; parameter is then
+exposed, and we can actually set that parameter to &lt;em&gt;another VOP network in the
+scene&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;We leave this VOP network empty - its internals are being overridden by the
+contents of the VOP network specified in that &lt;strong&gt;Shop Path&lt;/strong&gt; parameter!&lt;/p&gt;
+
+&lt;h4 id=&quot;steps&quot;&gt;Steps&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/vopnet-shop-path-setup.gif&quot; alt=&quot;VOP Network Shop Path Setup GIF&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To recap, the steps are as follows:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Create a VOP network that does something you want to reuse on other geo.&lt;/li&gt;
+  &lt;li&gt;Create an empty VOP network and hook it up to wherever you want to reuse the original.&lt;/li&gt;
+  &lt;li&gt;Select the original VOP network and hit &lt;strong&gt;Ctrl + c&lt;/strong&gt;. This will copy the path
+to the node to the clipboard.&lt;/li&gt;
+  &lt;li&gt;Select the empty VOP network, and set the &lt;strong&gt;Vex Source&lt;/strong&gt; paramater to &lt;strong&gt;Shop&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Paste the copied path to the source VOP network in the &lt;strong&gt;Shop Path&lt;/strong&gt;
+parameter (if you want this to be a relative path, that’s fine too).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/change-source-vopnet.gif&quot; alt=&quot;Make a change&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;small&gt;Changes to the source networkl are propagated immediately!&lt;/small&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;what-about-wrangles&quot;&gt;What about Wrangles?&lt;/h2&gt;
+&lt;p&gt;Hidden inside each wrangle is actually just a VOP network with a Snippet VOP
+inside!&lt;/p&gt;
+
+&lt;p&gt;VEX wrangles don’t have the &lt;strong&gt;Vex Source&lt;/strong&gt; parameter exposed at the top level, so we
+actually won’t be able to use an empty wrangle on each of our other streams.&lt;/p&gt;
+
+&lt;p&gt;Instead, let’s just write one wrangle with the code on it that we want to reuse, and the
+rest of the geometry we want to copy it around to will have empty &lt;em&gt;VOP
+Networks&lt;/em&gt; instead, just like before.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/reference-wrangle.gif&quot; alt=&quot;Wrangle Source&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;steps-1&quot;&gt;Steps:&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;Create the source wrangle with the desired code.&lt;/li&gt;
+  &lt;li&gt;Create an empty VOP network and hook it up to the other geometry we want to process.&lt;/li&gt;
+  &lt;li&gt;Dive inside the source wrangle node, and &lt;strong&gt;Ctrl + c&lt;/strong&gt; on the VOP network inside. This copies the path to the node to the clipboard.&lt;/li&gt;
+  &lt;li&gt;On each of the new empty VOP networks, set the &lt;strong&gt;Vex Source&lt;/strong&gt; parameter to &lt;strong&gt;Shop&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Paste the path of the copied VOP network into the &lt;strong&gt;Shop Path&lt;/strong&gt; parameter.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;final-notes&quot;&gt;Final Notes&lt;/h2&gt;
+&lt;p&gt;The biggest downside to this method is that you can’t really adjust the
+parameters on the copies. However, you could get around this by instead using
+attributes on the geometry to control certain parts of your setup!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/attribs-for-parms.gif&quot; alt=&quot;Attributes for Parameters&quot; /&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Decay Values</title>

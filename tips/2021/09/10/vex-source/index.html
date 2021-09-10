@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab:300|Roboto:500" rel="stylesheet">
+  </head>
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Vex Source &middot; James Robinson
+    
+  </title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+</head>
+
+
+  <body>
+
+    <div class="container content">
+      <header class="masthead">
+        <!-- <h3 class="masthead-title">
+          <a href="/" title="Home">James Robinson</a>
+          <small>Houdini FX TD</small>
+        </h3> -->
+        <nav class="navbar">
+  <span>
+  <h3 class="masthead-title">
+    <a href="/" title="Home">James Robinson</a>
+    <small>Houdini FX TD</small>
+  </h3>
+    <span style="display: block;">
+    <a class="fab fa-vimeo" href="https://vimeo.com/jamesrobinsonvfx"></a>
+    <a class="fab fa-linkedin" href="https://www.linkedin.com/in/jamesrobinsonvfx/"></a>
+    <a class="fab fa-github" href="https://github.com/jamesrobinsonvfx"></a>
+    <a class="fab fa-instagram" href="https://www.instagram.com/jamesrobinsonvfx/"></a>
+    </span>
+  </span>
+
+  <span>
+  <a href="/" class="navlink">Blog</a>
+  <a href="/snippets" class="navlink">Snippets</a>
+  <a href="/projects" class="navlink">Projects</a>
+  <a href="/work" class="navlink">Work</a>
+  <a href="/links" class="navlink">Links</a>
+  <a href="/about" class="navlink">About</a>
+  </span>
+</nav>
+      </header>
+
+      <main style="padding-top: 3em">
+        <!-- <hr> -->
+        <h1 class="post-title">Vex Source</h1>
+<time datetime="2021-09-10T00:00:00-07:00" class="post-date">10 Sep 2021</time>
+<section class="sheet">
+  <article class="post">
+      <blockquote style="border-color: #d08770">
+  <p>Hipfile: <a href="/assets/posts/vex-source/jamesr_vexsource.hip">jamesr_vexsource.hip</a></p>
+</blockquote>
+
+<p><img src="/assets/posts/vex-source/images/preview.png" alt="Cover Photo" /></p>
+
+<p>Houdini offers several ways to duplicate and reuse nodes.</p>
+
+<ul>
+  <li>Copy and paste nodes (<strong>Ctrl + c</strong>, <strong>Ctrl + v</strong>).</li>
+  <li>Create an HDA.</li>
+  <li><strong>RMB</strong> &gt; <strong>Actions</strong> &gt; <strong>Create Reference Copy</strong></li>
+</ul>
+
+<p>…to name a few.</p>
+
+<p>Sometimes, you might find yourself re-using the same VOP network or VEX wrangle
+without changing the internal nodes or code. But what happens if you want to
+change them all at once?</p>
+
+<h2 id="scenario">Scenario</h2>
+
+<p><img src="/assets/posts/vex-source/images/noisey-flippy.mp4" alt="" /></p>
+<video width="720" height="405" autoplay="" loop="">
+	<source src="/assets/posts/vex-source/images/noisey-flippy.mp4" type="video/mp4" />
+</video>
+
+<p>Let’s say we have a VOP network that applies some noisey displacement animation
+to a character (see hipfile above). There are several other characters in the
+scene who need the same displacement effect applied to them. We have a few
+options:</p>
+
+<h3 id="option-1-copy-and-paste-the-vop-network">Option 1: Copy and Paste the VOP Network</h3>
+<p><img src="/assets/posts/vex-source/images/copy-paste.gif" alt="Copy and Paste" /></p>
+
+<p>Simple as that. We can just duplicate it around and we’re all set. 90% of the
+time this will probably be what you do day-to-day. The downside though is that
+anytime you update the internal nodes/code, you’ll have to do the same thing to
+all the copies…</p>
+
+<h3 id="option-2-create-an-hda">Option 2: Create an HDA</h3>
+
+<p>HDAs are perfect for when you want to bundle up some nodes and reuse them all
+over the place. There are numerous advantages to using HDAs that I won’t go into
+in this post, but sometimes creating and tracking an HDA is just a bit overkill.
+In our case, we have one VOP that makes some noise…we don’t really need to go
+through the effort of creating an asset for it!</p>
+
+<h3 id="option-3-create-a-reference-copy">Option 3: Create a Reference Copy</h3>
+
+<p><img src="/assets/posts/vex-source/images/reference-copy.gif" alt="Reference Copy" /></p>
+
+<blockquote>
+  <p><strong>RMB&gt; **Actions</strong> &gt; <strong>Create Reference Copy</strong></p>
+</blockquote>
+
+<p>We could create a <strong>Reference Copy</strong> which is really just like copying and
+pasting the node like in the first option, except the new pasted node has
+relative channel references back to all the parameters on the source node. This
+works just fine, and we get a copy of all the internal nodes as well. But even
+with the reference copy, if we were to change the internal nodes of the source
+VOP network like adding new nodes or removing old ones, those changes would
+<em>not</em> be reflected in the copies.</p>
+
+<h3 id="option-4-change-the-vex-source">Option 4: Change the Vex Source</h3>
+
+<p>The last option we’ll go over is really the whole point of this post. On each VOP
+network, there is a parameter called <strong>Vex Source</strong>. By default, this is is set
+to <strong>Myself</strong>, which means it uses the operators inside itself to do all the work.</p>
+
+<p><img src="/assets/posts/vex-source/images/vex-source.png" alt="Vex Source Parameter" /></p>
+
+<p>If we change it instead to <strong>Shop</strong>, the <strong>Shop Path</strong> parameter is then
+exposed, and we can actually set that parameter to <em>another VOP network in the
+scene</em>.</p>
+
+<p>We leave this VOP network empty - its internals are being overridden by the
+contents of the VOP network specified in that <strong>Shop Path</strong> parameter!</p>
+
+<h4 id="steps">Steps</h4>
+
+<p><img src="/assets/posts/vex-source/images/vopnet-shop-path-setup.gif" alt="VOP Network Shop Path Setup GIF" /></p>
+
+<p>To recap, the steps are as follows:</p>
+<ol>
+  <li>Create a VOP network that does something you want to reuse on other geo.</li>
+  <li>Create an empty VOP network and hook it up to wherever you want to reuse the original.</li>
+  <li>Select the original VOP network and hit <strong>Ctrl + c</strong>. This will copy the path
+to the node to the clipboard.</li>
+  <li>Select the empty VOP network, and set the <strong>Vex Source</strong> paramater to <strong>Shop</strong>.</li>
+  <li>Paste the copied path to the source VOP network in the <strong>Shop Path</strong>
+parameter (if you want this to be a relative path, that’s fine too).</li>
+</ol>
+
+<p><img src="/assets/posts/vex-source/images/change-source-vopnet.gif" alt="Make a change" /></p>
+
+<p><small>Changes to the source networkl are propagated immediately!</small></p>
+
+<h2 id="what-about-wrangles">What about Wrangles?</h2>
+<p>Hidden inside each wrangle is actually just a VOP network with a Snippet VOP
+inside!</p>
+
+<p>VEX wrangles don’t have the <strong>Vex Source</strong> parameter exposed at the top level, so we
+actually won’t be able to use an empty wrangle on each of our other streams.</p>
+
+<p>Instead, let’s just write one wrangle with the code on it that we want to reuse, and the
+rest of the geometry we want to copy it around to will have empty <em>VOP
+Networks</em> instead, just like before.</p>
+
+<p><img src="/assets/posts/vex-source/images/reference-wrangle.gif" alt="Wrangle Source" /></p>
+
+<h4 id="steps-1">Steps:</h4>
+<ol>
+  <li>Create the source wrangle with the desired code.</li>
+  <li>Create an empty VOP network and hook it up to the other geometry we want to process.</li>
+  <li>Dive inside the source wrangle node, and <strong>Ctrl + c</strong> on the VOP network inside. This copies the path to the node to the clipboard.</li>
+  <li>On each of the new empty VOP networks, set the <strong>Vex Source</strong> parameter to <strong>Shop</strong>.</li>
+  <li>Paste the path of the copied VOP network into the <strong>Shop Path</strong> parameter.</li>
+</ol>
+
+<h2 id="final-notes">Final Notes</h2>
+<p>The biggest downside to this method is that you can’t really adjust the
+parameters on the copies. However, you could get around this by instead using
+attributes on the geometry to control certain parts of your setup!</p>
+
+<p><img src="/assets/posts/vex-source/images/attribs-for-parms.gif" alt="Attributes for Parameters" /></p>
+
+    </article>
+</section>
+
+
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+      <li>
+        <a href="/tips/2021/08/22/decay-values/">
+          Decay Values
+          <small><time datetime="2021-08-22T00:00:00-07:00">22 Aug 2021</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tips/2021/08/19/ftrim-function/">
+          ftrim() HScript function
+          <small><time datetime="2021-08-19T00:00:00-07:00">19 Aug 2021</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tips/2021/07/29/vdb-reshape-sdf-close/">
+          VDB Reshape SDF Close
+          <small><time datetime="2021-07-29T00:00:00-07:00">29 Jul 2021</time></small>
+        </a>
+      </li>
+    
+  </ul>
+</aside>
+
+
+      </main>
+
+      <footer class="footer">
+        <small>
+          &copy; <time datetime="2021-09-10T13:41:35-07:00">2021</time>. All rights reserved.
+        </small>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>
