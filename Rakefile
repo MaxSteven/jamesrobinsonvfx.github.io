@@ -13,15 +13,18 @@ task :build do
   system "jekyll build"
 
   # Copy to temp location
+  system "mkdir #{GH_PAGES_DIR}"
   system "rm -r #{GH_PAGES_DIR}/*" unless Dir['#{GH_PAGES_DIR}/*'].empty?
   system "cp -r _site/* #{GH_PAGES_DIR}/"
 
   # Move to <main> for deployment
   system "git checkout main"
   system "git pull origin main"
-  system "rm -r ." unless Dir['.'].empty?
+  system "rm -rf .jekyll-cache"
+  system "rm -rf _site"
   system "cp -r #{GH_PAGES_DIR}/* ."
-  system "git add . && git commit -m 'Push local build update'"
+  system "touch .nojekyll"
+  system "git add . && git commit -m 'Push local build update (see develop branch)'"
   system "git push origin main"
 
 end
