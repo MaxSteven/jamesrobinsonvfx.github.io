@@ -122,8 +122,9 @@ a:hover {
             justify-content: flex-start;
             flex-flow: row wrap;
 
-            font-size: 0.5rem;
+            font-size: 0.75rem;
             color: $nord13;
+            text-shadow: -2px 3px 5px rgba(0, 0, 0, 0.2);
 
             .tag {
                 margin: 0 0.1rem;
