@@ -2,7 +2,7 @@
 GH_PAGES_DIR = "/tmp/compiled_site"
 
 desc "Build Jekyll site and copy files"
-task :build do
+task :deploy do
   # Work on <develop> branch
   system "git checkout develop"
 
@@ -13,18 +13,31 @@ task :build do
   system "jekyll build"
 
   # Copy to temp location
+  puts "Creating temp site build directory"
   system "mkdir #{GH_PAGES_DIR}"
   system "rm -r #{GH_PAGES_DIR}/*" unless Dir['#{GH_PAGES_DIR}/*'].empty?
+  puts "Copying site to temp"
   system "cp -r _site/* #{GH_PAGES_DIR}/"
 
   # Move to <main> for deployment
+  puts "Stashing changes"
+  system "git stash"
+
+  puts "Switching to <main>"
   system "git checkout main"
   system "git pull origin main"
-  system "rm -rf .jekyll-cache"
-  system "rm -rf _site"
+
+  puts "Removing directories"
+  system "rm -rf *"
+
+  puts "Copying temp site build"
   system "cp -r #{GH_PAGES_DIR}/* ."
   system "touch .nojekyll"
   system "git add . && git commit -m 'Push local build update (see develop branch)'"
   system "git push origin main"
+  puts "Switching back to <develop>"
   system "git checkout develop"
+
+  puts "Reapplying stash"
+  system "git stash apply"
 end
