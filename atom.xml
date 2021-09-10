@@ -4,7 +4,7 @@
  <title>James Robinson</title>
  <link href="https://jamesrobinsonvfx.com/atom.xml" rel="self"/>
  <link href="https://jamesrobinsonvfx.com/"/>
- <updated>2021-09-09T23:27:46-07:00</updated>
+ <updated>2021-09-10T10:22:00-07:00</updated>
  <id>https://jamesrobinsonvfx.com</id>
  <author>
    <name>James Robinson</name>
@@ -17,7 +17,7 @@
    <link href="https://jamesrobinsonvfx.com/tips/2021/08/22/decay-values/"/>
    <updated>2021-08-22T00:00:00-07:00</updated>
    <id>https://jamesrobinsonvfx.com/tips/2021/08/22/decay-values</id>
-   <content type="html">&lt;blockquote&gt;
+   <content type="html">&lt;blockquote style=&quot;border-color: #d08770&quot;&gt;
   &lt;p&gt;Hipfile: &lt;a href=&quot;/assets/posts/decay-values/jamesr_decay.hiplc&quot;&gt;jamesr_decay.hip&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -118,7 +118,7 @@ did above!&lt;/p&gt;
    <link href="https://jamesrobinsonvfx.com/tips/2021/08/19/ftrim-function/"/>
    <updated>2021-08-19T00:00:00-07:00</updated>
    <id>https://jamesrobinsonvfx.com/tips/2021/08/19/ftrim-function</id>
-   <content type="html">&lt;blockquote&gt;
+   <content type="html">&lt;blockquote style=&quot;border-color: #d08770&quot;&gt;
   &lt;p&gt;Hipfile: &lt;a href=&quot;/assets/posts/ftrim-function/jamesr_ftrim.hiplc&quot;&gt;jamesr_ftrim.hip&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
