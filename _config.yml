@@ -44,7 +44,7 @@ collections:
   projects:
     output: true
     order:
+      - /mplay-batch.md
       - /inspect-node-data.md
       - /hair-cards-to-guide-curves.md
-      - /mplay-batch.md
       - /colorpalette-ramp.md
