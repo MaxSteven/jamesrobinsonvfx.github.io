@@ -37,7 +37,7 @@
             "Procedural felt tool for better integration"
         ],
         "timestamps": [],
-        "description": "Created tools for procedurally generating photo-realistic, art-directable CG thread and felt. Animators provided simple curves, and lighters had control over thread plies, twisting, color, fray, frizz, and profile. Felt layer was used to help get nice shadow interaction where the thread meets the live-action Sheep and Moon crafts.",
+        "description": "Created tools for procedurally generating photo-realistic, art-directable CG thread and felt. Animators provided simple curves, and lighters had control over thread plies, twisting, color, fray, frizz, and profile. A felt layer was used to help get nice shadow interaction where the thread meets the live-action Sheep and Moon crafts.",
         "ignore": false
     },
     {
@@ -57,7 +57,7 @@
             "Shot Execution"
         ],
         "timestamps": [],
-        "description": "Did some cloth stuff here.",
+        "description": "Created the cloth FX setup for Flat Matthew's suit worn on the Jimmy Kimmel section and onward.",
         "ignore": false
     },
     {
@@ -76,7 +76,7 @@
             "Ship & Cliff Destruction"
         ],
         "timestamps": [],
-        "description": "wow did so much ooh",
+        "description": "Created a library of ground blasts and instanced them around. Created tools for easily placing and timing blasts along a curve, randomly scattered, or by clicking on some environment geometry. Also added destruction and fire FX for the ship careening into the rockface.",
         "ignore": false
     },
     {
@@ -92,7 +92,7 @@
             "Hovercraft FX rig Shot Execution"
         ],
         "timestamps": [],
-        "description": "",
+        "description": "Created a setup control the thrusters on the hovercraft, as well as its ground interaction. Thruster intensity is controlled by the hovercraft's acceleration and direction, keeping it pretty automated/procedural for when the animation was updated.",
         "ignore": false
     },
     {
@@ -109,7 +109,7 @@
             "All FX Inside Gun"
         ],
         "timestamps": [],
-        "description": "",
+        "description": "Probably my favorite Apex spot to work on, but also the most challenging since the whole thing is in reverse and full of time ramps! Created the Amped Wall FX, a splurt of Caustic's green smoke, and all the FX inside the gun barrel/chamber as the bullet flies through.",
         "ignore": false
     },
     {
@@ -122,7 +122,7 @@
         "supporting_images": [],
         "responsibilities": [],
         "timestamps": [],
-        "description": "",
+        "description": "Created cloth FX rigs for all the characters.",
         "ignore": false
     },
     {
@@ -139,7 +139,7 @@
             "Drone FX"
         ],
         "timestamps": [],
-        "description": "",
+        "description": "A few smaller one-off FX in this one: sparks, muzzle flashes, Wattson's electricity again, Crypto's drone trails, drone EMP, and gibraltar's shield.",
         "ignore": false
     },
     {
@@ -157,7 +157,7 @@
             "Ground Interaction"
         ],
         "timestamps": [],
-        "description": "",
+        "description": "Created the stylized lightning and electricity setup for the aptly-name Wattson character. Did some blood and a plasma bullet hit on Octane, and ran some ground kickup for characters running around the environment.",
         "ignore": false
     },
     {
@@ -173,7 +173,7 @@
             "Pipeline Automation"
         ],
         "timestamps": [],
-        "description": "",
+        "description": "Created all cloth and fur CFX setups, and ran all the shots. Wrote a pipeline tool to listen to ftrack for updated animation caches and automatically up-version and send a new hipfile to our farm to pre-cache proxy geometry, sim cloth & fur, publish caches, test render, and submit to our review system (Pre-PDG).",
         "ignore": false
     },
     {
@@ -190,7 +190,7 @@
             "All FX & Instancing Setup"
         ],
         "timestamps": [],
-        "description": "",
+        "description": "Cell was made up of thousands of tiny little procedurally generated worm-like objects, and instanced onto a stretchy grain sim. In the background, there are hundreds of other instanced cells splitting, with wispy particle sims just like the hero. Instanced Arnold procedurals made rendering them all together a breeze.",
         "ignore": false
     },
     {
@@ -206,7 +206,7 @@
             "Shading & Rendering"
         ],
         "timestamps": [],
-        "description": "",
+        "description": "Volumetric tornado sim and Mantra lighting/rendering.",
         "ignore": false
     },
     {
@@ -223,7 +223,7 @@
             "Instancing Setup"
         ],
         "timestamps": [],
-        "description": "",
+        "description": "All animation and FX on the growing pumpkin shots, including animated mask, grass setup, growing vines into wheels, pixie dust etc. Super fun!",
         "ignore": false
     },
     {
@@ -242,7 +242,7 @@
             "Pipeline Caching Tools"
         ],
         "timestamps": [],
-        "description": "",
+        "description": "Modeled a couple of oceans and did some kickup spray and digital transformation FX. The challenging part of this spot is that the biker was shot 100% in camera, no digi-double. So instead of matching a rider to an ocean from FX, we matched the ocean to the tracked animation of the rider!",
         "ignore": false
     },
     {
@@ -257,7 +257,7 @@
             "Sketch Lines Animation & Shading"
         ],
         "timestamps": [],
-        "description": "",
+        "description": "All the lines are created and animated procedurally inside Houdini. After building a few HDAs for the show, it was easy to generate and animate cool sketchlines for any set piece the art direction called for.",
         "ignore": false
     },
     {
@@ -272,7 +272,7 @@
             "Butterfly System"
         ],
         "timestamps": [],
-        "description": "",
+        "description": "Created a particle system to animate the flying butters. Flapping is a looping cache from the Animation department that was cycled on each particle.",
         "ignore": false
     },
     {
@@ -287,7 +287,7 @@
             "Sand Pouring and Dumping"
         ],
         "timestamps": [],
-        "description": "",
+        "description": "Grain sim to pour sand out from the shoe, as well as the closet dump.",
         "ignore": false
     },
     {
@@ -305,7 +305,7 @@
             "Some Simulation"
         ],
         "timestamps": [],
-        "description": "",
+        "description": "Mountain forming sim seen in the thumbnail. Base simulation was mostly done by another artist. I setup the rock generation, instancing and blending, and rendering of deep image planes for comp.",
         "ignore": false
     },
     {
@@ -320,7 +320,7 @@
             "CG Snow"
         ],
         "timestamps": [],
-        "description": "",
+        "description": "Added CG Snow to places where it wasn't snowy enough.",
         "ignore": false
     },
     {
@@ -335,6 +335,6 @@
             "Tire and Environment Smoke"
         ],
         "timestamps": [],
-        "description": ""
+        "description": "Added lingering environment smoke and well as some tire burnout smoke as the car travels backwards."
     }
 ]
