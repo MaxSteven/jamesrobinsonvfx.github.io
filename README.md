@@ -9,8 +9,8 @@ GitHub is [still using Jekyll 3.9.0](https://www.sitepoint.com/jekyll-plugins-gi
 We can build locally and push the contents of `_site` to the main branch on GitHub manually.
 
 
-1. Switch to `<develop>` branch
-2. Run `rake deploy` (Read the `Rakefile` to see exactly what it does)
+1. Switch to `<develop>` branch.
+2. Run `rake deploy` (Read the `Rakefile` to see exactly what it does).
 
 
 > I suppose maybe in the future I could just switch the branch to something like
