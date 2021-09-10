@@ -15,7 +15,7 @@ body .gist {
     .gist-file {
         border: none;
         border-bottom: none;
-        font-family: Menlo, Monaco, "Courier New", monospace !important;
+        font-family: $code-font-family;
     }
 
     .gist-data {
