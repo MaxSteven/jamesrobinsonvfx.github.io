@@ -7,7 +7,7 @@ categories: tips
 tags: houdini vex vops
 ---
 
-> Hipfile: [jamesr_vexsource.hip](/assets/posts/vex-source/jamesr_vexsource.hip)
+> Hipfile: [jamesr_vexsource.hiplc](/assets/posts/vex-source/jamesr_vexsource.hiplc)
 {:style="border-color: #d08770"}
 
 ![Cover Photo](/assets/posts/vex-source/images/preview.png)
