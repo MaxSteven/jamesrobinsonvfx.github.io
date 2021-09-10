@@ -157,7 +157,7 @@ body .gist {
     .pl-sol,
     .pl-mb,
     .pl-pdb {
-        color: $nord4;
+        color: $nord5;
     }
     .pl-e,
     .pl-en,
@@ -194,5 +194,8 @@ body .gist {
     .pl-stp,
     .pl-sv {
         color: $nord14;
+        .pl-s1 {
+            color: $nord6;
+        }
     }
 }
