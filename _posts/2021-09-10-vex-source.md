@@ -10,7 +10,7 @@ tags: houdini vex vops
 > Hipfile: [jamesr_vexsource.hiplc](/assets/posts/vex-source/jamesr_vexsource.hiplc)
 {:style="border-color: #d08770"}
 
-[[![Cover Photo](/assets/posts/vex-source/images/preview.png)]((/assets/posts/vex-source/images/preview.png))](((/assets/posts/vex-source/images/preview.png)))
+[![Cover Photo]({{ page.thumbnail }})]({{ page.thumbnail }})
 
 Houdini offers several ways to duplicate and reuse nodes.
 
@@ -37,7 +37,7 @@ scene who need the same displacement effect applied to them. We have a few
 options:
 
 ### Option 1: Copy and Paste the VOP Network
-[![Copy and Paste](/assets/posts/vex-source/images/copy-paste.gif)]((/assets/posts/vex-source/images/copy-paste.gif))
+[![Copy and Paste](/assets/posts/vex-source/images/copy-paste.gif)](/assets/posts/vex-source/images/copy-paste.gif)
 
 Simple as that. We can just duplicate it around and we're all set. 90% of the
 time this will probably be what you do day-to-day. The downside though is that
@@ -54,7 +54,7 @@ through the effort of creating an asset for it!
 
 ### Option 3: Create a Reference Copy
 
-[![Reference Copy](/assets/posts/vex-source/images/reference-copy.gif)]((/assets/posts/vex-source/images/reference-copy.gif))
+[![Reference Copy](/assets/posts/vex-source/images/reference-copy.gif)](/assets/posts/vex-source/images/reference-copy.gif)
 
 > **RMB** > **Actions** > **Create Reference Copy**
 
@@ -72,7 +72,7 @@ The last option we'll go over is really the whole point of this post. On each VO
 network, there is a parameter called **Vex Source**. By default, this is is set
 to **Myself**, which means it uses the operators inside itself to do all the work.
 
-[![Vex Source Parameter](/assets/posts/vex-source/images/vex-source.png)]((/assets/posts/vex-source/images/vex-source.png))
+[![Vex Source Parameter](/assets/posts/vex-source/images/vex-source.png)](/assets/posts/vex-source/images/vex-source.png)
 
 If we change it instead to **Shop**, the **Shop Path** parameter is then
 exposed, and we can actually set that parameter to *another VOP network in the
@@ -83,7 +83,7 @@ contents of the VOP network specified in that **Shop Path** parameter!
 
 #### Steps
 
-[![VOP Network Shop Path Setup GIF](/assets/posts/vex-source/images/vopnet-shop-path-setup.gif)]((/assets/posts/vex-source/images/vopnet-shop-path-setup.gif))
+[![VOP Network Shop Path Setup GIF](/assets/posts/vex-source/images/vopnet-shop-path-setup.gif)](/assets/posts/vex-source/images/vopnet-shop-path-setup.gif)
 
 To recap, the steps are as follows:
 1. Create a VOP network that does something you want to reuse on other geo.
@@ -94,7 +94,7 @@ To recap, the steps are as follows:
 5. Paste the copied path to the source VOP network in the **Shop Path**
    parameter (if you want this to be a relative path, that's fine too).
 
-[![Make a change](/assets/posts/vex-source/images/change-source-vopnet.gif)]((/assets/posts/vex-source/images/change-source-vopnet.gif))
+[![Make a change](/assets/posts/vex-source/images/change-source-vopnet.gif)](/assets/posts/vex-source/images/change-source-vopnet.gif)
 
 <small>Changes to the source networkl are propagated immediately!</small>
 
@@ -109,7 +109,7 @@ Instead, let's just write one wrangle with the code on it that we want to reuse,
 rest of the geometry we want to copy it around to will have empty *VOP
 Networks* instead, just like before.
 
-[![Wrangle Source](/assets/posts/vex-source/images/reference-wrangle.gif)]((/assets/posts/vex-source/images/reference-wrangle.gif))
+[![Wrangle Source](/assets/posts/vex-source/images/reference-wrangle.gif)](/assets/posts/vex-source/images/reference-wrangle.gif)
 
 #### Steps:
 1. Create the source wrangle with the desired code.
@@ -123,4 +123,4 @@ The biggest downside to this method is that you can't really adjust the
 parameters on the copies. However, you could get around this by instead using
 attributes on the geometry to control certain parts of your setup!
 
-[![Attributes for Parameters](/assets/posts/vex-source/images/attribs-for-parms.gif)]((/assets/posts/vex-source/images/attribs-for-parms.gif))
+[![Attributes for Parameters](/assets/posts/vex-source/images/attribs-for-parms.gif)](/assets/posts/vex-source/images/attribs-for-parms.gif)

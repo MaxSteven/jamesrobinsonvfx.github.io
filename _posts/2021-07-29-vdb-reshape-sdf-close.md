@@ -6,6 +6,9 @@ thumbnail: /assets/posts/vdb-reshape-sdf-close/images/preview.jpg
 categories: tips
 tags: houdini vdb sdf
 ---
+
+[![Cover Photo]({{ page.thumbnail }})]({{ page.thumbnail }})
+
 > Hipfile: [jamesr_vdbreshapesdfclose.hip](/assets/posts/vdb-reshape-sdf-close/jamesr_vdbreshapesdfclose.hiplc)
 {:style="border-color: #d08770"}
 
@@ -22,16 +25,16 @@ gaps and holes in an SDF using 2 **VDB Reshape SDF** nodes:
 > If you want to keep a filled interior, don't forget to set the **Trim**
 > parameter to **None** (Houdini 18.5+)!
 
-![Old way](/assets/posts/vdb-reshape-sdf-close/images/old-way.jpg)
+[![Old way](/assets/posts/vdb-reshape-sdf-close/images/old-way.jpg)](/assets/posts/vdb-reshape-sdf-close/images/old-way.jpg)
 
 
 ### Close (New)
 Not sure when this was added (or maybe it has been here the whole time!), but
 there is another method that does the exact same thing in one go: **Close**.
 
-![New way](/assets/posts/vdb-reshape-sdf-close/images/new-way.jpg)
+[![New way](/assets/posts/vdb-reshape-sdf-close/images/new-way.jpg)](/assets/posts/vdb-reshape-sdf-close/images/new-way.jpg)
 
 ### Conclusion
 A side-by-side comparison of the two looks like you get the same result!
 
-![Side by side](/assets/posts/vdb-reshape-sdf-close/images/side-by-side.gif)
+[![Side by side](/assets/posts/vdb-reshape-sdf-close/images/side-by-side.gif)](/assets/posts/vdb-reshape-sdf-close/images/side-by-side.gif)

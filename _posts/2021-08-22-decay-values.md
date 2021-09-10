@@ -7,6 +7,7 @@ categories: tips
 tags: houdini solver vex
 ---
 
+[![Cover Photo]({{ page.thumbnail }})]({{ page.thumbnail }})
 
 > Hipfile: [jamesr_decay.hip](/assets/posts/decay-values/jamesr_decay.hiplc)
 {:style="border-color: #d08770"}
@@ -98,6 +99,6 @@ It's really as simple and changing the dropdown next to the **Coefficient**
 parameter from **None** to `e^Timestep`. Looks pretty similar to what we just
 did above!
 
-![Gas Linear Combination DOP](/assets/posts/decay-values/images/linear-combo-dop.jpg)
+[![Gas Linear Combination DOP](/assets/posts/decay-values/images/linear-combo-dop.jpg)](/assets/posts/decay-values/images/linear-combo-dop.jpg)
 
 ### Conclusion

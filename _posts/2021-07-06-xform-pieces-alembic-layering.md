@@ -76,7 +76,7 @@ Each piece needs to have a `s@path` attribute that corresponds to its place in a
 a hierarchy. It's important that each piece has room for both a **Transform**
 and **Shape**. Here's an example of a good looking `s@path`:
 
-![Set Path from Name](/assets/posts/xform-pieces-alembic-layering/images/path-from-name.png)
+[![Set Path from Name](/assets/posts/xform-pieces-alembic-layering/images/path-from-name.png)](/assets/posts/xform-pieces-alembic-layering/images/path-from-name.png)
 
 ```
 s@path = sprintf("pieces_grp/%s_geo/%s_geoShape", s@name, s@name);
@@ -99,7 +99,7 @@ copy/xform the unpacked pieces, then use an **Assemble** SOP to pack 'em up *aft
 
 
 ## ROP it Out
-![Output](/assets/posts/xform-pieces-alembic-layering/images/network-output.png)
+[![Output](/assets/posts/xform-pieces-alembic-layering/images/network-output.png)](/assets/posts/xform-pieces-alembic-layering/images/network-output.png)
 
 In order for the Alembic to work for our purposes, a few of the defaults need to
 be changed on the **Alembic ROP**.
@@ -110,13 +110,13 @@ be changed on the **Alembic ROP**.
 - **Geometry > Packed Transform** should be set to **Merge With Parent Transform**
 - Disable **Use Instancing Where Possible** if this is an RBD sim with unique pieces.
 
-![High Res Pieces Output Settings](/assets/posts/xform-pieces-alembic-layering/images/high-res-pieces.png)
+[![High Res Pieces Output Settings](/assets/posts/xform-pieces-alembic-layering/images/high-res-pieces.png)](/assets/posts/xform-pieces-alembic-layering/images/high-res-pieces.png)
 High Res Pieces Output Settings
 
 ### Transforms Cache
 - Make sure to disable **Create Shape Nodes**.
 
-![Low Res Xform Output Settings](/assets/posts/xform-pieces-alembic-layering/images/low-res-xforms.png)
+[![Low Res Xform Output Settings](/assets/posts/xform-pieces-alembic-layering/images/low-res-xforms.png)](/assets/posts/xform-pieces-alembic-layering/images/low-res-xforms.png)
 Low Res Xform Output Settings
 
 > Since we are only concerned with storing the tranformation of each piece, don't
@@ -132,7 +132,7 @@ If you're rendering with Arnold in Houdini, it's as simple as setting the render
 flag of an object to render an Alembic SOP. Arnold will render Packed Alembics
 as procedurals by default.
 
-![Layers](/assets/posts/xform-pieces-alembic-layering/images/layers.png)
+[![Layers](/assets/posts/xform-pieces-alembic-layering/images/layers.png)](/assets/posts/xform-pieces-alembic-layering/images/layers.png)
 <small>Alembic SOP in Houdini with layers</small>
 
 ### Recommendations

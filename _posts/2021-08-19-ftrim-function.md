@@ -7,6 +7,8 @@ categories: tips
 tags: houdini hscript
 ---
 
+[![Cover Photo]({{ page.thumbnail }})]({{ page.thumbnail }})
+
 > Hipfile: [jamesr_ftrim.hip](/assets/posts/ftrim-function/jamesr_ftrim.hiplc)
 {:style="border-color: #d08770"}
 
@@ -20,7 +22,7 @@ But quite often, if you're referencing a `float` parameter, you wind up getting
 allllll the digits that come with it, full precision and all, rather than just
 the nice value you see in the interface.
 
-![Problem](/assets/posts/ftrim-function/images/problem.png)
+[![Problem](/assets/posts/ftrim-function/images/problem.png)](/assets/posts/ftrim-function/images/problem.png)
 
 ie.
 ```
@@ -49,8 +51,8 @@ nice clean value, pretty much as you typed it!
 Some Parameter Value: `ftrim(ch("/some/parameter"))`
 ```
 
-![Solution](/assets/posts/ftrim-function/images/solution.png)
+[![Solution](/assets/posts/ftrim-function/images/solution.png)](/assets/posts/ftrim-function/images/solution.png)
 
 Of course, this also works in a **Font SOP** too.
 
-![Font SOP](/assets/posts/ftrim-function/images/font-sop.png)
+[![Font SOP](/assets/posts/ftrim-function/images/font-sop.png)](/assets/posts/ftrim-function/images/font-sop.png)
