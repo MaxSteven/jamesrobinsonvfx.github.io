@@ -70,7 +70,7 @@ class Post:
         return os.path.join(self.assets_path(), "images")
 
     def thumbnail_path(self):
-        return os.path.join(self.images_path(), "preview.png")
+        return os.path.join("/", self.images_path(), "preview.png")
 
     def hipname(self):
         return f"jamesr_{self.shortname.replace('-', '')}.hip"
@@ -103,7 +103,7 @@ class Post:
         content = ["\n"]
         if self.has_hipfile:
             content.extend([
-                f"> Hipfile: [{self.hipname()}({self.hipfile_path()})]",
+                f"> Hipfile: [{self.hipname()}]({self.hipfile_path()})]",
                 "{:style=\"border-color: #d08770\"}\n"
             ])
         content.append(
