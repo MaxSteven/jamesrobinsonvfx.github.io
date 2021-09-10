@@ -8,6 +8,7 @@ tags: houdini hscript
 ---
 
 > Hipfile: [jamesr_ftrim.hip](/assets/posts/ftrim-function/jamesr_ftrim.hiplc)
+{:style="border-color: #d08770"}
 
 ## Problem
 Sometimes you want to reference the value of a parameter and display it as a

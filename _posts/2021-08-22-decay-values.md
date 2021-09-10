@@ -9,6 +9,7 @@ tags: houdini solver vex
 
 
 > Hipfile: [jamesr_decay.hip](/assets/posts/decay-values/jamesr_decay.hiplc)
+{:style="border-color: #d08770"}
 
 One of the most common use cases for the **Solver SOP** is to accumulate values
 over time.
