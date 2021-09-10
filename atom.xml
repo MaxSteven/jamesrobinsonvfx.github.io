@@ -4,7 +4,7 @@
  <title>James Robinson</title>
  <link href="https://jamesrobinsonvfx.com/atom.xml" rel="self"/>
  <link href="https://jamesrobinsonvfx.com/"/>
- <updated>2021-09-10T14:34:30-07:00</updated>
+ <updated>2021-09-10T16:03:05-07:00</updated>
  <id>https://jamesrobinsonvfx.com</id>
  <author>
    <name>James Robinson</name>
@@ -143,6 +143,31 @@ parameters on the copies. However, you could get around this by instead using
 attributes on the geometry to control certain parts of your setup!&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;/assets/posts/vex-source/images/attribs-for-parms.gif&quot;&gt;&lt;img src=&quot;/assets/posts/vex-source/images/attribs-for-parms.gif&quot; alt=&quot;Attributes for Parameters&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;channel-referencing-wrangles&quot;&gt;Channel Referencing Wrangles&lt;/h3&gt;
+
+&lt;p&gt;Another pretty useful way of referencing another wrangle is to simply channel
+reference the &lt;strong&gt;Snippet&lt;/strong&gt; parameter from another wrangle.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/vex-source/images/channel-ref-snippet-string.png&quot;&gt;&lt;img src=&quot;/assets/posts/vex-source/images/channel-ref-snippet-string.png&quot; alt=&quot;Channel Reference Snippet String&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This way is also useful because you can add parameters to the wrangle copy’s interface
+and update those, and they &lt;em&gt;will&lt;/em&gt; get picked up and used while your code lives
+on just a single wrangle.&lt;/p&gt;
+
+&lt;p&gt;(Thanks Daniel)&lt;/p&gt;
+
+&lt;h3 id=&quot;evaluation-node-path&quot;&gt;Evaluation Node Path&lt;/h3&gt;
+&lt;p&gt;However, if you still want the source wrangle’s parameter sliders to affect the
+copies, you’ll need to update the &lt;strong&gt;Evaluation Node Path&lt;/strong&gt; parameter under the
+&lt;strong&gt;Bindings&lt;/strong&gt; tab of the wrangle copies.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/vex-source/images/eval-node-path.png&quot;&gt;&lt;img src=&quot;/assets/posts/vex-source/images/eval-node-path.png&quot; alt=&quot;Evaluation Node Path&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This tells the wrangle to look at &lt;em&gt;that&lt;/em&gt; node instead when trying to figure out
+where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ch()&lt;/code&gt; parameters are.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/vex-source/images/eval-node-path.png&quot;&gt;&lt;img src=&quot;/assets/posts/vex-source/images/eval-node-path-in-action.gif&quot; alt=&quot;Evaluation Node Path in Action&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  

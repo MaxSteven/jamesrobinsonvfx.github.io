@@ -191,6 +191,31 @@ attributes on the geometry to control certain parts of your setup!</p>
 
 <p><a href="/assets/posts/vex-source/images/attribs-for-parms.gif"><img src="/assets/posts/vex-source/images/attribs-for-parms.gif" alt="Attributes for Parameters" /></a></p>
 
+<h3 id="channel-referencing-wrangles">Channel Referencing Wrangles</h3>
+
+<p>Another pretty useful way of referencing another wrangle is to simply channel
+reference the <strong>Snippet</strong> parameter from another wrangle.</p>
+
+<p><a href="/assets/posts/vex-source/images/channel-ref-snippet-string.png"><img src="/assets/posts/vex-source/images/channel-ref-snippet-string.png" alt="Channel Reference Snippet String" /></a></p>
+
+<p>This way is also useful because you can add parameters to the wrangle copy’s interface
+and update those, and they <em>will</em> get picked up and used while your code lives
+on just a single wrangle.</p>
+
+<p>(Thanks Daniel)</p>
+
+<h3 id="evaluation-node-path">Evaluation Node Path</h3>
+<p>However, if you still want the source wrangle’s parameter sliders to affect the
+copies, you’ll need to update the <strong>Evaluation Node Path</strong> parameter under the
+<strong>Bindings</strong> tab of the wrangle copies.</p>
+
+<p><a href="/assets/posts/vex-source/images/eval-node-path.png"><img src="/assets/posts/vex-source/images/eval-node-path.png" alt="Evaluation Node Path" /></a></p>
+
+<p>This tells the wrangle to look at <em>that</em> node instead when trying to figure out
+where <code class="language-plaintext highlighter-rouge">ch()</code> parameters are.</p>
+
+<p><a href="/assets/posts/vex-source/images/eval-node-path.png"><img src="/assets/posts/vex-source/images/eval-node-path-in-action.gif" alt="Evaluation Node Path in Action" /></a></p>
+
     </article>
 </section>
 
@@ -228,7 +253,7 @@ attributes on the geometry to control certain parts of your setup!</p>
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2021-09-10T14:34:30-07:00">2021</time>. All rights reserved.
+          &copy; <time datetime="2021-09-10T16:03:05-07:00">2021</time>. All rights reserved.
         </small>
       </footer>
     </div>
