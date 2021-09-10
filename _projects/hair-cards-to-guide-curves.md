@@ -7,17 +7,6 @@ repo: colorpaletteramp
 ---
 ![Cover photo](/assets/projects/hair-cards-to-guide-curves/images/preview.png)
 
-{:.toc}
-- [Get it](#get-it)
-- [Process](#process)
-  - [First Attempt](#first-attempt)
-  - [Final](#final)
-- [Tool Features](#tool-features)
-  - [Single Card & Guide Geometry](#single-card--guide-geometry)
-  - [Stick to Animation](#stick-to-animation)
-  - [Caveats](#caveats)
-- [Conclusion](#conclusion)
-
 ## Overview
 
 A few weeks ago, my friend and co-worker [Omar
