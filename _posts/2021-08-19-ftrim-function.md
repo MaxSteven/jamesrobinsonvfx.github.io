@@ -44,6 +44,10 @@ The solution is actually quite simple! We can use the `ftrim()` function from
 HScript. `ftrim()` will strip off all those unwanted digits and leave you with a
 nice clean value, pretty much as you typed it!
 
+```
+Some Parameter Value: `ftrim(ch("/some/parameter"))`
+```
+
 ![Solution](/assets/posts/ftrim-function/images/solution.png)
 
 Of course, this also works in a **Font SOP** too.
