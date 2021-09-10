@@ -4,7 +4,7 @@
  <title>James Robinson</title>
  <link href="https://jamesrobinsonvfx.com/atom.xml" rel="self"/>
  <link href="https://jamesrobinsonvfx.com/"/>
- <updated>2021-09-10T13:46:40-07:00</updated>
+ <updated>2021-09-10T14:13:18-07:00</updated>
  <id>https://jamesrobinsonvfx.com</id>
  <author>
    <name>James Robinson</name>
@@ -21,7 +21,7 @@
   &lt;p&gt;Hipfile: &lt;a href=&quot;/assets/posts/vex-source/jamesr_vexsource.hiplc&quot;&gt;jamesr_vexsource.hiplc&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/preview.png&quot; alt=&quot;Cover Photo&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/vex-source/images/preview.png&quot;&gt;&lt;img src=&quot;/assets/posts/vex-source/images/preview.png&quot; alt=&quot;Cover Photo&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Houdini offers several ways to duplicate and reuse nodes.&lt;/p&gt;
 
@@ -50,7 +50,7 @@ scene who need the same displacement effect applied to them. We have a few
 options:&lt;/p&gt;
 
 &lt;h3 id=&quot;option-1-copy-and-paste-the-vop-network&quot;&gt;Option 1: Copy and Paste the VOP Network&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/copy-paste.gif&quot; alt=&quot;Copy and Paste&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/vex-source/images/copy-paste.gif&quot;&gt;&lt;img src=&quot;/assets/posts/vex-source/images/copy-paste.gif&quot; alt=&quot;Copy and Paste&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Simple as that. We can just duplicate it around and we’re all set. 90% of the
 time this will probably be what you do day-to-day. The downside though is that
@@ -67,7 +67,7 @@ through the effort of creating an asset for it!&lt;/p&gt;
 
 &lt;h3 id=&quot;option-3-create-a-reference-copy&quot;&gt;Option 3: Create a Reference Copy&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/reference-copy.gif&quot; alt=&quot;Reference Copy&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/vex-source/images/reference-copy.gif&quot;&gt;&lt;img src=&quot;/assets/posts/vex-source/images/reference-copy.gif&quot; alt=&quot;Reference Copy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;RMB&lt;/strong&gt; &amp;gt; &lt;strong&gt;Actions&lt;/strong&gt; &amp;gt; &lt;strong&gt;Create Reference Copy&lt;/strong&gt;&lt;/p&gt;
@@ -87,7 +87,7 @@ VOP network like adding new nodes or removing old ones, those changes would
 network, there is a parameter called &lt;strong&gt;Vex Source&lt;/strong&gt;. By default, this is is set
 to &lt;strong&gt;Myself&lt;/strong&gt;, which means it uses the operators inside itself to do all the work.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/vex-source.png&quot; alt=&quot;Vex Source Parameter&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/vex-source/images/vex-source.png&quot;&gt;&lt;img src=&quot;/assets/posts/vex-source/images/vex-source.png&quot; alt=&quot;Vex Source Parameter&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;If we change it instead to &lt;strong&gt;Shop&lt;/strong&gt;, the &lt;strong&gt;Shop Path&lt;/strong&gt; parameter is then
 exposed, and we can actually set that parameter to &lt;em&gt;another VOP network in the
@@ -98,7 +98,7 @@ contents of the VOP network specified in that &lt;strong&gt;Shop Path&lt;/strong
 
 &lt;h4 id=&quot;steps&quot;&gt;Steps&lt;/h4&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/vopnet-shop-path-setup.gif&quot; alt=&quot;VOP Network Shop Path Setup GIF&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/vex-source/images/vopnet-shop-path-setup.gif&quot;&gt;&lt;img src=&quot;/assets/posts/vex-source/images/vopnet-shop-path-setup.gif&quot; alt=&quot;VOP Network Shop Path Setup GIF&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;To recap, the steps are as follows:&lt;/p&gt;
 &lt;ol&gt;
@@ -111,7 +111,7 @@ to the node to the clipboard.&lt;/li&gt;
 parameter (if you want this to be a relative path, that’s fine too).&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/change-source-vopnet.gif&quot; alt=&quot;Make a change&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/vex-source/images/change-source-vopnet.gif&quot;&gt;&lt;img src=&quot;/assets/posts/vex-source/images/change-source-vopnet.gif&quot; alt=&quot;Make a change&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;small&gt;Changes to the source networkl are propagated immediately!&lt;/small&gt;&lt;/p&gt;
 
@@ -126,7 +126,7 @@ actually won’t be able to use an empty wrangle on each of our other streams.&l
 rest of the geometry we want to copy it around to will have empty &lt;em&gt;VOP
 Networks&lt;/em&gt; instead, just like before.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/reference-wrangle.gif&quot; alt=&quot;Wrangle Source&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/vex-source/images/reference-wrangle.gif&quot;&gt;&lt;img src=&quot;/assets/posts/vex-source/images/reference-wrangle.gif&quot; alt=&quot;Wrangle Source&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;steps-1&quot;&gt;Steps:&lt;/h4&gt;
 &lt;ol&gt;
@@ -142,7 +142,7 @@ Networks&lt;/em&gt; instead, just like before.&lt;/p&gt;
 parameters on the copies. However, you could get around this by instead using
 attributes on the geometry to control certain parts of your setup!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/attribs-for-parms.gif&quot; alt=&quot;Attributes for Parameters&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/vex-source/images/attribs-for-parms.gif&quot;&gt;&lt;img src=&quot;/assets/posts/vex-source/images/attribs-for-parms.gif&quot; alt=&quot;Attributes for Parameters&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  
@@ -151,7 +151,9 @@ attributes on the geometry to control certain parts of your setup!&lt;/p&gt;
    <link href="https://jamesrobinsonvfx.com/tips/2021/08/22/decay-values/"/>
    <updated>2021-08-22T00:00:00-07:00</updated>
    <id>https://jamesrobinsonvfx.com/tips/2021/08/22/decay-values</id>
-   <content type="html">&lt;blockquote style=&quot;border-color: #d08770&quot;&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;/assets/posts/decay-values/images/preview.jpg&quot;&gt;&lt;img src=&quot;/assets/posts/decay-values/images/preview.jpg&quot; alt=&quot;Cover Photo&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote style=&quot;border-color: #d08770&quot;&gt;
   &lt;p&gt;Hipfile: &lt;a href=&quot;/assets/posts/decay-values/jamesr_decay.hiplc&quot;&gt;jamesr_decay.hip&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -241,7 +243,7 @@ something!)&lt;/p&gt;
 parameter from &lt;strong&gt;None&lt;/strong&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;e^Timestep&lt;/code&gt;. Looks pretty similar to what we just
 did above!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/decay-values/images/linear-combo-dop.jpg&quot; alt=&quot;Gas Linear Combination DOP&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/decay-values/images/linear-combo-dop.jpg&quot;&gt;&lt;img src=&quot;/assets/posts/decay-values/images/linear-combo-dop.jpg&quot; alt=&quot;Gas Linear Combination DOP&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
 </content>
@@ -252,7 +254,9 @@ did above!&lt;/p&gt;
    <link href="https://jamesrobinsonvfx.com/tips/2021/08/19/ftrim-function/"/>
    <updated>2021-08-19T00:00:00-07:00</updated>
    <id>https://jamesrobinsonvfx.com/tips/2021/08/19/ftrim-function</id>
-   <content type="html">&lt;blockquote style=&quot;border-color: #d08770&quot;&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;/assets/posts/ftrim-function/images/preview.png&quot;&gt;&lt;img src=&quot;/assets/posts/ftrim-function/images/preview.png&quot; alt=&quot;Cover Photo&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote style=&quot;border-color: #d08770&quot;&gt;
   &lt;p&gt;Hipfile: &lt;a href=&quot;/assets/posts/ftrim-function/jamesr_ftrim.hiplc&quot;&gt;jamesr_ftrim.hip&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -266,7 +270,7 @@ sims or making some sort of visualizer.&lt;/p&gt;
 allllll the digits that come with it, full precision and all, rather than just
 the nice value you see in the interface.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/ftrim-function/images/problem.png&quot; alt=&quot;Problem&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/ftrim-function/images/problem.png&quot;&gt;&lt;img src=&quot;/assets/posts/ftrim-function/images/problem.png&quot; alt=&quot;Problem&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;ie.&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0.04
@@ -291,11 +295,11 @@ nice clean value, pretty much as you typed it!&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Some Parameter Value: `ftrim(ch(&quot;/some/parameter&quot;))`
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/ftrim-function/images/solution.png&quot; alt=&quot;Solution&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/ftrim-function/images/solution.png&quot;&gt;&lt;img src=&quot;/assets/posts/ftrim-function/images/solution.png&quot; alt=&quot;Solution&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Of course, this also works in a &lt;strong&gt;Font SOP&lt;/strong&gt; too.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/ftrim-function/images/font-sop.png&quot; alt=&quot;Font SOP&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/ftrim-function/images/font-sop.png&quot;&gt;&lt;img src=&quot;/assets/posts/ftrim-function/images/font-sop.png&quot; alt=&quot;Font SOP&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  
@@ -304,7 +308,9 @@ nice clean value, pretty much as you typed it!&lt;/p&gt;
    <link href="https://jamesrobinsonvfx.com/tips/2021/07/29/vdb-reshape-sdf-close/"/>
    <updated>2021-07-29T00:00:00-07:00</updated>
    <id>https://jamesrobinsonvfx.com/tips/2021/07/29/vdb-reshape-sdf-close</id>
-   <content type="html">&lt;blockquote style=&quot;border-color: #d08770&quot;&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;/assets/posts/vdb-reshape-sdf-close/images/preview.jpg&quot;&gt;&lt;img src=&quot;/assets/posts/vdb-reshape-sdf-close/images/preview.jpg&quot; alt=&quot;Cover Photo&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote style=&quot;border-color: #d08770&quot;&gt;
   &lt;p&gt;Hipfile: &lt;a href=&quot;/assets/posts/vdb-reshape-sdf-close/jamesr_vdbreshapesdfclose.hiplc&quot;&gt;jamesr_vdbreshapesdfclose.hip&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -325,18 +331,18 @@ gaps and holes in an SDF using 2 &lt;strong&gt;VDB Reshape SDF&lt;/strong&gt; no
 parameter to &lt;strong&gt;None&lt;/strong&gt; (Houdini 18.5+)!&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/vdb-reshape-sdf-close/images/old-way.jpg&quot; alt=&quot;Old way&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/vdb-reshape-sdf-close/images/old-way.jpg&quot;&gt;&lt;img src=&quot;/assets/posts/vdb-reshape-sdf-close/images/old-way.jpg&quot; alt=&quot;Old way&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;close-new&quot;&gt;Close (New)&lt;/h3&gt;
 &lt;p&gt;Not sure when this was added (or maybe it has been here the whole time!), but
 there is another method that does the exact same thing in one go: &lt;strong&gt;Close&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/vdb-reshape-sdf-close/images/new-way.jpg&quot; alt=&quot;New way&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/vdb-reshape-sdf-close/images/new-way.jpg&quot;&gt;&lt;img src=&quot;/assets/posts/vdb-reshape-sdf-close/images/new-way.jpg&quot; alt=&quot;New way&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
 &lt;p&gt;A side-by-side comparison of the two looks like you get the same result!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/vdb-reshape-sdf-close/images/side-by-side.gif&quot; alt=&quot;Side by side&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/vdb-reshape-sdf-close/images/side-by-side.gif&quot;&gt;&lt;img src=&quot;/assets/posts/vdb-reshape-sdf-close/images/side-by-side.gif&quot; alt=&quot;Side by side&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  
@@ -422,7 +428,7 @@ the static static transforms.&lt;/li&gt;
 a hierarchy. It’s important that each piece has room for both a &lt;strong&gt;Transform&lt;/strong&gt;
 and &lt;strong&gt;Shape&lt;/strong&gt;. Here’s an example of a good looking &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s@path&lt;/code&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/path-from-name.png&quot; alt=&quot;Set Path from Name&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/xform-pieces-alembic-layering/images/path-from-name.png&quot;&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/path-from-name.png&quot; alt=&quot;Set Path from Name&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;s@path = sprintf(&quot;pieces_grp/%s_geo/%s_geoShape&quot;, s@name, s@name);
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -445,7 +451,7 @@ some misalignment!&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;rop-it-out&quot;&gt;ROP it Out&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/network-output.png&quot; alt=&quot;Output&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/xform-pieces-alembic-layering/images/network-output.png&quot;&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/network-output.png&quot; alt=&quot;Output&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;In order for the Alembic to work for our purposes, a few of the defaults need to
 be changed on the &lt;strong&gt;Alembic ROP&lt;/strong&gt;.&lt;/p&gt;
@@ -458,7 +464,7 @@ be changed on the &lt;strong&gt;Alembic ROP&lt;/strong&gt;.&lt;/p&gt;
   &lt;li&gt;Disable &lt;strong&gt;Use Instancing Where Possible&lt;/strong&gt; if this is an RBD sim with unique pieces.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/high-res-pieces.png&quot; alt=&quot;High Res Pieces Output Settings&quot; /&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/xform-pieces-alembic-layering/images/high-res-pieces.png&quot;&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/high-res-pieces.png&quot; alt=&quot;High Res Pieces Output Settings&quot; /&gt;&lt;/a&gt;
 High Res Pieces Output Settings&lt;/p&gt;
 
 &lt;h3 id=&quot;transforms-cache&quot;&gt;Transforms Cache&lt;/h3&gt;
@@ -466,7 +472,7 @@ High Res Pieces Output Settings&lt;/p&gt;
   &lt;li&gt;Make sure to disable &lt;strong&gt;Create Shape Nodes&lt;/strong&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/low-res-xforms.png&quot; alt=&quot;Low Res Xform Output Settings&quot; /&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/xform-pieces-alembic-layering/images/low-res-xforms.png&quot;&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/low-res-xforms.png&quot; alt=&quot;Low Res Xform Output Settings&quot; /&gt;&lt;/a&gt;
 Low Res Xform Output Settings&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -484,7 +490,7 @@ so I’ll stick to what I know.&lt;/p&gt;
 flag of an object to render an Alembic SOP. Arnold will render Packed Alembics
 as procedurals by default.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/layers.png&quot; alt=&quot;Layers&quot; /&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/xform-pieces-alembic-layering/images/layers.png&quot;&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/layers.png&quot; alt=&quot;Layers&quot; /&gt;&lt;/a&gt;
 &lt;small&gt;Alembic SOP in Houdini with layers&lt;/small&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;recommendations&quot;&gt;Recommendations&lt;/h3&gt;
@@ -511,13 +517,13 @@ as procedurals by default.&lt;/p&gt;
    <link href="https://jamesrobinsonvfx.com/tips/2021/03/26/viewport-draw-modes/"/>
    <updated>2021-03-26T00:00:00-07:00</updated>
    <id>https://jamesrobinsonvfx.com/tips/2021/03/26/viewport-draw-modes</id>
-   <content type="html">&lt;p&gt;&lt;img src=&quot;/assets/posts/viewport-draw-modes/preview.png&quot; alt=&quot;Viewport Modes&quot; /&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;/assets/posts/viewport-draw-modes/preview.png&quot;&gt;&lt;img src=&quot;/assets/posts/viewport-draw-modes/preview.png&quot; alt=&quot;Cover Photo&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;I recently discovered that you can actually set the viewport drawing modes to be
 unique per Shading Mode. ie. when templating geo, you can shade with “Wireframe
 Ghost” instead of the default template wireframe.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/viewport-draw-modes/settings.png&quot; alt=&quot;Viewport Settings&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/viewport-draw-modes/settings.png&quot;&gt;&lt;img src=&quot;/assets/posts/viewport-draw-modes/settings.png&quot; alt=&quot;Viewport Settings&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;This combined with a thinner wire width makes for a pretty pleasing experience!
 The ghost mode when templated also sort of helps show a bit more depth.&lt;/p&gt;
@@ -529,7 +535,9 @@ The ghost mode when templated also sort of helps show a bit more depth.&lt;/p&gt
    <link href="https://jamesrobinsonvfx.com/tips/workflow/2021/03/26/opchange/"/>
    <updated>2021-03-26T00:00:00-07:00</updated>
    <id>https://jamesrobinsonvfx.com/tips/workflow/2021/03/26/opchange</id>
-   <content type="html">&lt;p&gt;Going through and manually swapping &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$HIP&lt;/code&gt; for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$JOB&lt;/code&gt;, or switching any value
+   <content type="html">&lt;p&gt;&lt;a href=&quot;/assets/posts/opchange/preview.png&quot;&gt;&lt;img src=&quot;/assets/posts/opchange/preview.png&quot; alt=&quot;Cover Photo&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Going through and manually swapping &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$HIP&lt;/code&gt; for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$JOB&lt;/code&gt;, or switching any value
 for another one in an entire hipfile can be a real pain. You could try doing the
 long way (looking at each parm and changing by hand….ouch!), or by iterating
 all the parms on all the nodes with Python. Or, you can use a simple built-in

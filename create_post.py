@@ -107,7 +107,7 @@ class Post:
                 "{:style=\"border-color: #d08770\"}\n"
             ])
         content.append(
-            f"![Cover Photo]({self.thumbnail_path()})\n"
+            "[![Cover Photo]({{ page.thumbnail }})]({{ page.thumbnail }})\n"
         )
         return content
 
