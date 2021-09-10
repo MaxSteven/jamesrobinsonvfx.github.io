@@ -29,6 +29,7 @@ task :deploy do
 
   puts "Removing directories"
   system "rm -rf *"
+  system "rm -rf .jekyll-cache"
 
   puts "Copying temp site build"
   system "cp -r #{GH_PAGES_DIR}/* ."
