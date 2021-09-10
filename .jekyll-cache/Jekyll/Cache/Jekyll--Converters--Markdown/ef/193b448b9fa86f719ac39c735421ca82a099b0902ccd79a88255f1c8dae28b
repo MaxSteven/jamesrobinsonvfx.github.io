@@ -1,0 +1,43 @@
+I"M<p>Going through and manually swapping <code class="language-plaintext highlighter-rouge">$HIP</code> for <code class="language-plaintext highlighter-rouge">$JOB</code>, or switching any value
+for another one in an entire hipfile can be a real pain. You could try doing the
+long way (looking at each parm and changing by hand….ouch!), or by iterating
+all the parms on all the nodes with Python. Or, you can use a simple built-in
+HScript command: <code class="language-plaintext highlighter-rouge">opchange</code>.</p>
+
+<p><a href="https://www.sidefx.com/docs/houdini/commands/opchange.html"><code class="language-plaintext highlighter-rouge">opchange</code></a> makes
+it really simple to swap values across the entire scene, or in a limited scope
+of nodes.</p>
+
+<h2 id="example">Example</h2>
+<p>Let’s say you were loading a bunch of HDRIs from some sort of library you have
+elsewhere on disk, but now you need to share the project with someone else.
+You’ve copied all the light textures from your library location into <code class="language-plaintext highlighter-rouge">$JOB/tex</code>,
+but now you need to change all the paths on the lights in your hipfile. We can
+use <code class="language-plaintext highlighter-rouge">opchange</code> to make it a bit easier.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>opchange D:/Library/HDRI <span class="se">\$</span>JOB/tex
+</code></pre></div></div>
+
+<p>Now all references to <code class="language-plaintext highlighter-rouge">D:/Library/HDRI</code> should have been replaced with <code class="language-plaintext highlighter-rouge">$JOB/tex</code>.</p>
+
+<h2 id="gotchas">Gotchas</h2>
+<p>If you’re swapping a variable, and you want to search for the <em>unexpanded</em>
+version, ie. <code class="language-plaintext highlighter-rouge">$HIP</code>, make sure to escape the <code class="language-plaintext highlighter-rouge">$</code> with a <code class="language-plaintext highlighter-rouge">\</code>, otherwise Houdini
+will be searching for the <em>expanded</em> version, like <code class="language-plaintext highlighter-rouge">~/project/myproject</code> instead.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>opchange <span class="se">\$</span>HIP <span class="se">\$</span>JOB/hip
+</code></pre></div></div>
+
+<h3 id="limit-the-scope">Limit the Scope</h3>
+<p>We don’t have to search the entire scene in this case, since we know that all of
+our lights are going to exist at <code class="language-plaintext highlighter-rouge">/obj</code>.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>opchange <span class="nt">-p</span> /obj D:/Library/HDRI <span class="se">\$</span>JOB/tex
+</code></pre></div></div>
+
+<p>Duplicated a node and want to change the new node’s parm references? use the -i flag.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>opchange <span class="nt">-i</span> <span class="nt">-p</span> /obj/sheepnmoon/mat/fuzz_moon sheep_ moon_
+</code></pre></div></div>
+
+:ET
