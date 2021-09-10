@@ -118,9 +118,35 @@ Networks* instead, just like before.
 4. On each of the new empty VOP networks, set the **Vex Source** parameter to **Shop**.
 5. Paste the path of the copied VOP network into the **Shop Path** parameter.
 
+
 ## Final Notes
 The biggest downside to this method is that you can't really adjust the
 parameters on the copies. However, you could get around this by instead using
 attributes on the geometry to control certain parts of your setup!
 
 [![Attributes for Parameters](/assets/posts/vex-source/images/attribs-for-parms.gif)](/assets/posts/vex-source/images/attribs-for-parms.gif)
+
+### Channel Referencing Wrangles
+
+Another pretty useful way of referencing another wrangle is to simply channel
+reference the **Snippet** parameter from another wrangle.
+
+[![Channel Reference Snippet String](/assets/posts/vex-source/images/channel-ref-snippet-string.png)](/assets/posts/vex-source/images/channel-ref-snippet-string.png)
+
+This way is also useful because you can add parameters to the wrangle copy's interface
+and update those, and they *will* get picked up and used while your code lives
+on just a single wrangle.
+
+(Thanks Daniel)
+
+### Evaluation Node Path
+However, if you still want the source wrangle's parameter sliders to affect the
+copies, you'll need to update the **Evaluation Node Path** parameter under the
+**Bindings** tab of the wrangle copies.
+
+[![Evaluation Node Path](/assets/posts/vex-source/images/eval-node-path.png)](/assets/posts/vex-source/images/eval-node-path.png)
+
+This tells the wrangle to look at *that* node instead when trying to figure out
+where `ch()` parameters are.
+
+[![Evaluation Node Path in Action](/assets/posts/vex-source/images/eval-node-path-in-action.gif)](/assets/posts/vex-source/images/eval-node-path.png)
