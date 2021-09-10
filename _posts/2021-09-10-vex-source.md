@@ -56,7 +56,7 @@ through the effort of creating an asset for it!
 
 ![Reference Copy](/assets/posts/vex-source/images/reference-copy.gif)
 
-> **RMB> **Actions** > **Create Reference Copy**
+> **RMB** > **Actions** > **Create Reference Copy**
 
 We could create a **Reference Copy** which is really just like copying and
 pasting the node like in the first option, except the new pasted node has
