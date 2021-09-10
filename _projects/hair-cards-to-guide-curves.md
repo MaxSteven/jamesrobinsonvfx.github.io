@@ -5,7 +5,7 @@ description: Convert hair card geometry (like from a game engine) to guide curve
 thumbnail: /assets/projects/hair-cards-to-guide-curves/images/preview.png
 repo: colorpaletteramp
 ---
-![Cover photo](/assets/projects/hair-cards-to-guide-curves/images/preview.png)
+[![Cover photo]({{ site.thumbnail }})]({{ site.thumbnail }})
 
 ## Overview
 
@@ -72,7 +72,7 @@ Checkout the hipfile to see the setup, and crack open the hda for a deeper look.
 As mentioned above, this node will create guide curves from hair cards.
 
 
-![Cycle Grooms](/assets/projects/hair-cards-to-guide-curves/images/cycle-grooms.gif)
+[![Cycle Grooms](/assets/projects/hair-cards-to-guide-curves/images/cycle-grooms.gif)](/assets/projects/hair-cards-to-guide-curves/images/cycle-grooms.gif)
 
 By default, the tool is pretty straight forward. Plug in the static cards into
 the first input, get curves out! As long as you have a `uv` attribute (that
@@ -80,7 +80,7 @@ works) you should get something useable.
 
 
 ### Single Card & Guide Geometry
-![Single Card](/assets/projects/hair-cards-to-guide-curves/images/single-card.gif)
+[![Single Card](/assets/projects/hair-cards-to-guide-curves/images/single-card.gif)](/assets/projects/hair-cards-to-guide-curves/images/single-card.gif)
 
 Enable the **Single Card** parameter to scrub through the cards one at a time
 for a quick debugging visualization.
@@ -91,8 +91,8 @@ If a second input is connected, the guides will interpolate attributes
 
 > Make sure the topology matches the original cards from the first input!
 
-![Stick to Animation](/assets/projects/hair-cards-to-guide-curves/images/stick-to-anim.gif)
-![Exploded Vis](/assets/projects/hair-cards-to-guide-curves/images/exploded-view.gif)
+[![Stick to Animation](/assets/projects/hair-cards-to-guide-curves/images/stick-to-anim.gif)](/assets/projects/hair-cards-to-guide-curves/images/stick-to-anim.gif)
+[![Exploded Vis](/assets/projects/hair-cards-to-guide-curves/images/exploded-view.gif)](/assets/projects/hair-cards-to-guide-curves/images/exploded-view.gif)
 
 
 ### Caveats
@@ -108,4 +108,4 @@ Enjoy! If you have any problems, please feel welcome to add an issue to the
 github repo, or reach out to me directly.
 
 
-![Hairstyles](/assets/projects/hair-cards-to-guide-curves/images/change-hair.gif)
+[![Hairstyles](/assets/projects/hair-cards-to-guide-curves/images/change-hair.gif)](/assets/projects/hair-cards-to-guide-curves/images/change-hair.gif)
