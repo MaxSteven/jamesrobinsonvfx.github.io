@@ -9,6 +9,9 @@ paginate: 25
 except_separator: <!--more-->
 baseurl: ""
 
+# Exclude Rakefile from build
+exclude: [Rakefile]
+
 # Assets
 # We specify the directory for Jekyll so we can use @imports.
 sass:
