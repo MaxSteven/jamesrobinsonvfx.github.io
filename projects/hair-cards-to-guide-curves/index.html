@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab:300|Roboto:500" rel="stylesheet">
+  </head>
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Hair Cards to Guide Curves &middot; James Robinson
+    
+  </title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+</head>
+
+
+  <body>
+
+    <div class="container content">
+      <header class="masthead">
+        <!-- <h3 class="masthead-title">
+          <a href="/" title="Home">James Robinson</a>
+          <small>Houdini FX TD</small>
+        </h3> -->
+        <nav class="navbar">
+  <span>
+  <h3 class="masthead-title">
+    <a href="/" title="Home">James Robinson</a>
+    <small>Houdini FX TD</small>
+  </h3>
+    <span style="display: block;">
+    <a class="fab fa-vimeo" href="https://vimeo.com/jamesrobinsonvfx"></a>
+    <a class="fab fa-linkedin" href="https://www.linkedin.com/in/jamesrobinsonvfx/"></a>
+    <a class="fab fa-github" href="https://github.com/jamesrobinsonvfx"></a>
+    <a class="fab fa-instagram" href="https://www.instagram.com/jamesrobinsonvfx/"></a>
+    </span>
+  </span>
+
+  <span>
+  <a href="/" class="navlink">Blog</a>
+  <a href="/snippets" class="navlink">Snippets</a>
+  <a href="/projects" class="navlink">Projects</a>
+  <a href="/work" class="navlink">Work</a>
+  <a href="/links" class="navlink">Links</a>
+  <a href="/about" class="navlink">About</a>
+  </span>
+</nav>
+      </header>
+
+      <main style="padding-top: 3em">
+        <!-- <hr> -->
+        <h1 class="post-title">Hair Cards to Guide Curves</h1>
+<time datetime="2021-09-09T22:53:31-07:00" class="post-date">09 Sep 2021</time>
+<section class="sheet">
+  <article class="post">
+      <p><img src="/assets/projects/hair-cards-to-guide-curves/images/preview.png" alt="Cover photo" /></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>A few weeks ago, my friend and co-worker <a href="https://www.artstation.com/omartaher">Omar
+Taher</a> came to me with an issue: he had a
+hair groom made of triangulated cards, and wanted to extract centerline curves
+from them to use as guides.</p>
+
+<h2 id="get-it">Get it</h2>
+<p>Download the latest release <a href="https://github.com/jamesrobinsonvfx/cards_to_curves/releases/latest/download/cards_to_curves.zip">here</a>.</p>
+
+<p>Full repo <a href="https://github.com/jamesrobinsonvfx/cards_to_curves">here</a>.</p>
+
+<p>Inside the <code class="language-plaintext highlighter-rouge">houdini18.5/hda</code> folder you can grab the HDA and put it someplace
+where Houdini will find it. Otherwise, you can install it as a <a href="https://www.sidefx.com/docs/houdini/ref/plugins.html">Houdini
+Package</a>:</p>
+
+<ol>
+  <li>Download the release zip</li>
+  <li>Navigate to your Houdini user preferences folder (ie. <code class="language-plaintext highlighter-rouge">~/houdini18.5</code>)</li>
+  <li>Create a folder called <code class="language-plaintext highlighter-rouge">packages</code> if it doesn’t exist yet</li>
+  <li>Copy the downloaded zip into <code class="language-plaintext highlighter-rouge">packages</code></li>
+  <li>Extract the contents, and delete the zip archive if you want</li>
+  <li>Drag the file <code class="language-plaintext highlighter-rouge">cards_to_curves.json</code> up one level into to that <code class="language-plaintext highlighter-rouge">packages</code> folder</li>
+</ol>
+
+<p>There is also a demo file located at <code class="language-plaintext highlighter-rouge">houdini18.5/hip</code> with some usage examples.</p>
+
+<p>See the the help card on the node for more detailed info.</p>
+
+<h2 id="process">Process</h2>
+<p>Sounds easy enough at first, but given some wonky polygon winding and shapes, it
+took a little extra work to make sure it was stable on every card.</p>
+
+<h3 id="first-attempt">First Attempt</h3>
+
+<p>At first, not knowing much about how groom artists create hair cards, I took a
+VEX approach that matched up pairs of points based on their neighbors, and added
+a point at their center.
+Unfortunately, that only worked when the cards were made with one row of
+alternating triangles, and after downloading a few more free hair card grooms, I
+realized that this method fails spectacularly if the artist created it
+differently.</p>
+
+<h3 id="final">Final</h3>
+
+<p>Luckily, one thing all good hair card grooms have in common: they have nice UVs!
+Should have thought of that sooner! This makes finding the centerline a breeze:</p>
+<ol>
+  <li>Evaluate the connectivity.</li>
+  <li>Split geo by UV seams, and promote <code class="language-plaintext highlighter-rouge">uv</code> attribute to points (if it isn’t
+there already).</li>
+  <li><strong>Swap</strong> <code class="language-plaintext highlighter-rouge">P</code> for <code class="language-plaintext highlighter-rouge">UV</code>, so the points now look like a UV layout, but in world
+space near the origin in the viewport.</li>
+  <li>Iterate over each connected piece (card), and create a line down the center
+of the bounding box, from the top to the bottom.</li>
+  <li>Add some more points to these lines with a <strong>Resample</strong>.</li>
+  <li><strong>Ray</strong> the lines to the flattened hair card geo.</li>
+  <li>Use an <strong>Attribute Interpolate</strong> to put them back into world space.</li>
+</ol>
+
+<p>Checkout the hipfile to see the setup, and crack open the hda for a deeper look.</p>
+
+<h2 id="tool-features">Tool Features</h2>
+
+<p>As mentioned above, this node will create guide curves from hair cards.</p>
+
+<p><img src="/assets/projects/hair-cards-to-guide-curves/images/cycle-grooms.gif" alt="Cycle Grooms" /></p>
+
+<p>By default, the tool is pretty straight forward. Plug in the static cards into
+the first input, get curves out! As long as you have a <code class="language-plaintext highlighter-rouge">uv</code> attribute (that
+works) you should get something useable.</p>
+
+<h3 id="single-card--guide-geometry">Single Card &amp; Guide Geometry</h3>
+<p><img src="/assets/projects/hair-cards-to-guide-curves/images/single-card.gif" alt="Single Card" /></p>
+
+<p>Enable the <strong>Single Card</strong> parameter to scrub through the cards one at a time
+for a quick debugging visualization.</p>
+
+<h3 id="stick-to-animation">Stick to Animation</h3>
+<p>If a second input is connected, the guides will interpolate attributes
+(including position) from that geometry stream.</p>
+
+<blockquote>
+  <p>Make sure the topology matches the original cards from the first input!</p>
+</blockquote>
+
+<p><img src="/assets/projects/hair-cards-to-guide-curves/images/stick-to-anim.gif" alt="Stick to Animation" />
+<img src="/assets/projects/hair-cards-to-guide-curves/images/exploded-view.gif" alt="Exploded Vis" /></p>
+
+<h3 id="caveats">Caveats</h3>
+<p>If you’re getting bad guides that zig zag, or look like they’re spanning across
+multiple guides, make sure the input cards are clean. There is a <strong>Poly Doctor</strong>
+embedded in the node that should help clean up non-manifold geometry, but
+sometimes it can’t do all the work! Make sure that any problem cards are
+actually being treated as separate connected islands per-card. Otherwise either
+fix them, or delete them!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>Enjoy! If you have any problems, please feel welcome to add an issue to the
+github repo, or reach out to me directly.</p>
+
+<p><img src="/assets/projects/hair-cards-to-guide-curves/images/change-hair.gif" alt="Hairstyles" /></p>
+
+    </article>
+</section>
+
+
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+      <li>
+        <a href="/tips/2021/08/22/decay-values/">
+          Decay Values
+          <small><time datetime="2021-08-22T00:00:00-07:00">22 Aug 2021</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tips/2021/08/19/ftrim-function/">
+          ftrim() HScript function
+          <small><time datetime="2021-08-19T00:00:00-07:00">19 Aug 2021</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tips/2021/07/29/vdb-reshape-sdf-close/">
+          VDB Reshape SDF Close
+          <small><time datetime="2021-07-29T00:00:00-07:00">29 Jul 2021</time></small>
+        </a>
+      </li>
+    
+  </ul>
+</aside>
+
+
+      </main>
+
+      <footer class="footer">
+        <small>
+          &copy; <time datetime="2021-09-09T22:53:31-07:00">2021</time>. All rights reserved.
+        </small>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

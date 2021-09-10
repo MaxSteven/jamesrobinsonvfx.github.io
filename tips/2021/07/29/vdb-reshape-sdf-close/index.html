@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab:300|Roboto:500" rel="stylesheet">
+  </head>
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      VDB Reshape SDF Close &middot; James Robinson
+    
+  </title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+</head>
+
+
+  <body>
+
+    <div class="container content">
+      <header class="masthead">
+        <!-- <h3 class="masthead-title">
+          <a href="/" title="Home">James Robinson</a>
+          <small>Houdini FX TD</small>
+        </h3> -->
+        <nav class="navbar">
+  <span>
+  <h3 class="masthead-title">
+    <a href="/" title="Home">James Robinson</a>
+    <small>Houdini FX TD</small>
+  </h3>
+    <span style="display: block;">
+    <a class="fab fa-vimeo" href="https://vimeo.com/jamesrobinsonvfx"></a>
+    <a class="fab fa-linkedin" href="https://www.linkedin.com/in/jamesrobinsonvfx/"></a>
+    <a class="fab fa-github" href="https://github.com/jamesrobinsonvfx"></a>
+    <a class="fab fa-instagram" href="https://www.instagram.com/jamesrobinsonvfx/"></a>
+    </span>
+  </span>
+
+  <span>
+  <a href="/" class="navlink">Blog</a>
+  <a href="/snippets" class="navlink">Snippets</a>
+  <a href="/projects" class="navlink">Projects</a>
+  <a href="/work" class="navlink">Work</a>
+  <a href="/links" class="navlink">Links</a>
+  <a href="/about" class="navlink">About</a>
+  </span>
+</nav>
+      </header>
+
+      <main style="padding-top: 3em">
+        <!-- <hr> -->
+        <h1 class="post-title">VDB Reshape SDF Close</h1>
+<time datetime="2021-07-29T00:00:00-07:00" class="post-date">29 Jul 2021</time>
+<section class="sheet">
+  <article class="post">
+      <blockquote style="border-color: #d08770">
+  <p>Hipfile: <a href="/assets/posts/vdb-reshape-sdf-close/jamesr_vdbreshapesdfclose.hiplc">jamesr_vdbreshapesdfclose.hip</a></p>
+</blockquote>
+
+<h3 id="dilate-and-erode-old">Dilate and Erode (Old)</h3>
+<p>Most people are probably familiar with the following workflow for sealing up
+gaps and holes in an SDF using 2 <strong>VDB Reshape SDF</strong> nodes:</p>
+
+<ol>
+  <li>Set the first one to <strong>Dilate</strong></li>
+  <li>Set the second one to <strong>Erode</strong></li>
+  <li>Channel reference the <strong>Offset</strong> parameter from the dilating node to the
+<strong>Offset</strong> parameter of the eroding node.</li>
+  <li>Adjust the offset until you’re happy</li>
+</ol>
+
+<blockquote>
+  <p>If you want to keep a filled interior, don’t forget to set the <strong>Trim</strong>
+parameter to <strong>None</strong> (Houdini 18.5+)!</p>
+</blockquote>
+
+<p><img src="/assets/posts/vdb-reshape-sdf-close/images/old-way.jpg" alt="Old way" /></p>
+
+<h3 id="close-new">Close (New)</h3>
+<p>Not sure when this was added (or maybe it has been here the whole time!), but
+there is another method that does the exact same thing in one go: <strong>Close</strong>.</p>
+
+<p><img src="/assets/posts/vdb-reshape-sdf-close/images/new-way.jpg" alt="New way" /></p>
+
+<h3 id="conclusion">Conclusion</h3>
+<p>A side-by-side comparison of the two looks like you get the same result!</p>
+
+<p><img src="/assets/posts/vdb-reshape-sdf-close/images/side-by-side.gif" alt="Side by side" /></p>
+
+    </article>
+</section>
+
+
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+      <li>
+        <a href="/tips/2021/08/22/decay-values/">
+          Decay Values
+          <small><time datetime="2021-08-22T00:00:00-07:00">22 Aug 2021</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tips/2021/08/19/ftrim-function/">
+          ftrim() HScript function
+          <small><time datetime="2021-08-19T00:00:00-07:00">19 Aug 2021</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tips/2021/07/06/xform-pieces-alembic-layering/">
+          Transform RBD Pieces with Alembic Layering
+          <small><time datetime="2021-07-06T00:00:00-07:00">06 Jul 2021</time></small>
+        </a>
+      </li>
+    
+  </ul>
+</aside>
+
+
+      </main>
+
+      <footer class="footer">
+        <small>
+          &copy; <time datetime="2021-09-09T22:53:31-07:00">2021</time>. All rights reserved.
+        </small>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

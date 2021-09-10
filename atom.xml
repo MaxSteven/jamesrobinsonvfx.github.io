@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>James Robinson</title>
+ <link href="https://jamesrobinsonvfx.com/atom.xml" rel="self"/>
+ <link href="https://jamesrobinsonvfx.com/"/>
+ <updated>2021-09-09T22:53:31-07:00</updated>
+ <id>https://jamesrobinsonvfx.com</id>
+ <author>
+   <name>James Robinson</name>
+   <email>james@jamesrobinsonvfx.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>Decay Values</title>
+   <link href="https://jamesrobinsonvfx.com/tips/2021/08/22/decay-values/"/>
+   <updated>2021-08-22T00:00:00-07:00</updated>
+   <id>https://jamesrobinsonvfx.com/tips/2021/08/22/decay-values</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;Hipfile: &lt;a href=&quot;/assets/posts/decay-values/jamesr_decay.hiplc&quot;&gt;jamesr_decay.hip&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;One of the most common use cases for the &lt;strong&gt;Solver SOP&lt;/strong&gt; is to accumulate values
+over time.&lt;/p&gt;
+
+&lt;h3 id=&quot;accumulating--substeps&quot;&gt;Accumulating &amp;amp; Substeps&lt;/h3&gt;
+
+&lt;p&gt;Accumulating a value like color or density over time is pretty straightforward.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Add to the value from the previous timestep&lt;/li&gt;
+  &lt;li&gt;Clamp as needed&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;density&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;accumulate&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;density&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clamp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;density&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;When you introduce substeps, the accumulation can get a little crazy! Since the
+solver is doing this addition &lt;em&gt;each timestep&lt;/em&gt;, you’ll wind up increasing the
+value much more quickly than with just one substep. Luckily
+the solution is pretty straight forward: multiply your accumulation scale by
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f@TimeInc&lt;/code&gt; before adding.&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;density&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;accumulate&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TimeInc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;density&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clamp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;density&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;decaying--substeps&quot;&gt;Decaying &amp;amp; Substeps&lt;/h3&gt;
+&lt;p&gt;Accumulating was easy enough right? At first you might think the same could be
+done for decaying or fading a value over time
+(&lt;a href=&quot;https://forums.odforce.net/topic/30990-solver-sop-and-substeps/&quot;&gt;like I did&lt;/a&gt;…oof!).&lt;/p&gt;
+
+&lt;p&gt;If you’re decreasing the value by subtracting, multiplying by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f@TimeInc&lt;/code&gt; is
+just fine.&lt;/p&gt;
+
+&lt;p&gt;But if you’re doing a fading effect where you’re multiplying by some value
+between 0 and 1, multiplying by the time increment will actually have &lt;em&gt;the opposite&lt;/em&gt;
+effect!&lt;/p&gt;
+
+&lt;p&gt;Imagine you start with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f@density&lt;/code&gt; value of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1.0&lt;/code&gt;, and you have a decay rate of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0.98&lt;/code&gt;. At
+1 substep, each frame you are multiplying the previous value by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0.98&lt;/code&gt;. So by
+frame 2, your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f@density&lt;/code&gt; attribute is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0.98&lt;/code&gt;, frame 3 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0.9604&lt;/code&gt;…and so on.&lt;/p&gt;
+
+&lt;p&gt;But if you multiply your decay rate by the time increment, you get a number
+that’s much much lower!&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// f@Timeinc = 0.0416
+0.98 * f@Timeinc = 0.040768
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;in this case, each &lt;em&gt;substep&lt;/em&gt; we’d be multiplying the value by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0.040768&lt;/code&gt;. Even
+after just a single step we’d probably have all our value eaten away, which is
+exactly the problem we want to avoid.&lt;/p&gt;
+
+&lt;h3 id=&quot;get-to-the-solution-already&quot;&gt;Get to the solution already!&lt;/h3&gt;
+&lt;p&gt;Alright alright, we actually have a few ways to solve this one.&lt;/p&gt;
+
+&lt;h4 id=&quot;subtract-and-clamp&quot;&gt;Subtract and Clamp&lt;/h4&gt;
+&lt;p&gt;This first way is similar to the additive accumulation method above (subtraction
+is really just addition in disguise anyways). Instead of decreasing the value by
+mulitplying, we’ll just subtract some small amount each timestep:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;v@Cd.x = max(0, v@Cd.x - (chf(&quot;decay&quot;) * f@Timeinc));
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;power-function&quot;&gt;Power Function&lt;/h4&gt;
+&lt;p&gt;The second way uses VEX’s &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pow()&lt;/code&gt; function to decay the value over time.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This method will have a different decaying behaviour vs just doing a simple
+multiplication on a single substep. But it tends to look pretty natural so go ahead and
+try it out&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;v@Cd.x *= pow(chf(&quot;decay&quot;), f@Timeinc);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Easy as that! Try it in a Solver SOP with different substep values and see the
+comparison (or take a look at the attached hipfile). Should be pretty close.&lt;/p&gt;
+
+&lt;h4 id=&quot;linear-combination-dop&quot;&gt;Linear Combination DOP&lt;/h4&gt;
+&lt;p&gt;This method is less for when you’re trying to do this in a SOP solver, and more
+for if you’re building a setup in DOPs (and want to use this microsolver for
+something!)&lt;/p&gt;
+
+&lt;p&gt;It’s really as simple and changing the dropdown next to the &lt;strong&gt;Coefficient&lt;/strong&gt;
+parameter from &lt;strong&gt;None&lt;/strong&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;e^Timestep&lt;/code&gt;. Looks pretty similar to what we just
+did above!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/decay-values/images/linear-combo-dop.jpg&quot; alt=&quot;Gas Linear Combination DOP&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>ftrim() HScript function</title>
+   <link href="https://jamesrobinsonvfx.com/tips/2021/08/19/ftrim-function/"/>
+   <updated>2021-08-19T00:00:00-07:00</updated>
+   <id>https://jamesrobinsonvfx.com/tips/2021/08/19/ftrim-function</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;Hipfile: &lt;a href=&quot;/assets/posts/ftrim-function/jamesr_ftrim.hiplc&quot;&gt;jamesr_ftrim.hip&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
+&lt;p&gt;Sometimes you want to reference the value of a parameter and display it as a
+string to put in a Font SOP, or the &lt;a href=&quot;2012-02-07-example-content.md&quot;&gt;Viewport
+Comment&lt;/a&gt; of a Camera node when you’re wedging
+sims or making some sort of visualizer.&lt;/p&gt;
+
+&lt;p&gt;But quite often, if you’re referencing a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;float&lt;/code&gt; parameter, you wind up getting
+allllll the digits that come with it, full precision and all, rather than just
+the nice value you see in the interface.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/ftrim-function/images/problem.png&quot; alt=&quot;Problem&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ie.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0.04
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;becomes&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0.040000000000000001
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;which is probably &lt;em&gt;not&lt;/em&gt; what you want!&lt;/p&gt;
+
+&lt;p&gt;A possible solution to trim off some of the extra digits might look something like&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;floor(ch(&quot;/some/parm&quot;) * 1000)/1000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Unfortunately, this fails too :(&lt;/p&gt;
+
+&lt;h2 id=&quot;solution&quot;&gt;Solution&lt;/h2&gt;
+
+&lt;p&gt;The solution is actually quite simple! We can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ftrim()&lt;/code&gt; function from
+HScript. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ftrim()&lt;/code&gt; will strip off all those unwanted digits and leave you with a
+nice clean value, pretty much as you typed it!&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Some Parameter Value: `ftrim(ch(&quot;/some/parameter&quot;))`
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/ftrim-function/images/solution.png&quot; alt=&quot;Solution&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Of course, this also works in a &lt;strong&gt;Font SOP&lt;/strong&gt; too.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/ftrim-function/images/font-sop.png&quot; alt=&quot;Font SOP&quot; /&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>VDB Reshape SDF Close</title>
+   <link href="https://jamesrobinsonvfx.com/tips/2021/07/29/vdb-reshape-sdf-close/"/>
+   <updated>2021-07-29T00:00:00-07:00</updated>
+   <id>https://jamesrobinsonvfx.com/tips/2021/07/29/vdb-reshape-sdf-close</id>
+   <content type="html">&lt;blockquote style=&quot;border-color: #d08770&quot;&gt;
+  &lt;p&gt;Hipfile: &lt;a href=&quot;/assets/posts/vdb-reshape-sdf-close/jamesr_vdbreshapesdfclose.hiplc&quot;&gt;jamesr_vdbreshapesdfclose.hip&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;dilate-and-erode-old&quot;&gt;Dilate and Erode (Old)&lt;/h3&gt;
+&lt;p&gt;Most people are probably familiar with the following workflow for sealing up
+gaps and holes in an SDF using 2 &lt;strong&gt;VDB Reshape SDF&lt;/strong&gt; nodes:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Set the first one to &lt;strong&gt;Dilate&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Set the second one to &lt;strong&gt;Erode&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Channel reference the &lt;strong&gt;Offset&lt;/strong&gt; parameter from the dilating node to the
+&lt;strong&gt;Offset&lt;/strong&gt; parameter of the eroding node.&lt;/li&gt;
+  &lt;li&gt;Adjust the offset until you’re happy&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If you want to keep a filled interior, don’t forget to set the &lt;strong&gt;Trim&lt;/strong&gt;
+parameter to &lt;strong&gt;None&lt;/strong&gt; (Houdini 18.5+)!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/vdb-reshape-sdf-close/images/old-way.jpg&quot; alt=&quot;Old way&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;close-new&quot;&gt;Close (New)&lt;/h3&gt;
+&lt;p&gt;Not sure when this was added (or maybe it has been here the whole time!), but
+there is another method that does the exact same thing in one go: &lt;strong&gt;Close&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/vdb-reshape-sdf-close/images/new-way.jpg&quot; alt=&quot;New way&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;A side-by-side comparison of the two looks like you get the same result!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/vdb-reshape-sdf-close/images/side-by-side.gif&quot; alt=&quot;Side by side&quot; /&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Transform RBD Pieces with Alembic Layering</title>
+   <link href="https://jamesrobinsonvfx.com/tips/2021/07/06/xform-pieces-alembic-layering/"/>
+   <updated>2021-07-06T00:00:00-07:00</updated>
+   <id>https://jamesrobinsonvfx.com/tips/2021/07/06/xform-pieces-alembic-layering</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;Hipfile: &lt;a href=&quot;/assets/posts/xform-pieces-alembic-layering/jamesr_alembicrbdlayers.hiplc&quot;&gt;jamesr_alembicrbdlayers.hip&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;Or follow along on &lt;a href=&quot;https://hdbp.io/xsx5HQz2&quot;&gt;hdbp.io&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/xform-pieces.mp4&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;video width=&quot;720&quot; height=&quot;405&quot; autoplay=&quot;&quot; loop=&quot;&quot;&gt;
+	&lt;source src=&quot;/assets/posts/xform-pieces-alembic-layering/images/xform-pieces.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+&lt;/video&gt;
+
+&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;There are plenty of ways to transfer RBD data from one application to another.
+Some facilities might have proprietary tools to make this pretty straightforward
+and quick. Others might use
+&lt;a href=&quot;https://graphics.pixar.com/usd/docs/index.html&quot;&gt;USD&lt;/a&gt;. But what if you don’t
+have either option?&lt;/p&gt;
+
+&lt;p&gt;One kind of interesting way of doing it is to use &lt;strong&gt;Alembic Layering&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;concept&quot;&gt;Concept&lt;/h2&gt;
+
+&lt;h3 id=&quot;obstacles&quot;&gt;Obstacles&lt;/h3&gt;
+&lt;p&gt;One thing we &lt;em&gt;absolutely&lt;/em&gt; want to avoid when writing RBD geo to Alembic is
+writing all the pieces out as a single, unpacked, deforming point cache. This is
+a huge waste of time and space because:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;All of the points and mesh data will be written on each frame.&lt;/li&gt;
+  &lt;li&gt;We are forced to use deformation blur.&lt;/li&gt;
+  &lt;li&gt;If we need more detailed motion blur, we must write &lt;em&gt;more motion samples&lt;/em&gt; into
+the cache.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Multiply those factors by all of your iteration time and you get a really slow turnaround!&lt;/p&gt;
+
+&lt;h3 id=&quot;packed-geometry-to-the-rescue&quot;&gt;Packed Geometry to the Rescue&lt;/h3&gt;
+&lt;p&gt;Houdini is perfectly capable of writing its own packed geometry format as
+packed Alembic primitives. Houdini treats each packed prim like its own
+&lt;em&gt;object&lt;/em&gt; and so each primitive gets its own &lt;em&gt;transform&lt;/em&gt;. This is great beacause:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;We only need to wait for the mesh data to write into the Alembic cache once.&lt;/li&gt;
+  &lt;li&gt;Alembic caches are much smaller, since only one copy of the mesh data exists.
+The rest of the data is just time-varying attributes and transform matrices.&lt;/li&gt;
+  &lt;li&gt;We don’t need to use motion samples or deformation blur.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;take-it-a-step-further&quot;&gt;Take it a Step Further&lt;/h3&gt;
+&lt;p&gt;This is all sounding pretty great! And for a small, lower-res sim this would
+probably suffice. But what if we have a bigger sim, with pretty high-res pieces?
+When writing the Alembic to disk, we would still need to wait for Houdini to
+transform the packed high res pieces, and write their transforms.&lt;/p&gt;
+
+&lt;p&gt;Instead, what if we wrote the high-res static pieces to disk &lt;em&gt;once&lt;/em&gt;, and anytime we
+wanted to change the sim and export it, we write &lt;em&gt;only&lt;/em&gt; the transforms from the
+low-res sim to a cache, and leave the high-res static piece alone?&lt;/p&gt;
+
+&lt;p&gt;Alembic let’s us do exactly that, using &lt;em&gt;Alembic Layering!&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;layering&quot;&gt;Layering&lt;/h3&gt;
+&lt;p&gt;The concept behind layering transforms is simple:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Write one static Alembic cache of the high-res pieces.&lt;/li&gt;
+  &lt;li&gt;Write one animated Alembic cache of &lt;em&gt;only&lt;/em&gt; the transforms of each piece.&lt;/li&gt;
+  &lt;li&gt;Load the static cache, and layer the transforms on top so that they override
+the static static transforms.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;requirements&quot;&gt;Requirements&lt;/h2&gt;
+
+&lt;h3 id=&quot;spath-attribute&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s@path&lt;/code&gt; Attribute&lt;/h3&gt;
+&lt;p&gt;Each piece needs to have a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s@path&lt;/code&gt; attribute that corresponds to its place in a
+a hierarchy. It’s important that each piece has room for both a &lt;strong&gt;Transform&lt;/strong&gt;
+and &lt;strong&gt;Shape&lt;/strong&gt;. Here’s an example of a good looking &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s@path&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/path-from-name.png&quot; alt=&quot;Set Path from Name&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;s@path = sprintf(&quot;pieces_grp/%s_geo/%s_geoShape&quot;, s@name, s@name);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It’s also crucial that the paths on the high-res geometry and the low-res
+transform match up!&lt;/p&gt;
+
+&lt;h3 id=&quot;packed-geometry--fragments&quot;&gt;Packed Geometry / Fragments&lt;/h3&gt;
+&lt;p&gt;It’s important that each piece is &lt;em&gt;packed&lt;/em&gt;. This is how Houdini will get the
+transform it needs. Make sure that the pieces are backed &lt;em&gt;before&lt;/em&gt; transforming them. If
+you’re using this method with a &lt;strong&gt;Copy to Points&lt;/strong&gt; SOP, or a &lt;strong&gt;Transform
+Pieces&lt;/strong&gt; SOP, make sure the geo is packed &lt;em&gt;before&lt;/em&gt; moving them around. This way,
+the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;primintrinsic:packedfulltransform&lt;/code&gt; will actually get updated! (ie. &lt;em&gt;don’t&lt;/em&gt;
+copy/xform the unpacked pieces, then use an &lt;strong&gt;Assemble&lt;/strong&gt; SOP to pack ‘em up &lt;em&gt;after&lt;/em&gt;.)&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;There is a little trick to get the pivots to line up correctly, so please see
+the demo file for details on that if you’re exporting RBD pieces and noticing
+some misalignment!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;rop-it-out&quot;&gt;ROP it Out&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/network-output.png&quot; alt=&quot;Output&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In order for the Alembic to work for our purposes, a few of the defaults need to
+be changed on the &lt;strong&gt;Alembic ROP&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;both-rops&quot;&gt;Both ROPs&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Enable &lt;strong&gt;Hierarchy &amp;gt; Build Hierarchy from Attribute&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Ensure &lt;strong&gt;Path Attribute&lt;/strong&gt; is the same as the one you made earlier.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Geometry &amp;gt; Packed Transform&lt;/strong&gt; should be set to &lt;strong&gt;Merge With Parent Transform&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Disable &lt;strong&gt;Use Instancing Where Possible&lt;/strong&gt; if this is an RBD sim with unique pieces.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/high-res-pieces.png&quot; alt=&quot;High Res Pieces Output Settings&quot; /&gt;
+High Res Pieces Output Settings&lt;/p&gt;
+
+&lt;h3 id=&quot;transforms-cache&quot;&gt;Transforms Cache&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Make sure to disable &lt;strong&gt;Create Shape Nodes&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/low-res-xforms.png&quot; alt=&quot;Low Res Xform Output Settings&quot; /&gt;
+Low Res Xform Output Settings&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Since we are only concerned with storing the tranformation of each piece, don’t
+write the shape data in this cache. Otherwise, it will overwrite the high res
+mesh completely when we layer it back in!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;import-in-your-dcc-of-choice&quot;&gt;Import in your DCC of Choice&lt;/h2&gt;
+&lt;p&gt;The most common target application is probably going to be Maya. I’m not too
+familiar with the procedurals for any other render engine aside from &lt;strong&gt;Arnold&lt;/strong&gt;,
+so I’ll stick to what I know.&lt;/p&gt;
+
+&lt;p&gt;If you’re rendering with Arnold in Houdini, it’s as simple as setting the render
+flag of an object to render an Alembic SOP. Arnold will render Packed Alembics
+as procedurals by default.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/layers.png&quot; alt=&quot;Layers&quot; /&gt;
+&lt;small&gt;Alembic SOP in Houdini with layers&lt;/small&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;recommendations&quot;&gt;Recommendations&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Do&lt;/th&gt;
+      &lt;th&gt;Don’t&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Load Alembic as a GPU Cache (Maya) or as an Arnold Standin Procedural&lt;/td&gt;
+      &lt;td&gt;&lt;em&gt;Do Not&lt;/em&gt; just do a  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;File &amp;gt; Import&lt;/code&gt;  and load the cache as Maya geometry. For a heavy sim with thousands of transforms and shape nodes, you’re likely to crash Maya!&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Viewport Draw Modes</title>
+   <link href="https://jamesrobinsonvfx.com/tips/2021/03/26/viewport-draw-modes/"/>
+   <updated>2021-03-26T00:00:00-07:00</updated>
+   <id>https://jamesrobinsonvfx.com/tips/2021/03/26/viewport-draw-modes</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;/assets/posts/viewport-draw-modes/preview.png&quot; alt=&quot;Viewport Modes&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I recently discovered that you can actually set the viewport drawing modes to be
+unique per Shading Mode. ie. when templating geo, you can shade with “Wireframe
+Ghost” instead of the default template wireframe.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/viewport-draw-modes/settings.png&quot; alt=&quot;Viewport Settings&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This combined with a thinner wire width makes for a pretty pleasing experience!
+The ghost mode when templated also sort of helps show a bit more depth.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>opchange</title>
+   <link href="https://jamesrobinsonvfx.com/tips/workflow/2021/03/26/opchange/"/>
+   <updated>2021-03-26T00:00:00-07:00</updated>
+   <id>https://jamesrobinsonvfx.com/tips/workflow/2021/03/26/opchange</id>
+   <content type="html">&lt;p&gt;Going through and manually swapping &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$HIP&lt;/code&gt; for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$JOB&lt;/code&gt;, or switching any value
+for another one in an entire hipfile can be a real pain. You could try doing the
+long way (looking at each parm and changing by hand….ouch!), or by iterating
+all the parms on all the nodes with Python. Or, you can use a simple built-in
+HScript command: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;opchange&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.sidefx.com/docs/houdini/commands/opchange.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;opchange&lt;/code&gt;&lt;/a&gt; makes
+it really simple to swap values across the entire scene, or in a limited scope
+of nodes.&lt;/p&gt;
+
+&lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
+&lt;p&gt;Let’s say you were loading a bunch of HDRIs from some sort of library you have
+elsewhere on disk, but now you need to share the project with someone else.
+You’ve copied all the light textures from your library location into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$JOB/tex&lt;/code&gt;,
+but now you need to change all the paths on the lights in your hipfile. We can
+use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;opchange&lt;/code&gt; to make it a bit easier.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;opchange D:/Library/HDRI &lt;span class=&quot;se&quot;&gt;\$&lt;/span&gt;JOB/tex
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now all references to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;D:/Library/HDRI&lt;/code&gt; should have been replaced with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$JOB/tex&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;gotchas&quot;&gt;Gotchas&lt;/h2&gt;
+&lt;p&gt;If you’re swapping a variable, and you want to search for the &lt;em&gt;unexpanded&lt;/em&gt;
+version, ie. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$HIP&lt;/code&gt;, make sure to escape the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$&lt;/code&gt; with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\&lt;/code&gt;, otherwise Houdini
+will be searching for the &lt;em&gt;expanded&lt;/em&gt; version, like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/project/myproject&lt;/code&gt; instead.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;opchange &lt;span class=&quot;se&quot;&gt;\$&lt;/span&gt;HIP &lt;span class=&quot;se&quot;&gt;\$&lt;/span&gt;JOB/hip
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;limit-the-scope&quot;&gt;Limit the Scope&lt;/h3&gt;
+&lt;p&gt;We don’t have to search the entire scene in this case, since we know that all of
+our lights are going to exist at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/obj&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;opchange &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; /obj D:/Library/HDRI &lt;span class=&quot;se&quot;&gt;\$&lt;/span&gt;JOB/tex
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Duplicated a node and want to change the new node’s parm references? use the -i flag.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;opchange &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; /obj/sheepnmoon/mat/fuzz_moon sheep_ moon_
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</content>
+ </entry>
+ 
+
+</feed>

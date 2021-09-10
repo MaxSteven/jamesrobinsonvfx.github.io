@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab:300|Roboto:500" rel="stylesheet">
+  </head>
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      opchange &middot; James Robinson
+    
+  </title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+</head>
+
+
+  <body>
+
+    <div class="container content">
+      <header class="masthead">
+        <!-- <h3 class="masthead-title">
+          <a href="/" title="Home">James Robinson</a>
+          <small>Houdini FX TD</small>
+        </h3> -->
+        <nav class="navbar">
+  <span>
+  <h3 class="masthead-title">
+    <a href="/" title="Home">James Robinson</a>
+    <small>Houdini FX TD</small>
+  </h3>
+    <span style="display: block;">
+    <a class="fab fa-vimeo" href="https://vimeo.com/jamesrobinsonvfx"></a>
+    <a class="fab fa-linkedin" href="https://www.linkedin.com/in/jamesrobinsonvfx/"></a>
+    <a class="fab fa-github" href="https://github.com/jamesrobinsonvfx"></a>
+    <a class="fab fa-instagram" href="https://www.instagram.com/jamesrobinsonvfx/"></a>
+    </span>
+  </span>
+
+  <span>
+  <a href="/" class="navlink">Blog</a>
+  <a href="/snippets" class="navlink">Snippets</a>
+  <a href="/projects" class="navlink">Projects</a>
+  <a href="/work" class="navlink">Work</a>
+  <a href="/links" class="navlink">Links</a>
+  <a href="/about" class="navlink">About</a>
+  </span>
+</nav>
+      </header>
+
+      <main style="padding-top: 3em">
+        <!-- <hr> -->
+        <h1 class="post-title">opchange</h1>
+<time datetime="2021-03-26T00:00:00-07:00" class="post-date">26 Mar 2021</time>
+<section class="sheet">
+  <article class="post">
+      <p>Going through and manually swapping <code class="language-plaintext highlighter-rouge">$HIP</code> for <code class="language-plaintext highlighter-rouge">$JOB</code>, or switching any value
+for another one in an entire hipfile can be a real pain. You could try doing the
+long way (looking at each parm and changing by hand….ouch!), or by iterating
+all the parms on all the nodes with Python. Or, you can use a simple built-in
+HScript command: <code class="language-plaintext highlighter-rouge">opchange</code>.</p>
+
+<p><a href="https://www.sidefx.com/docs/houdini/commands/opchange.html"><code class="language-plaintext highlighter-rouge">opchange</code></a> makes
+it really simple to swap values across the entire scene, or in a limited scope
+of nodes.</p>
+
+<h2 id="example">Example</h2>
+<p>Let’s say you were loading a bunch of HDRIs from some sort of library you have
+elsewhere on disk, but now you need to share the project with someone else.
+You’ve copied all the light textures from your library location into <code class="language-plaintext highlighter-rouge">$JOB/tex</code>,
+but now you need to change all the paths on the lights in your hipfile. We can
+use <code class="language-plaintext highlighter-rouge">opchange</code> to make it a bit easier.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>opchange D:/Library/HDRI <span class="se">\$</span>JOB/tex
+</code></pre></div></div>
+
+<p>Now all references to <code class="language-plaintext highlighter-rouge">D:/Library/HDRI</code> should have been replaced with <code class="language-plaintext highlighter-rouge">$JOB/tex</code>.</p>
+
+<h2 id="gotchas">Gotchas</h2>
+<p>If you’re swapping a variable, and you want to search for the <em>unexpanded</em>
+version, ie. <code class="language-plaintext highlighter-rouge">$HIP</code>, make sure to escape the <code class="language-plaintext highlighter-rouge">$</code> with a <code class="language-plaintext highlighter-rouge">\</code>, otherwise Houdini
+will be searching for the <em>expanded</em> version, like <code class="language-plaintext highlighter-rouge">~/project/myproject</code> instead.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>opchange <span class="se">\$</span>HIP <span class="se">\$</span>JOB/hip
+</code></pre></div></div>
+
+<h3 id="limit-the-scope">Limit the Scope</h3>
+<p>We don’t have to search the entire scene in this case, since we know that all of
+our lights are going to exist at <code class="language-plaintext highlighter-rouge">/obj</code>.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>opchange <span class="nt">-p</span> /obj D:/Library/HDRI <span class="se">\$</span>JOB/tex
+</code></pre></div></div>
+
+<p>Duplicated a node and want to change the new node’s parm references? use the -i flag.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>opchange <span class="nt">-i</span> <span class="nt">-p</span> /obj/sheepnmoon/mat/fuzz_moon sheep_ moon_
+</code></pre></div></div>
+
+
+    </article>
+</section>
+
+
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+      <li>
+        <a href="/tips/2021/08/22/decay-values/">
+          Decay Values
+          <small><time datetime="2021-08-22T00:00:00-07:00">22 Aug 2021</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tips/2021/08/19/ftrim-function/">
+          ftrim() HScript function
+          <small><time datetime="2021-08-19T00:00:00-07:00">19 Aug 2021</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tips/2021/07/29/vdb-reshape-sdf-close/">
+          VDB Reshape SDF Close
+          <small><time datetime="2021-07-29T00:00:00-07:00">29 Jul 2021</time></small>
+        </a>
+      </li>
+    
+  </ul>
+</aside>
+
+
+      </main>
+
+      <footer class="footer">
+        <small>
+          &copy; <time datetime="2021-09-09T22:53:31-07:00">2021</time>. All rights reserved.
+        </small>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>
