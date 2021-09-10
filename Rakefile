@@ -26,5 +26,5 @@ task :build do
   system "touch .nojekyll"
   system "git add . && git commit -m 'Push local build update (see develop branch)'"
   system "git push origin main"
-
+  system "git checkout develop"
 end
