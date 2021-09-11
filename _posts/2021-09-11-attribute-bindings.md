@@ -1,11 +1,15 @@
 ---
 layout: post
 title: Attribute Bindings
+shortname: attribute-bindings
 description: Write to attributes with one name while using another in your code
-thumbnail: /assets/posts/attribute-bindings/images/preview.png
+thumbnail: {{ images }}/preview.png
+images: /assets/posts/attribute-bindings
 categories: tips
 tags: houdini vex attributes tools
 ---
+
+{% capture images %}/assets/posts/{{ page.shortname }}/images{% endcapture %}
 
 > Hipfile: [jamesr_attributebindings.hip](/assets/posts/attribute-bindings/jamesr_attributebindings.hip)
 {:style="border-color: #d08770"}
@@ -26,17 +30,18 @@ The first issue we encounter is the flexibility part. If
 
 For our purposes, hardcoding the attributes and group names is not an option. It
 forces the user to actually tear apart your code (gasp!) and make sure all the
-references to a specifically named attribute
+references to a specifically named attribute.
 
 
 ## `setpointattrib()` and Friends
 One common function you often see handling this sort of situation is
 `setpointattrib()` (and its friends `setprimattrib()` etc...). Let's see how we
-can use it
+can use it:
 
+[![`setpointattrib()` Demo]({{ images/ }})]()
 
-
-
+```c
+```
 
 
 While this function certainly does what we are asking, *it is painfully slow*
@@ -61,17 +66,46 @@ But consider that in this example we are modifying just a *single* attribute, in
 doing a few different things in different wrangles and steps which can really
 add up!
 
+## Attribute Bindings Tab
+
+[![Attribute Bindings Tab]({{ images }}/attrib-bindings.png)]({{ images }}/attrib-bindings.png)
+
+The idea is pretty straightforward. The **Attribute Name** is the name of the
+attribute you *really* want to write to. **Vex Parameter** is simply what you'll
+call that attribute inside your code. Think of this as an *alias* for the
+attribute name that you actually care about. Let's see it in action:
+
+
+
 ## Volumes
+
 This technique is *especially* useful when dealing with fields in Volume VOPs.
 Have you ever dived inside a **Gas Turbulence DOP** or any similar nodes? If you
 look in the Attribute Bindings section, you'll see that SideFX uses these all
 the time! It's how you're able to specify the name of any **Control Field**, but
 internally they only need to use one name!
 
+Let's try it out on our own. We'll create a Volume VOP that adds noise to both `density` and `temperature`.
+There's actually a shortcut toggle we can use without needing to set all the names ourselves.
+
+
+[![Bind Each to Density]({{ images }}/bind-each-to-density.png)]({{ images }}/bind-each-to-density.png)
+
+[![Volume Bindings]({{ images }}/volume-binding-demo.gif)]({{ images }}/volume-binding-demo.gif)
+
+1. Create a Volume VOP.
+2. Add some nodes inside. Don't add any extra **Bind Export** nodes, just pipe them out to `density`.
+3. On the **Volume Bindings** tab uncheck **Autobind by Name**
+4. Enable **Bind Each to Density**
+
+Now we've applied the same operation to all of the fields! This is really useful if you're creating any tools that
+modify volumes, and you want the user to be able to easily run over fields called anything.
 
 ## Attributes to Create
 
-This parameter is often overlooked, and it's default is just `*` - which means
+[![Attributes to Create - Default]({{ images }}/attribs-to-create-default.png)]({{ images }}/attribs-to-create-default.png)
+
+This parameter is often overlooked, and its default is just `*` - which means
 any attributes referred to in the wrangle using the `@` syntax will be created
 if it they don't exist already.
 
@@ -84,46 +118,60 @@ it.
 
 Take this for example:
 
-We have a tool that modifies the thickness of some curves. By default, the code
+![]({{ images }}/attribs-to-create-scenario.mp4)
+<video width="720" height="405" autoplay loop>
+	<source src="/assets/posts/xform-pieces-alembic-layering/images/xform-pieces.mp4" type="video/mp4">
+</video>
+
+We have a setup that modifies the thickness of some curves. By default, the code
 will apply some randomness. The user is also given the option to provide an
 attribute by which to multiply the randomized thickness. For clarity, let's
-provide a sensible default value like `thicknessscale` (sort of how vellum, and
-other tools across houdini fill it in too). If we structure our code like so:
+provide them a sensible default like `thicknessscale` (sort of how vellum and
+other tools across houdini fill it in too).
 
+[![Parameter Defaults and Code]({{ images }}/parm-defaults-and-code.png)]({{ images }}/parm-defaults-and-code.png)
 
-```
-Code
+If we structure our code like so:
+
+```c
+float r = rand(@seed + 65536);
+
+f@pscale = r * f@scale * chf("global_scale");
 ```
 
 with the following attribute bindings:
 
-[![]()]()
+[![Attribute Bindings]({{ images }}/attribs-to-create-attrib-bindings.png)]({{ images }}/attribs-to-create-attrib-bindings.png)
+
+we would expect that the `f@pscale` attribute is scaled by some random number, and the curves will change shape.
 
 
-we get exactly what we're after. In this example, the user provided an attribute
-called `age_scale`, and it scaled the thickness of the curves over time.
-
-But what happens if they don't want to do any extra scaling? If no attribute is
+But what happens if they don't want to do any extra scaling, and they didn't specify any attribute? If no attribute is
 provided, and the binding is left blank or the attribute doesn't exist we wind up with a bit of an issue...
 
 
-[![Scales are Zero]()]()
+[![Scales are Zero]({{ images }}/zero-scales.gif)]({{ images }}/zero-scales.gif)
 
 All the scales are now zero! Well that's not really what we want... if the user
 doesn't specify an attribute (or if it doesn't exist), we should carry on and happily apply just the
-randomized value to the thickness.
+randomized value to the thickness. Let's modify the code a bit:
 
 
+```c
+float @scale = 1.0; // Initialize it in case the user doesn't
+
+float r = rand(@seed + 65536);
+
+f@pscale = r * @scale * chf("global_scale");
 ```
-float @mod = 1.0;
-f@scale = 1.0 * f@mod;
-```
+
+[![Scales Working]({{ images }}/scales-working.gif)]({{ images }}/scales-working.gif)
 
 This works excellently! Now, even though the attribute is missing, everything
 is just multiplied by `1.0`, so we're in the clear. But let's look at the
 attributes now...
 
-[![]()]()
+[![Extra Attribute]({{ images }}/extra-attrib.png)]({{ images }}/extra-attrib.png)
 
 Oh no! Since that default value we have sitting in there wasn't cleared out, and
 since it doesn't already exist on the points, we wound up creating some attribute called `thicknessscale` with a value
@@ -133,17 +181,16 @@ created, we should really just leave it alone.
 Leaving it alone is simple. Just exclude it from that **Attributes to Create**
 parameter.
 
-[![Exclude f@mod Attribute]()]()
+[![Exclude f@scale Attribute]({{ images }}/exclude-attribs.png)]()
 
 ```
-* ^mod
+* ^scale ^seed
 ```
-
 
 > The attributes specified in this list are the same as the *Vex Parameters* you're using in your code, even if they are *bound* to something different.
 
 
-[![No Extra Attributes]()]()
+[![No Extra Attributes]({{ images }}/no-extra-attrib.png)]({{ images }}/no-extra-attrib.png)
 
 
 If the attribute *does* exist on the points beforehand, don't worry - this
@@ -152,22 +199,22 @@ with the added bonus that since it's being ignored in the **Attributes to
 Create** parameter, we aren't able to actually write to it, which means we can't
 muck it up inbetween!
 
+[! [Final Result]({{ images }}/custom-attrib.gif)]({{ images }}/custom-attrib.gif)
 
 
+## Final Notes
 
+### Groups
 
+We can do most of the same stuff with groups. Just remember than Vex expects the
+prefix `i@group_` before group names, which also applies to the **Vex Parameter** parameter
+in the bindings section.
 
+[![Group Bindings]({{ images }}/group-bindings.png)]({{ images }}/group-bindings.png)
 
+[![Group Bindings Example]({{ images }}/group-bindings-example.png)]({{ images }}/group-bindings-example.png)
 
-- set a group name
-- view the group (bonus!)
+An important note - if you're using the **Ouput Selection Group** paramater to visualize the group
+in the viewport (and pass the selection to downstream nodes), note that this parameter is expecting ***Group Name*** not the **Vex Parameter**!
 
-
-
-basic attribute binding
-
-The idea is pretty straightforward. The **Attribute Name** is the name of the
-attribute you *really* want to write to. **Vex Parameter** is simply what you'll
-call that attribute inside your code. Think of this as an *alias* for the
-attribute name that you actually care about. Let's see it in action:
-
+[![Ouput Selection Group]({{ images }}/output-selection-group.gif)]({{ images }}/output-selection-group.gif)
