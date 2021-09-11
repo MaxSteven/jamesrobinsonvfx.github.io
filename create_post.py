@@ -134,7 +134,7 @@ class Post:
 
     @desc.setter
     def desc(self, desc):
-        self._desc = desc.rstrip(".")
+        self._desc = (desc[0].upper + desc[1:]).rstrip(".")
 
     @property
     def cats(self):
