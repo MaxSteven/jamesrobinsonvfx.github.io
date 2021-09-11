@@ -94,6 +94,7 @@ class Post:
             "---",
             "layout: post",
             f"title: {self.title}",
+            f"shortname: {self.shortname}",
             f"description: {self.desc}",
             f"thumbnail: {self.thumbnail_path()}",
         ]
@@ -106,6 +107,11 @@ class Post:
                 f"> Hipfile: [{self.hipname()}]({self.hipfile_path()})",
                 "{:style=\"border-color: #d08770\"}\n"
             ])
+        content.append(
+            "{% capture images %}"
+            f"/assets/{self.post_dirname()}/{{{{ page.shortname }}}}/images"
+            "{% endcapture %}\n"
+        )
         content.append(
             "[![Cover Photo]({{ page.thumbnail }})]({{ page.thumbnail }})\n"
         )
@@ -134,7 +140,10 @@ class Post:
 
     @desc.setter
     def desc(self, desc):
-        self._desc = (desc[0].upper + desc[1:]).rstrip(".")
+        try:
+            self._desc = (desc[0].upper() + desc[1:]).rstrip(".")
+        except IndexError:
+            self._desc = desc
 
     @property
     def cats(self):
