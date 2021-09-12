@@ -4,13 +4,290 @@
  <title>James Robinson</title>
  <link href="https://jamesrobinsonvfx.com/atom.xml" rel="self"/>
  <link href="https://jamesrobinsonvfx.com/"/>
- <updated>2021-09-10T16:04:55-07:00</updated>
+ <updated>2021-09-11T19:07:42-07:00</updated>
  <id>https://jamesrobinsonvfx.com</id>
  <author>
    <name>James Robinson</name>
    <email>james@jamesrobinsonvfx.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Attribute Bindings</title>
+   <link href="https://jamesrobinsonvfx.com/tips/2021/09/11/attribute-bindings/"/>
+   <updated>2021-09-11T00:00:00-07:00</updated>
+   <id>https://jamesrobinsonvfx.com/tips/2021/09/11/attribute-bindings</id>
+   <content type="html">
+&lt;blockquote style=&quot;border-color: #d08770&quot;&gt;
+  &lt;p&gt;Hipfile: &lt;a href=&quot;/assets/posts/attribute-bindings/jamesr_attributebindings.hip&quot;&gt;jamesr_attributebindings.hip&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/preview.png&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/preview.png&quot; alt=&quot;Cover Photo&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;basics&quot;&gt;Basics&lt;/h2&gt;
+
+&lt;p&gt;Let’s build a super simple setup that applies randomness to an attribute on some
+points. The user will specify which attribute they want to write to. We also
+want the user to be able to scale the points by any attribute they specify
+without changing any of the code.&lt;/p&gt;
+
+&lt;p&gt;So the first thing we will need is some logic to randomize a value, and write it
+out. In this case, let’s start with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pscale&lt;/code&gt; so we can see what’s happening.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/scale-points.png&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/scale-points.png&quot; alt=&quot;Scale Points&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ptnum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pscale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;chf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;global_scale&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Easy enough!&lt;/p&gt;
+
+&lt;h2 id=&quot;point-setpointattrib-and-friends&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;point()&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setpointattrib()&lt;/code&gt; and Friends&lt;/h2&gt;
+
+&lt;h3 id=&quot;reading&quot;&gt;Reading&lt;/h3&gt;
+
+&lt;p&gt;Next, we’ll need to fetch the user-specified attribute that we want to scale the
+randomness by. The most familiar way is by using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;point()&lt;/code&gt; function.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;(/assets/posts/attribute-bindings/images/user-scale.png)&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/user-scale.png&quot; alt=&quot;User Attrib&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coolscale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;relbbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In this case we have a user-specified attribute called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;coolscale&lt;/code&gt;. We’ll use the
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;point()&lt;/code&gt; function and a string parameter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chs()&lt;/code&gt; to get that value.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;(/assets/posts/attribute-bindings/images/user-scale-point-func.png)&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/user-scale-point-func.png&quot; alt=&quot;User Attrib&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;So far so good. We’ve queried the custom user attribute and scaled our
+randomness by it.&lt;/p&gt;
+
+&lt;h3 id=&quot;writing&quot;&gt;Writing&lt;/h3&gt;
+
+&lt;p&gt;We’ve successfully written to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pscale&lt;/code&gt; so far. But remember that our setup’s
+requirements call for the user to be able to specify the output attribute.
+Currently, we have it hardcoded to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f@pscale&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In order to write to a custom attribute, let’s add another parameter to specify
+what the attribute should be called and use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setpointattrib()&lt;/code&gt; function to
+write the value to the points.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;(/assets/posts/attribute-bindings/images/output-attrib.png)&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/output-attrib.png&quot; alt=&quot;Output Attrib&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ptnum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_scale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;point&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user_scale_attrib&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ptnum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_scale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;chf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;global_scale&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;setpointattrib&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;output_attrib&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ptnum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scale&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;While this function certainly does what we are asking, &lt;em&gt;it is painfully slow&lt;/em&gt;
+when iterating over many many points, which isn’t an uncommon task! So how can
+we do it all a bit better? Let’s take a look at the &lt;strong&gt;Bindings&lt;/strong&gt; tab.&lt;/p&gt;
+
+&lt;h3 id=&quot;attribute-bindings-tab&quot;&gt;Attribute Bindings Tab&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/attrib-bindings.png&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/attrib-bindings.png&quot; alt=&quot;Attribute Bindings Tab&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The idea is pretty straightforward. The &lt;strong&gt;Attribute Name&lt;/strong&gt; is the name of the
+attribute you &lt;em&gt;really&lt;/em&gt; want to write to. &lt;strong&gt;Vex Parameter&lt;/strong&gt; is simply what you’ll
+call that attribute inside your code. Think of this as an &lt;em&gt;alias&lt;/em&gt; for the
+attribute name that you actually care about.&lt;/p&gt;
+
+&lt;p&gt;We can modify our setup to use this method instead:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/rewrite-code.gif&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/rewrite-code.gif&quot; alt=&quot;Rewrite Code&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ptnum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scaled&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user_scale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;chf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;global_scale&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Our code has just gotten much simpler. We only need to refer the attributes that we put
+in the &lt;strong&gt;Vex Parameter&lt;/strong&gt; parameters using the familiar &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@&lt;/code&gt; syntax.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/new-bindings.png&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/new-bindings.png&quot; alt=&quot;New Bindings&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;We can take advantage of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chs()&lt;/code&gt; channels we already made, and just channel reference them in the
+bindings section. That way the interface can stay user-friendly (especially for whenever you
+want to promote these up to the interface of a digital asset or something).&lt;/p&gt;
+
+&lt;h3 id=&quot;speed-comparison&quot;&gt;Speed Comparison&lt;/h3&gt;
+
+&lt;p&gt;Let’s do a comparison with the &lt;strong&gt;Performance Monitor&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/perf-test.png&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/perf-test.png&quot; alt=&quot;Performance Test&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;With ~112k points we can see that the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setpointattrib()&lt;/code&gt; method takes about
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0.081 seconds&lt;/code&gt; to cook, whereas the &lt;strong&gt;Attribute Bindings&lt;/strong&gt; method takes
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0.002 seconds&lt;/code&gt;! That’s a pretty big difference, though &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0.08&lt;/code&gt; seconds is
+pretty negligible too.&lt;/p&gt;
+
+&lt;p&gt;What happens if we try with a a point cloud consisting of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;30,000,000&lt;/code&gt; points?&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/perf-test-30m.png&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/perf-test-30m.png&quot; alt=&quot;Performance Test 30m Points&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Attribute Bindings&lt;/strong&gt; wins by a factor of ~30x on my machine. Now the difference between &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0.13s&lt;/code&gt;
+and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;3.9s&lt;/code&gt; per cook might not seem like a huge amount if you’re already waiting
+a minute or so per-frame to process a heavy point cloud (like a big FLIP sim).
+But consider that in this example we are writing just a &lt;em&gt;single&lt;/em&gt; attribute, in
+&lt;em&gt;one&lt;/em&gt; wrangle. In a real-world setup, you might have several attributes and be
+doing a few different things in different wrangles and steps which can really
+add up!&lt;/p&gt;
+
+&lt;h2 id=&quot;volumes&quot;&gt;Volumes&lt;/h2&gt;
+
+&lt;p&gt;This technique is &lt;em&gt;especially&lt;/em&gt; useful when dealing with fields in Volume VOPs.
+Have you ever dived inside a &lt;strong&gt;Gas Turbulence DOP&lt;/strong&gt; or any similar nodes? If you
+look in the Attribute Bindings section, you’ll see that SideFX uses these all
+the time! It’s how you’re able to specify the name of any &lt;strong&gt;Control Field&lt;/strong&gt;, but
+internally they only need to use one name!&lt;/p&gt;
+
+&lt;p&gt;Let’s try it out on our own. We’ll create a Volume VOP that adds noise to both
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;density&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;temperature&lt;/code&gt;. There’s actually a shortcut toggle we can use
+without needing to set all the names ourselves.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/bind-each-to-density.png&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/bind-each-to-density.png&quot; alt=&quot;Bind Each to Density&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/volume-binding-demo.gif&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/volume-binding-demo.gif&quot; alt=&quot;Volume Bindings&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Create a Volume VOP.&lt;/li&gt;
+  &lt;li&gt;Add some nodes inside. Don’t add any extra &lt;strong&gt;Bind Export&lt;/strong&gt; nodes, just pipe
+them out to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;density&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;On the &lt;strong&gt;Volume Bindings&lt;/strong&gt; tab uncheck &lt;strong&gt;Autobind by Name&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Enable &lt;strong&gt;Bind Each to Density&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Now we’ve applied the same operation to all of the fields! This is really useful
+if you’re creating any tools that modify volumes, and you want the user to be
+able to easily run over fields called anything.&lt;/p&gt;
+
+&lt;h2 id=&quot;attributes-to-create&quot;&gt;Attributes to Create&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/attribs-to-create-default.png&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/attribs-to-create-default.png&quot; alt=&quot;Attributes to Create - Default&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This parameter is often overlooked, and its default is just &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*&lt;/code&gt; - which means
+any attributes referred to in the wrangle using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@&lt;/code&gt; syntax will be created
+if it they don’t exist already.&lt;/p&gt;
+
+&lt;p&gt;The default is usually fine. But sometimes, you might be using an attribute
+temporarily just to do some sort of calculation, and you don’t actually want it
+to be created and passed along through the output. In that case, you can just
+use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;^&lt;/code&gt; character plus the attribute name to skip it! This is also useful if
+you have a tool that &lt;em&gt;allows&lt;/em&gt; a user attribute to passed in but does not &lt;em&gt;require&lt;/em&gt;
+it.&lt;/p&gt;
+
+&lt;p&gt;Take this for example:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/attribs-to-create-scenario.mp4&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;video width=&quot;720&quot; height=&quot;405&quot; autoplay=&quot;&quot; loop=&quot;&quot;&gt;
+	&lt;source src=&quot;/assets/posts/attribute-bindings/images/attribs-to-create-scenario.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+&lt;/video&gt;
+
+&lt;p&gt;We have a setup that modifies the thickness of some curves. By default, the code
+will apply some randomness. The user is also given the option to provide an
+attribute by which to multiply the randomized thickness. For clarity, let’s
+provide them a sensible default like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;thicknessscale&lt;/code&gt; (sort of how vellum and
+other tools across houdini fill it in too).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/parm-defaults-and-code.png&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/parm-defaults-and-code.png&quot; alt=&quot;Parameter Defaults and Code&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;If we structure our code like so:&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;65536&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pscale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;chf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;global_scale&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;with the following attribute bindings:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/attribs-to-create-attrib-bindings.png&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/attribs-to-create-attrib-bindings.png&quot; alt=&quot;Attribute Bindings&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;we would expect that the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f@pscale&lt;/code&gt; attribute is scaled by some random number,
+and the curves will change shape.&lt;/p&gt;
+
+&lt;p&gt;But what happens if the user doesn’t want to do any extra scaling, and they
+didn’t specify any attribute? If no attribute is provided, and the binding is
+left blank or the attribute doesn’t exist we wind up with a bit of an issue…&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/zero-scales.gif&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/zero-scales.gif&quot; alt=&quot;Scales are Zero&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;All the scales are now zero! Well that’s not really what we want… if the user
+doesn’t specify an attribute (or if it doesn’t exist), we should carry on and
+happily apply just the randomized value to the thickness. Let’s modify the code a bit:&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Initialize it in case the user doesn&apos;t&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;65536&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pscale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;chf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;global_scale&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/scales-working.gif&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/scales-working.gif&quot; alt=&quot;Scales Working&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This works excellently! Now, even though the attribute is missing, everything
+is just multiplied by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1.0&lt;/code&gt;, so we’re in the clear. But let’s look at the
+attributes now…&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/extra-attrib.png&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/extra-attrib.png&quot; alt=&quot;Extra Attribute&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Oh no! Since that default value we have sitting in there wasn’t cleared out, and
+since it doesn’t already exist on the points, we wound up creating some
+attribute called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;thicknessscale&lt;/code&gt; with a value of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1.0&lt;/code&gt;! That’s sort of
+annoying. If the user didn’t ask for an attribute to be created, we should
+really just leave it alone.&lt;/p&gt;
+
+&lt;p&gt;Leaving it alone is simple. Just exclude it from that &lt;strong&gt;Attributes to Create&lt;/strong&gt;
+parameter.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/exclude-attribs.png&quot; alt=&quot;Exclude f@scale Attribute&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* ^scale ^seed
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The attributes specified in this list are the same as the &lt;em&gt;Vex Parameters&lt;/em&gt;
+you’re using in your code, even if they are &lt;em&gt;bound&lt;/em&gt; to something different.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/no-extra-attrib.png&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/no-extra-attrib.png&quot; alt=&quot;No Extra Attributes&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;If the attribute &lt;em&gt;does&lt;/em&gt; exist on the points beforehand, don’t worry - this
+option won’t cause it to be deleted. It will still pass through just as expected,
+with the added bonus that since it’s being ignored in the &lt;strong&gt;Attributes to
+Create&lt;/strong&gt; parameter, we aren’t able to actually write to it, which means we can’t
+muck it up with our code!&lt;/p&gt;
+
+&lt;h3 id=&quot;result&quot;&gt;Result&lt;/h3&gt;
+
+&lt;p&gt;Let’s see it in action with the user specifying their own scaling attribute on
+top of our randomization:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/custom-attrib.gif&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/custom-attrib.gif&quot; alt=&quot;Final Result&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;final-notes&quot;&gt;Final Notes&lt;/h2&gt;
+
+&lt;h3 id=&quot;groups&quot;&gt;Groups&lt;/h3&gt;
+
+&lt;p&gt;We can do most of the same stuff with groups. Just remember than Vex expects the
+prefix &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;i@group_&lt;/code&gt; before group names, which also applies to the &lt;strong&gt;Vex Parameter&lt;/strong&gt; parameter
+in the bindings section.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/group-bindings.png&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/group-bindings.png&quot; alt=&quot;Group Bindings&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/group-bindings-example.png&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/group-bindings-example.png&quot; alt=&quot;Group Bindings Example&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;An important note - if you’re using the &lt;strong&gt;Output Selection Group&lt;/strong&gt; parameter to
+visualize the group in the viewport (and pass the selection to downstream
+nodes), note that this parameter is expecting &lt;strong&gt;&lt;em&gt;Group Name&lt;/em&gt;&lt;/strong&gt; not the &lt;strong&gt;Vex
+Parameter&lt;/strong&gt;!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/posts/attribute-bindings/images/output-selection-group.gif&quot;&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/output-selection-group.gif&quot; alt=&quot;Output Selection Group&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Vex Source</title>

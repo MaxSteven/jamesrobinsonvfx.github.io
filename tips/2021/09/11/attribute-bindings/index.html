@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab:300|Roboto:500" rel="stylesheet">
+  </head>
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Attribute Bindings &middot; James Robinson
+    
+  </title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+</head>
+
+
+  <body>
+
+    <div class="container content">
+      <header class="masthead">
+        <!-- <h3 class="masthead-title">
+          <a href="/" title="Home">James Robinson</a>
+          <small>Houdini FX TD</small>
+        </h3> -->
+        <nav class="navbar">
+  <span>
+  <h3 class="masthead-title">
+    <a href="/" title="Home">James Robinson</a>
+    <small>Houdini FX TD</small>
+  </h3>
+    <span style="display: block;">
+    <a class="fab fa-vimeo" href="https://vimeo.com/jamesrobinsonvfx"></a>
+    <a class="fab fa-linkedin" href="https://www.linkedin.com/in/jamesrobinsonvfx/"></a>
+    <a class="fab fa-github" href="https://github.com/jamesrobinsonvfx"></a>
+    <a class="fab fa-instagram" href="https://www.instagram.com/jamesrobinsonvfx/"></a>
+    </span>
+  </span>
+
+  <span>
+  <a href="/" class="navlink">Blog</a>
+  <a href="/snippets" class="navlink">Snippets</a>
+  <a href="/projects" class="navlink">Projects</a>
+  <a href="/work" class="navlink">Work</a>
+  <a href="/links" class="navlink">Links</a>
+  <a href="/about" class="navlink">About</a>
+  </span>
+</nav>
+      </header>
+
+      <main style="padding-top: 3em">
+        <!-- <hr> -->
+        <h1 class="post-title">Attribute Bindings</h1>
+<time datetime="2021-09-11T00:00:00-07:00" class="post-date">11 Sep 2021</time>
+<section class="sheet">
+  <article class="post">
+      
+<blockquote style="border-color: #d08770">
+  <p>Hipfile: <a href="/assets/posts/attribute-bindings/jamesr_attributebindings.hip">jamesr_attributebindings.hip</a></p>
+</blockquote>
+
+<p><a href="/assets/posts/attribute-bindings/images/preview.png"><img src="/assets/posts/attribute-bindings/images/preview.png" alt="Cover Photo" /></a></p>
+
+<h2 id="basics">Basics</h2>
+
+<p>Let’s build a super simple setup that applies randomness to an attribute on some
+points. The user will specify which attribute they want to write to. We also
+want the user to be able to scale the points by any attribute they specify
+without changing any of the code.</p>
+
+<p>So the first thing we will need is some logic to randomize a value, and write it
+out. In this case, let’s start with <code class="language-plaintext highlighter-rouge">pscale</code> so we can see what’s happening.</p>
+
+<p><a href="/assets/posts/attribute-bindings/images/scale-points.png"><img src="/assets/posts/attribute-bindings/images/scale-points.png" alt="Scale Points" /></a></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">i</span><span class="err">@</span><span class="n">ptnum</span><span class="p">);</span>
+
+<span class="n">f</span><span class="err">@</span><span class="n">pscale</span> <span class="o">*=</span> <span class="n">r</span> <span class="o">*</span> <span class="nf">chf</span><span class="p">(</span><span class="s">"global_scale"</span><span class="p">);</span>
+</code></pre></div></div>
+<p>Easy enough!</p>
+
+<h2 id="point-setpointattrib-and-friends"><code class="language-plaintext highlighter-rouge">point()</code>, <code class="language-plaintext highlighter-rouge">setpointattrib()</code> and Friends</h2>
+
+<h3 id="reading">Reading</h3>
+
+<p>Next, we’ll need to fetch the user-specified attribute that we want to scale the
+randomness by. The most familiar way is by using the <code class="language-plaintext highlighter-rouge">point()</code> function.</p>
+
+<p><a href="(/assets/posts/attribute-bindings/images/user-scale.png)"><img src="/assets/posts/attribute-bindings/images/user-scale.png" alt="User Attrib" /></a></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="err">@</span><span class="n">coolscale</span> <span class="o">=</span> <span class="n">pow</span><span class="p">(</span><span class="n">relbbox</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">v</span><span class="err">@</span><span class="n">P</span><span class="p">).</span><span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>In this case we have a user-specified attribute called <code class="language-plaintext highlighter-rouge">coolscale</code>. We’ll use the
+<code class="language-plaintext highlighter-rouge">point()</code> function and a string parameter <code class="language-plaintext highlighter-rouge">chs()</code> to get that value.</p>
+
+<p><a href="(/assets/posts/attribute-bindings/images/user-scale-point-func.png)"><img src="/assets/posts/attribute-bindings/images/user-scale-point-func.png" alt="User Attrib" /></a></p>
+
+<p>So far so good. We’ve queried the custom user attribute and scaled our
+randomness by it.</p>
+
+<h3 id="writing">Writing</h3>
+
+<p>We’ve successfully written to <code class="language-plaintext highlighter-rouge">pscale</code> so far. But remember that our setup’s
+requirements call for the user to be able to specify the output attribute.
+Currently, we have it hardcoded to <code class="language-plaintext highlighter-rouge">f@pscale</code>.</p>
+
+<p>In order to write to a custom attribute, let’s add another parameter to specify
+what the attribute should be called and use the <code class="language-plaintext highlighter-rouge">setpointattrib()</code> function to
+write the value to the points.</p>
+
+<p><a href="(/assets/posts/attribute-bindings/images/output-attrib.png)"><img src="/assets/posts/attribute-bindings/images/output-attrib.png" alt="Output Attrib" /></a></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">i</span><span class="err">@</span><span class="n">ptnum</span><span class="p">);</span>
+
+<span class="kt">float</span> <span class="n">user_scale</span> <span class="o">=</span> <span class="n">point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">chs</span><span class="p">(</span><span class="s">"user_scale_attrib"</span><span class="p">),</span> <span class="n">i</span><span class="err">@</span><span class="n">ptnum</span><span class="p">);</span>
+
+<span class="kt">float</span> <span class="n">scale</span> <span class="o">=</span>  <span class="n">r</span> <span class="o">*</span> <span class="n">user_scale</span> <span class="o">*</span> <span class="nf">chf</span><span class="p">(</span><span class="s">"global_scale"</span><span class="p">);</span>
+
+<span class="n">setpointattrib</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">chs</span><span class="p">(</span><span class="s">"output_attrib"</span><span class="p">),</span> <span class="n">i</span><span class="err">@</span><span class="n">ptnum</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>While this function certainly does what we are asking, <em>it is painfully slow</em>
+when iterating over many many points, which isn’t an uncommon task! So how can
+we do it all a bit better? Let’s take a look at the <strong>Bindings</strong> tab.</p>
+
+<h3 id="attribute-bindings-tab">Attribute Bindings Tab</h3>
+
+<p><a href="/assets/posts/attribute-bindings/images/attrib-bindings.png"><img src="/assets/posts/attribute-bindings/images/attrib-bindings.png" alt="Attribute Bindings Tab" /></a></p>
+
+<p>The idea is pretty straightforward. The <strong>Attribute Name</strong> is the name of the
+attribute you <em>really</em> want to write to. <strong>Vex Parameter</strong> is simply what you’ll
+call that attribute inside your code. Think of this as an <em>alias</em> for the
+attribute name that you actually care about.</p>
+
+<p>We can modify our setup to use this method instead:</p>
+
+<p><a href="/assets/posts/attribute-bindings/images/rewrite-code.gif"><img src="/assets/posts/attribute-bindings/images/rewrite-code.gif" alt="Rewrite Code" /></a></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">i</span><span class="err">@</span><span class="n">ptnum</span><span class="p">);</span>
+
+<span class="n">f</span><span class="err">@</span><span class="n">scaled</span> <span class="o">=</span>  <span class="n">r</span> <span class="o">*</span> <span class="n">f</span><span class="err">@</span><span class="n">user_scale</span> <span class="o">*</span> <span class="nf">chf</span><span class="p">(</span><span class="s">"global_scale"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Our code has just gotten much simpler. We only need to refer the attributes that we put
+in the <strong>Vex Parameter</strong> parameters using the familiar <code class="language-plaintext highlighter-rouge">@</code> syntax.</p>
+
+<p><a href="/assets/posts/attribute-bindings/images/new-bindings.png"><img src="/assets/posts/attribute-bindings/images/new-bindings.png" alt="New Bindings" /></a></p>
+
+<p>We can take advantage of the <code class="language-plaintext highlighter-rouge">chs()</code> channels we already made, and just channel reference them in the
+bindings section. That way the interface can stay user-friendly (especially for whenever you
+want to promote these up to the interface of a digital asset or something).</p>
+
+<h3 id="speed-comparison">Speed Comparison</h3>
+
+<p>Let’s do a comparison with the <strong>Performance Monitor</strong>.</p>
+
+<p><a href="/assets/posts/attribute-bindings/images/perf-test.png"><img src="/assets/posts/attribute-bindings/images/perf-test.png" alt="Performance Test" /></a></p>
+
+<p>With ~112k points we can see that the <code class="language-plaintext highlighter-rouge">setpointattrib()</code> method takes about
+<code class="language-plaintext highlighter-rouge">0.081 seconds</code> to cook, whereas the <strong>Attribute Bindings</strong> method takes
+<code class="language-plaintext highlighter-rouge">0.002 seconds</code>! That’s a pretty big difference, though <code class="language-plaintext highlighter-rouge">0.08</code> seconds is
+pretty negligible too.</p>
+
+<p>What happens if we try with a a point cloud consisting of <code class="language-plaintext highlighter-rouge">30,000,000</code> points?</p>
+
+<p><a href="/assets/posts/attribute-bindings/images/perf-test-30m.png"><img src="/assets/posts/attribute-bindings/images/perf-test-30m.png" alt="Performance Test 30m Points" /></a></p>
+
+<p><strong>Attribute Bindings</strong> wins by a factor of ~30x on my machine. Now the difference between <code class="language-plaintext highlighter-rouge">0.13s</code>
+and <code class="language-plaintext highlighter-rouge">3.9s</code> per cook might not seem like a huge amount if you’re already waiting
+a minute or so per-frame to process a heavy point cloud (like a big FLIP sim).
+But consider that in this example we are writing just a <em>single</em> attribute, in
+<em>one</em> wrangle. In a real-world setup, you might have several attributes and be
+doing a few different things in different wrangles and steps which can really
+add up!</p>
+
+<h2 id="volumes">Volumes</h2>
+
+<p>This technique is <em>especially</em> useful when dealing with fields in Volume VOPs.
+Have you ever dived inside a <strong>Gas Turbulence DOP</strong> or any similar nodes? If you
+look in the Attribute Bindings section, you’ll see that SideFX uses these all
+the time! It’s how you’re able to specify the name of any <strong>Control Field</strong>, but
+internally they only need to use one name!</p>
+
+<p>Let’s try it out on our own. We’ll create a Volume VOP that adds noise to both
+<code class="language-plaintext highlighter-rouge">density</code> and <code class="language-plaintext highlighter-rouge">temperature</code>. There’s actually a shortcut toggle we can use
+without needing to set all the names ourselves.</p>
+
+<p><a href="/assets/posts/attribute-bindings/images/bind-each-to-density.png"><img src="/assets/posts/attribute-bindings/images/bind-each-to-density.png" alt="Bind Each to Density" /></a></p>
+
+<p><a href="/assets/posts/attribute-bindings/images/volume-binding-demo.gif"><img src="/assets/posts/attribute-bindings/images/volume-binding-demo.gif" alt="Volume Bindings" /></a></p>
+
+<ol>
+  <li>Create a Volume VOP.</li>
+  <li>Add some nodes inside. Don’t add any extra <strong>Bind Export</strong> nodes, just pipe
+them out to <code class="language-plaintext highlighter-rouge">density</code>.</li>
+  <li>On the <strong>Volume Bindings</strong> tab uncheck <strong>Autobind by Name</strong>.</li>
+  <li>Enable <strong>Bind Each to Density</strong>.</li>
+</ol>
+
+<p>Now we’ve applied the same operation to all of the fields! This is really useful
+if you’re creating any tools that modify volumes, and you want the user to be
+able to easily run over fields called anything.</p>
+
+<h2 id="attributes-to-create">Attributes to Create</h2>
+
+<p><a href="/assets/posts/attribute-bindings/images/attribs-to-create-default.png"><img src="/assets/posts/attribute-bindings/images/attribs-to-create-default.png" alt="Attributes to Create - Default" /></a></p>
+
+<p>This parameter is often overlooked, and its default is just <code class="language-plaintext highlighter-rouge">*</code> - which means
+any attributes referred to in the wrangle using the <code class="language-plaintext highlighter-rouge">@</code> syntax will be created
+if it they don’t exist already.</p>
+
+<p>The default is usually fine. But sometimes, you might be using an attribute
+temporarily just to do some sort of calculation, and you don’t actually want it
+to be created and passed along through the output. In that case, you can just
+use the <code class="language-plaintext highlighter-rouge">^</code> character plus the attribute name to skip it! This is also useful if
+you have a tool that <em>allows</em> a user attribute to passed in but does not <em>require</em>
+it.</p>
+
+<p>Take this for example:</p>
+
+<p><img src="/assets/posts/attribute-bindings/images/attribs-to-create-scenario.mp4" alt="" /></p>
+<video width="720" height="405" autoplay="" loop="">
+	<source src="/assets/posts/attribute-bindings/images/attribs-to-create-scenario.mp4" type="video/mp4" />
+</video>
+
+<p>We have a setup that modifies the thickness of some curves. By default, the code
+will apply some randomness. The user is also given the option to provide an
+attribute by which to multiply the randomized thickness. For clarity, let’s
+provide them a sensible default like <code class="language-plaintext highlighter-rouge">thicknessscale</code> (sort of how vellum and
+other tools across houdini fill it in too).</p>
+
+<p><a href="/assets/posts/attribute-bindings/images/parm-defaults-and-code.png"><img src="/assets/posts/attribute-bindings/images/parm-defaults-and-code.png" alt="Parameter Defaults and Code" /></a></p>
+
+<p>If we structure our code like so:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="err">@</span><span class="n">seed</span> <span class="o">+</span> <span class="mi">65536</span><span class="p">);</span>
+
+<span class="n">f</span><span class="err">@</span><span class="n">pscale</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">f</span><span class="err">@</span><span class="n">scale</span> <span class="o">*</span> <span class="nf">chf</span><span class="p">(</span><span class="s">"global_scale"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>with the following attribute bindings:</p>
+
+<p><a href="/assets/posts/attribute-bindings/images/attribs-to-create-attrib-bindings.png"><img src="/assets/posts/attribute-bindings/images/attribs-to-create-attrib-bindings.png" alt="Attribute Bindings" /></a></p>
+
+<p>we would expect that the <code class="language-plaintext highlighter-rouge">f@pscale</code> attribute is scaled by some random number,
+and the curves will change shape.</p>
+
+<p>But what happens if the user doesn’t want to do any extra scaling, and they
+didn’t specify any attribute? If no attribute is provided, and the binding is
+left blank or the attribute doesn’t exist we wind up with a bit of an issue…</p>
+
+<p><a href="/assets/posts/attribute-bindings/images/zero-scales.gif"><img src="/assets/posts/attribute-bindings/images/zero-scales.gif" alt="Scales are Zero" /></a></p>
+
+<p>All the scales are now zero! Well that’s not really what we want… if the user
+doesn’t specify an attribute (or if it doesn’t exist), we should carry on and
+happily apply just the randomized value to the thickness. Let’s modify the code a bit:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="err">@</span><span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span> <span class="c1">// Initialize it in case the user doesn't</span>
+
+<span class="kt">float</span> <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="err">@</span><span class="n">seed</span> <span class="o">+</span> <span class="mi">65536</span><span class="p">);</span>
+
+<span class="n">f</span><span class="err">@</span><span class="n">pscale</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="err">@</span><span class="n">scale</span> <span class="o">*</span> <span class="nf">chf</span><span class="p">(</span><span class="s">"global_scale"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><a href="/assets/posts/attribute-bindings/images/scales-working.gif"><img src="/assets/posts/attribute-bindings/images/scales-working.gif" alt="Scales Working" /></a></p>
+
+<p>This works excellently! Now, even though the attribute is missing, everything
+is just multiplied by <code class="language-plaintext highlighter-rouge">1.0</code>, so we’re in the clear. But let’s look at the
+attributes now…</p>
+
+<p><a href="/assets/posts/attribute-bindings/images/extra-attrib.png"><img src="/assets/posts/attribute-bindings/images/extra-attrib.png" alt="Extra Attribute" /></a></p>
+
+<p>Oh no! Since that default value we have sitting in there wasn’t cleared out, and
+since it doesn’t already exist on the points, we wound up creating some
+attribute called <code class="language-plaintext highlighter-rouge">thicknessscale</code> with a value of <code class="language-plaintext highlighter-rouge">1.0</code>! That’s sort of
+annoying. If the user didn’t ask for an attribute to be created, we should
+really just leave it alone.</p>
+
+<p>Leaving it alone is simple. Just exclude it from that <strong>Attributes to Create</strong>
+parameter.</p>
+
+<p><a href=""><img src="/assets/posts/attribute-bindings/images/exclude-attribs.png" alt="Exclude f@scale Attribute" /></a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* ^scale ^seed
+</code></pre></div></div>
+
+<blockquote>
+  <p>The attributes specified in this list are the same as the <em>Vex Parameters</em>
+you’re using in your code, even if they are <em>bound</em> to something different.</p>
+</blockquote>
+
+<p><a href="/assets/posts/attribute-bindings/images/no-extra-attrib.png"><img src="/assets/posts/attribute-bindings/images/no-extra-attrib.png" alt="No Extra Attributes" /></a></p>
+
+<p>If the attribute <em>does</em> exist on the points beforehand, don’t worry - this
+option won’t cause it to be deleted. It will still pass through just as expected,
+with the added bonus that since it’s being ignored in the <strong>Attributes to
+Create</strong> parameter, we aren’t able to actually write to it, which means we can’t
+muck it up with our code!</p>
+
+<h3 id="result">Result</h3>
+
+<p>Let’s see it in action with the user specifying their own scaling attribute on
+top of our randomization:</p>
+
+<p><a href="/assets/posts/attribute-bindings/images/custom-attrib.gif"><img src="/assets/posts/attribute-bindings/images/custom-attrib.gif" alt="Final Result" /></a></p>
+
+<h2 id="final-notes">Final Notes</h2>
+
+<h3 id="groups">Groups</h3>
+
+<p>We can do most of the same stuff with groups. Just remember than Vex expects the
+prefix <code class="language-plaintext highlighter-rouge">i@group_</code> before group names, which also applies to the <strong>Vex Parameter</strong> parameter
+in the bindings section.</p>
+
+<p><a href="/assets/posts/attribute-bindings/images/group-bindings.png"><img src="/assets/posts/attribute-bindings/images/group-bindings.png" alt="Group Bindings" /></a></p>
+
+<p><a href="/assets/posts/attribute-bindings/images/group-bindings-example.png"><img src="/assets/posts/attribute-bindings/images/group-bindings-example.png" alt="Group Bindings Example" /></a></p>
+
+<p>An important note - if you’re using the <strong>Output Selection Group</strong> parameter to
+visualize the group in the viewport (and pass the selection to downstream
+nodes), note that this parameter is expecting <strong><em>Group Name</em></strong> not the <strong>Vex
+Parameter</strong>!</p>
+
+<p><a href="/assets/posts/attribute-bindings/images/output-selection-group.gif"><img src="/assets/posts/attribute-bindings/images/output-selection-group.gif" alt="Output Selection Group" /></a></p>
+
+    </article>
+</section>
+
+
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+      <li>
+        <a href="/tips/2021/09/10/vex-source/">
+          Vex Source
+          <small><time datetime="2021-09-10T00:00:00-07:00">10 Sep 2021</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tips/2021/08/22/decay-values/">
+          Decay Values
+          <small><time datetime="2021-08-22T00:00:00-07:00">22 Aug 2021</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tips/2021/08/19/ftrim-function/">
+          ftrim() HScript function
+          <small><time datetime="2021-08-19T00:00:00-07:00">19 Aug 2021</time></small>
+        </a>
+      </li>
+    
+  </ul>
+</aside>
+
+
+      </main>
+
+      <footer class="footer">
+        <small>
+          &copy; <time datetime="2021-09-11T19:07:42-07:00">2021</time>. All rights reserved.
+        </small>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>
