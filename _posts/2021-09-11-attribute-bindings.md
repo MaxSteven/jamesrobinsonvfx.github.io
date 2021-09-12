@@ -17,18 +17,15 @@ tags: houdini vex attributes tools
 
 ## Basics
 
-
-## Scenario
-
 Let's build a super simple setup that applies randomness to an attribute on some
 points. The user will specify which attribute they want to write to. We also
 want the user to be able to scale the points by any attribute they specify
 without changing any of the code.
 
 So the first thing we will need is some logic to randomize a value, and write it
-to out. In this case, let's start with `pscale` so we can see what's happening.
+out. In this case, let's start with `pscale` so we can see what's happening.
 
-[![Scale Points]({{ images }}/scale-points.png)](({{ images }}/scale-points.png))
+[![Scale Points]({{ images }}/scale-points.png)]({{ images }}/scale-points.png)
 
 ```c
 float r = rand(i@ptnum);
@@ -52,7 +49,7 @@ f@coolscale = pow(relbbox(0, v@P).z, 4.0);
 ```
 
 In this case we have a user-specified attribute called `coolscale`. We'll use the
-`point()` function and a string parameter (`chs()`) to get that value.
+`point()` function and a string parameter `chs()` to get that value.
 
 [![User Attrib]({{ images }}/user-scale-point-func.png)](({{ images }}/user-scale-point-func.png))
 
@@ -104,9 +101,12 @@ float r = rand(i@ptnum);
 f@scaled =  r * f@user_scale * chf("global_scale");
 ```
 
+Our code has just gotten much simpler. We only need to refer the attributes that we put
+in the **Vex Parameter** parameters using the familiar `@` syntax.
+
 [![New Bindings]({{ images }}/new-bindings.png)]({{ images }}/new-bindings.png)
 
-We can use the channels we already have, and just channel reference them in the
+We can take advantage of the `chs()` channels we already made, and just channel reference them in the
 bindings section. That way the interface can stay user-friendly (especially for whenever you
 want to promote these up to the interface of a digital asset or something).
 
@@ -119,16 +119,15 @@ Let's do a comparison with the **Performance Monitor**.
 
 With ~112k points we can see that the `setpointattrib()` method takes about
 `0.081 seconds` to cook, whereas the **Attribute Bindings** method takes
-`0.002 seconds`! That's a pretty big difference, even though `0.08` seconds is
+`0.002 seconds`! That's a pretty big difference, though `0.08` seconds is
 pretty negligible too.
 
 What happens if we try with a a point cloud consisting of `30,000,000` points?
 
 [![Performance Test 30m Points]({{ images }}/perf-test-30m.png)]({{ images }}/perf-test-30m.png)
 
-
-The difference is ~30x faster on my machine. Now the difference between `0.15s`
-and `4.0s` per cook might not seem like a huge amount if you're already waiting
+**Attribute Bindings** wins by a factor of ~30x on my machine. Now the difference between `0.13s`
+and `3.9s` per cook might not seem like a huge amount if you're already waiting
 a minute or so per-frame to process a heavy point cloud (like a big FLIP sim).
 But consider that in this example we are writing just a *single* attribute, in
 *one* wrangle. In a real-world setup, you might have several attributes and be
@@ -156,8 +155,8 @@ without needing to set all the names ourselves.
 1. Create a Volume VOP.
 2. Add some nodes inside. Don't add any extra **Bind Export** nodes, just pipe
    them out to `density`.
-3. On the **Volume Bindings** tab uncheck **Autobind by Name**
-4. Enable **Bind Each to Density**
+3. On the **Volume Bindings** tab uncheck **Autobind by Name**.
+4. Enable **Bind Each to Density**.
 
 Now we've applied the same operation to all of the fields! This is really useful
 if you're creating any tools that modify volumes, and you want the user to be
@@ -260,7 +259,7 @@ parameter.
 
 
 If the attribute *does* exist on the points beforehand, don't worry - this
-option won't cause it to be deleted. It will still passthrough just as expected,
+option won't cause it to be deleted. It will still pass through just as expected,
 with the added bonus that since it's being ignored in the **Attributes to
 Create** parameter, we aren't able to actually write to it, which means we can't
 muck it up with our code!
