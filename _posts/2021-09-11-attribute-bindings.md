@@ -10,7 +10,7 @@ tags: houdini vex attributes tools
 
 {% capture images %}/assets/posts/{{ page.shortname }}/images{% endcapture %}
 
-> Hipfile: [jamesr_attributebindings.hip](/assets/posts/attribute-bindings/jamesr_attributebindings.hip)
+> Hipfile: [jamesr_attributebindings.hiplc](/assets/posts/attribute-bindings/jamesr_attributebindings.hiplc)
 {:style="border-color: #d08770"}
 
 [![Cover Photo]({{ page.thumbnail }})]({{ page.thumbnail }})
