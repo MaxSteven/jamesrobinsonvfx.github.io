@@ -15,64 +15,125 @@ tags: houdini vex attributes tools
 
 [![Cover Photo]({{ page.thumbnail }})]({{ page.thumbnail }})
 
-## Purpose
+## Basics
+
 
 ## Scenario
-Let's say we want to build a tool/setup that changes something when
-- A point is in a specific group
 
+Let's build a super simple setup that applies randomness to an attribute on some
+points. The user will specify which attribute they want to write to. We also
+want the user to be able to scale the points by any attribute they specify
+without changing any of the code.
 
-and we also want the user to be able specify what the name of the attribute is,
-as well as the new group that the point belongs to.
+So the first thing we will need is some logic to randomize a value, and write it
+to out. In this case, let's start with `pscale` so we can see what's happening.
 
-The first issue we encounter is the flexibility part. If
-
-For our purposes, hardcoding the attributes and group names is not an option. It
-forces the user to actually tear apart your code (gasp!) and make sure all the
-references to a specifically named attribute.
-
-
-## `setpointattrib()` and Friends
-One common function you often see handling this sort of situation is
-`setpointattrib()` (and its friends `setprimattrib()` etc...). Let's see how we
-can use it:
-
+[![Scale Points]({{ images }}/scale-points.png)](({{ images }}/scale-points.png))
 
 ```c
+float r = rand(i@ptnum);
+
+f@pscale *= r * chf("global_scale");
+```
+Easy enough!
+
+## `point()`, `setpointattrib()` and Friends
+
+
+### Reading
+
+Next, we'll need to fetch the user-specified attribute that we want to scale the
+randomness by. The most familiar way is by using the `point()` function.
+
+[![User Attrib]({{ images }}/user-scale.png)](({{ images }}/user-scale.png))
+
+```c
+f@coolscale = pow(relbbox(0, v@P).z, 4.0);
 ```
 
+In this case we have a user-specified attribute called `coolscale`. We'll use the
+`point()` function and a string parameter (`chs()`) to get that value.
+
+[![User Attrib]({{ images }}/user-scale-point-func.png)](({{ images }}/user-scale-point-func.png))
+
+So far so good. We've queried the custom user attribute and scaled our
+randomness by it.
+
+### Writing
+
+We've successfully written to `pscale` so far. But remember that our setup's
+requirements call for the user to be able to specify the output attribute.
+Currently, we have it hardcoded to `f@pscale`.
+
+In order to write to a custom attribute, let's add another parameter to specify
+what the attribute should be called and use the `setpointattrib()` function to
+write the value to the points.
+
+[![Output Attrib]({{ images }}/output-attrib.png)](({{ images }}/output-attrib.png))
+
+```c
+float r = rand(i@ptnum);
+
+float user_scale = point(0, chs("user_scale_attrib"), i@ptnum);
+
+float scale =  r * user_scale * chf("global_scale");
+
+setpointattrib(0, chs("output_attrib"), i@ptnum, scale);
+```
 
 While this function certainly does what we are asking, *it is painfully slow*
-when iterating over many many points, which isn't an uncommon task!
+when iterating over many many points, which isn't an uncommon task! So how can
+we do it all a bit better? Let's take a look at the **Bindings** tab.
 
-Let's do a quick comparison with the **Performance Monitor**. First we'll create
-a point cloud consisting of `30,000,000` points. In this example, we want to
-randomize some user-specified attribute relating to the scale of the points. In
-the code, we'll refer to it simply as `f@scale`. The user can specify the name
-they want it to actually be (probably `f@pscale`), and we'll write our result
-into that attribute.
-
-On the left stream, we have the following code
-
-
-
-The difference is ~5x faster on my machine. Now the difference between `0.7s`
-and `3.0s` per cook might not seem like a huge amount if you're already waiting
-a minute or so per-frame to process a heavy point cloud (like a big FLIP sim).
-But consider that in this example we are modifying just a *single* attribute, in
-*one* wrangle. In a real-world setup, you might have several attributes and be
-doing a few different things in different wrangles and steps which can really
-add up!
-
-## Attribute Bindings Tab
+### Attribute Bindings Tab
 
 [![Attribute Bindings Tab]({{ images }}/attrib-bindings.png)]({{ images }}/attrib-bindings.png)
 
 The idea is pretty straightforward. The **Attribute Name** is the name of the
 attribute you *really* want to write to. **Vex Parameter** is simply what you'll
 call that attribute inside your code. Think of this as an *alias* for the
-attribute name that you actually care about. Let's see it in action:
+attribute name that you actually care about.
 
+We can modify our setup to use this method instead:
+
+[![Rewrite Code]({{ images }}/rewrite-code.gif)]({{ images }}/rewrite-code.gif)
+
+```c
+float r = rand(i@ptnum);
+
+f@scaled =  r * f@user_scale * chf("global_scale");
+```
+
+[![New Bindings]({{ images }}/new-bindings.png)]({{ images }}/new-bindings.png)
+
+We can use the channels we already have, and just channel reference them in the
+bindings section. That way the interface can stay user-friendly (especially for whenever you
+want to promote these up to the interface of a digital asset or something).
+
+
+### Speed Comparison
+
+Let's do a comparison with the **Performance Monitor**.
+
+[![Performance Test]({{ images }}/perf-test.png)]({{ images }}/perf-test.png)
+
+With ~112k points we can see that the `setpointattrib()` method takes about
+`0.081 seconds` to cook, whereas the **Attribute Bindings** method takes
+`0.002 seconds`! That's a pretty big difference, even though `0.08` seconds is
+pretty negligible too.
+
+What happens if we try with a a point cloud consisting of `30,000,000` points?
+
+[![Performance Test 30m Points]({{ images }}/perf-test-30m.png)]({{ images }}/perf-test-30m.png)
+
+
+The difference is ~30x faster on my machine. Now the difference between `0.15s`
+and `4.0s` per cook might not seem like a huge amount if you're already waiting
+a minute or so per-frame to process a heavy point cloud (like a big FLIP sim).
+But consider that in this example we are writing just a *single* attribute, in
+*one* wrangle. In a real-world setup, you might have several attributes and be
+doing a few different things in different wrangles and steps which can really
+add up!
 
 
 ## Volumes
@@ -148,7 +209,7 @@ we would expect that the `f@pscale` attribute is scaled by some random number,
 and the curves will change shape.
 
 
-But what happens if the user doesnt' want to do any extra scaling, and they
+But what happens if the user doesn't want to do any extra scaling, and they
 didn't specify any attribute? If no attribute is provided, and the binding is
 left blank or the attribute doesn't exist we wind up with a bit of an issue...
 
@@ -224,9 +285,9 @@ in the bindings section.
 
 [![Group Bindings Example]({{ images }}/group-bindings-example.png)]({{ images }}/group-bindings-example.png)
 
-An important note - if you're using the **Ouput Selection Group** parameter to
+An important note - if you're using the **Output Selection Group** parameter to
 visualize the group in the viewport (and pass the selection to downstream
 nodes), note that this parameter is expecting ***Group Name*** not the **Vex
 Parameter**!
 
-[![Ouput Selection Group]({{ images }}/output-selection-group.gif)]({{ images }}/output-selection-group.gif)
+[![Output Selection Group]({{ images }}/output-selection-group.gif)]({{ images }}/output-selection-group.gif)
