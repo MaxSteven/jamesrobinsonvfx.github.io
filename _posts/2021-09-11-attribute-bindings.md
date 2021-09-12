@@ -3,8 +3,7 @@ layout: post
 title: Attribute Bindings
 shortname: attribute-bindings
 description: Write to attributes with one name while using another in your code
-thumbnail: {{ images }}/preview.png
-images: /assets/posts/attribute-bindings
+thumbnail: /assets/posts/attribute-bindings/images/preview.png
 categories: tips
 tags: houdini vex attributes tools
 ---
@@ -38,7 +37,6 @@ One common function you often see handling this sort of situation is
 `setpointattrib()` (and its friends `setprimattrib()` etc...). Let's see how we
 can use it:
 
-[![`setpointattrib()` Demo]({{ images/ }})]()
 
 ```c
 ```
@@ -85,8 +83,9 @@ look in the Attribute Bindings section, you'll see that SideFX uses these all
 the time! It's how you're able to specify the name of any **Control Field**, but
 internally they only need to use one name!
 
-Let's try it out on our own. We'll create a Volume VOP that adds noise to both `density` and `temperature`.
-There's actually a shortcut toggle we can use without needing to set all the names ourselves.
+Let's try it out on our own. We'll create a Volume VOP that adds noise to both
+`density` and `temperature`. There's actually a shortcut toggle we can use
+without needing to set all the names ourselves.
 
 
 [![Bind Each to Density]({{ images }}/bind-each-to-density.png)]({{ images }}/bind-each-to-density.png)
@@ -94,12 +93,14 @@ There's actually a shortcut toggle we can use without needing to set all the nam
 [![Volume Bindings]({{ images }}/volume-binding-demo.gif)]({{ images }}/volume-binding-demo.gif)
 
 1. Create a Volume VOP.
-2. Add some nodes inside. Don't add any extra **Bind Export** nodes, just pipe them out to `density`.
+2. Add some nodes inside. Don't add any extra **Bind Export** nodes, just pipe
+   them out to `density`.
 3. On the **Volume Bindings** tab uncheck **Autobind by Name**
 4. Enable **Bind Each to Density**
 
-Now we've applied the same operation to all of the fields! This is really useful if you're creating any tools that
-modify volumes, and you want the user to be able to easily run over fields called anything.
+Now we've applied the same operation to all of the fields! This is really useful
+if you're creating any tools that modify volumes, and you want the user to be
+able to easily run over fields called anything.
 
 ## Attributes to Create
 
@@ -112,15 +113,15 @@ if it they don't exist already.
 The default is usually fine. But sometimes, you might be using an attribute
 temporarily just to do some sort of calculation, and you don't actually want it
 to be created and passed along through the output. In that case, you can just
-use the `^` character plus the attribute name to skip it! This is also useful if you
-have a tool that *allows* a user attribute to passed in but does not *require*
+use the `^` character plus the attribute name to skip it! This is also useful if
+you have a tool that *allows* a user attribute to passed in but does not *require*
 it.
 
 Take this for example:
 
 ![]({{ images }}/attribs-to-create-scenario.mp4)
 <video width="720" height="405" autoplay loop>
-	<source src="/assets/posts/xform-pieces-alembic-layering/images/xform-pieces.mp4" type="video/mp4">
+	<source src="{{ images }}/attribs-to-create-scenario.mp4" type="video/mp4">
 </video>
 
 We have a setup that modifies the thickness of some curves. By default, the code
@@ -143,18 +144,20 @@ with the following attribute bindings:
 
 [![Attribute Bindings]({{ images }}/attribs-to-create-attrib-bindings.png)]({{ images }}/attribs-to-create-attrib-bindings.png)
 
-we would expect that the `f@pscale` attribute is scaled by some random number, and the curves will change shape.
+we would expect that the `f@pscale` attribute is scaled by some random number,
+and the curves will change shape.
 
 
-But what happens if they don't want to do any extra scaling, and they didn't specify any attribute? If no attribute is
-provided, and the binding is left blank or the attribute doesn't exist we wind up with a bit of an issue...
+But what happens if the user doesnt' want to do any extra scaling, and they
+didn't specify any attribute? If no attribute is provided, and the binding is
+left blank or the attribute doesn't exist we wind up with a bit of an issue...
 
 
 [![Scales are Zero]({{ images }}/zero-scales.gif)]({{ images }}/zero-scales.gif)
 
 All the scales are now zero! Well that's not really what we want... if the user
-doesn't specify an attribute (or if it doesn't exist), we should carry on and happily apply just the
-randomized value to the thickness. Let's modify the code a bit:
+doesn't specify an attribute (or if it doesn't exist), we should carry on and
+happily apply just the randomized value to the thickness. Let's modify the code a bit:
 
 
 ```c
@@ -174,9 +177,10 @@ attributes now...
 [![Extra Attribute]({{ images }}/extra-attrib.png)]({{ images }}/extra-attrib.png)
 
 Oh no! Since that default value we have sitting in there wasn't cleared out, and
-since it doesn't already exist on the points, we wound up creating some attribute called `thicknessscale` with a value
-of `1.0`! That's sort of annoying. If the user didn't ask for an attribute to
-created, we should really just leave it alone.
+since it doesn't already exist on the points, we wound up creating some
+attribute called `thicknessscale` with a value of `1.0`! That's sort of
+annoying. If the user didn't ask for an attribute to be created, we should
+really just leave it alone.
 
 Leaving it alone is simple. Just exclude it from that **Attributes to Create**
 parameter.
@@ -187,7 +191,8 @@ parameter.
 * ^scale ^seed
 ```
 
-> The attributes specified in this list are the same as the *Vex Parameters* you're using in your code, even if they are *bound* to something different.
+> The attributes specified in this list are the same as the *Vex Parameters*
+> you're using in your code, even if they are *bound* to something different.
 
 
 [![No Extra Attributes]({{ images }}/no-extra-attrib.png)]({{ images }}/no-extra-attrib.png)
@@ -197,9 +202,14 @@ If the attribute *does* exist on the points beforehand, don't worry - this
 option won't cause it to be deleted. It will still passthrough just as expected,
 with the added bonus that since it's being ignored in the **Attributes to
 Create** parameter, we aren't able to actually write to it, which means we can't
-muck it up inbetween!
+muck it up with our code!
 
-[! [Final Result]({{ images }}/custom-attrib.gif)]({{ images }}/custom-attrib.gif)
+### Result
+
+Let's see it in action with the user specifying their own scaling attribute on
+top of our randomization:
+
+[![Final Result]({{ images }}/custom-attrib.gif)]({{ images }}/custom-attrib.gif)
 
 
 ## Final Notes
@@ -214,7 +224,9 @@ in the bindings section.
 
 [![Group Bindings Example]({{ images }}/group-bindings-example.png)]({{ images }}/group-bindings-example.png)
 
-An important note - if you're using the **Ouput Selection Group** paramater to visualize the group
-in the viewport (and pass the selection to downstream nodes), note that this parameter is expecting ***Group Name*** not the **Vex Parameter**!
+An important note - if you're using the **Ouput Selection Group** parameter to
+visualize the group in the viewport (and pass the selection to downstream
+nodes), note that this parameter is expecting ***Group Name*** not the **Vex
+Parameter**!
 
 [![Ouput Selection Group]({{ images }}/output-selection-group.gif)]({{ images }}/output-selection-group.gif)
