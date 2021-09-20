@@ -128,9 +128,6 @@ Any parameter named `snippet`, `code` or `python` will have this option in its
 **Right Click** menu.
 
 ## Usage
-> Apologies for the weird coloring from my mac...
->
-[![]({{ images }} xform-pieces.mp4)]({{ images }} xform-pieces.mp4)
 <video width="720" height="405" autoplay loop>
-	<source src="/assets/posts/xform-pieces-alembic-layering/images/xform-pieces.mp4" type="video/mp4">
+	<source src="{{ images }}/demo.mp4" type="video/mp4">
 </video>
