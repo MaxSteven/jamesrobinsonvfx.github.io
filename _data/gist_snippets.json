@@ -1,5 +1,33 @@
 [
     {
+        "description": "Randomizes colors",
+        "id": "eaa3d2a8af9b420054f6990d4a680aeb",
+        "html_url": "https://gist.github.com/eaa3d2a8af9b420054f6990d4a680aeb",
+        "created_at": "2021-09-20T20:13:49Z",
+        "filename": "randomize_color.h"
+    },
+    {
+        "description": "Color paletter (w/Nord Theme Colors)",
+        "id": "b422a1e78b2a9e664b044e1dd89327c4",
+        "html_url": "https://gist.github.com/b422a1e78b2a9e664b044e1dd89327c4",
+        "created_at": "2021-09-16T18:38:49Z",
+        "filename": "opColorPalette.def"
+    },
+    {
+        "description": "Darker \"Light\" Background",
+        "id": "fa20cd45d07f154d2b162e69880a5817",
+        "html_url": "https://gist.github.com/fa20cd45d07f154d2b162e69880a5817",
+        "created_at": "2021-09-16T18:38:13Z",
+        "filename": "3DSceneColors.light"
+    },
+    {
+        "description": "Toggle Manual Mode in Houdini",
+        "id": "2d773b45c61452a592dc6fff28db6fbc",
+        "html_url": "https://gist.github.com/2d773b45c61452a592dc6fff28db6fbc",
+        "created_at": "2021-09-16T18:05:17Z",
+        "filename": "toggle_manual.py"
+    },
+    {
         "description": "Easiest way to get multiparm instance index",
         "id": "3e751c7cb7e6d51bee4ae257cd917d5d",
         "html_url": "https://gist.github.com/3e751c7cb7e6d51bee4ae257cd917d5d",
