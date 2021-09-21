@@ -8,6 +8,10 @@ task :deploy do
 
   # Scrape Gist Feed
   system "./fetch_gist_snippets.py _data/gist_snippets.json"
+  system "git add _data/gist_snippets.json"
+  system "git commit -m 'Update snippets'"
+  system "git push origin develop"
+
 
   # Build Site
   system "jekyll build"
