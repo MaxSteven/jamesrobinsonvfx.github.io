@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Wrangle To Gist
+title: Wrangle to Gist
 shortname: wrangle-to-gist
 description: Post code snippets to your Gist feed from within Houdini
 thumbnail: /assets/projects/wrangle-to-gist/images/preview.png
