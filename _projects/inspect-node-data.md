@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Inspect Node Data
+date: 2021-08-14
 description: SOP-level HDA for storing, retrieving, and inspecting parameters from nodes
 thumbnail: /assets/projects/inspect-node-data/images/cover-photo.jpg
 repo: inspectnodedata

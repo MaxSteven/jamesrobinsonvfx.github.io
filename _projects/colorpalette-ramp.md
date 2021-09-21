@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Color Palette Ramp
+date: 2020-05-09
 description: Houdini SOP node to extract a color palette from an image using K-Means Clustering
 thumbnail: /assets/projects/colorpalette-ramp/images/thumbnail.png
 repo: colorpaletteramp

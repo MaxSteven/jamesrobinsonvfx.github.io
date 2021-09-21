@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Hair Cards to Guide Curves
+date: 2021-09-08
 description: Convert hair card geometry (like from a game engine) to guide curves
 thumbnail: /assets/projects/hair-cards-to-guide-curves/images/preview.png
 repo: colorpaletteramp

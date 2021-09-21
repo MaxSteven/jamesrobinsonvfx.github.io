@@ -1,6 +1,7 @@
 ---
 layout: post
 title: MPlay Batch
+date: 2021-03-22
 description: Batch write sequences from MPlay
 thumbnail: /assets/projects/mplay-batch/images/thumbnail.png
 repo: mplay_batch
