@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab:300|Roboto:500" rel="stylesheet">
+  </head>
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Houdini Package Template &middot; James Robinson
+    
+  </title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+</head>
+
+
+  <body>
+
+    <div class="container content">
+      <header class="masthead">
+        <!-- <h3 class="masthead-title">
+          <a href="/" title="Home">James Robinson</a>
+          <small>Houdini FX TD</small>
+        </h3> -->
+        <nav class="navbar">
+  <span>
+  <h3 class="masthead-title">
+    <a href="/" title="Home">James Robinson</a>
+    <small>Houdini FX TD</small>
+  </h3>
+    <span style="display: block;">
+    <a class="fab fa-vimeo" href="https://vimeo.com/jamesrobinsonvfx"></a>
+    <a class="fab fa-linkedin" href="https://www.linkedin.com/in/jamesrobinsonvfx/"></a>
+    <a class="fab fa-github" href="https://github.com/jamesrobinsonvfx"></a>
+    <a class="fab fa-instagram" href="https://www.instagram.com/jamesrobinsonvfx/"></a>
+    </span>
+  </span>
+
+  <span>
+  <a href="/" class="navlink">Blog</a>
+  <a href="/snippets" class="navlink">Snippets</a>
+  <a href="/projects" class="navlink">Projects</a>
+  <a href="/work" class="navlink">Work</a>
+  <a href="/links" class="navlink">Links</a>
+  <a href="/about" class="navlink">About</a>
+  </span>
+</nav>
+      </header>
+
+      <main style="padding-top: 3em">
+        <!-- <hr> -->
+        <h1 class="post-title">Houdini Package Template</h1>
+<time datetime="2021-09-26T22:56:33-07:00" class="post-date">26 Sep 2021</time>
+<section class="sheet">
+  <article class="post">
+      
+<p><a href="/assets/projects/houdini-package-template/images/preview.png"><img src="/assets/projects/houdini-package-template/images/preview.png" alt="Cover Photo" /></a></p>
+
+<blockquote>
+  <p>Get it <a href="https://github.com/jamesrobinsonvfx/houdini_package_template">here</a> <a class="fab fa-github" href="https://github.com/jamesrobinsonvfx/houdini_package_template"></a></p>
+</blockquote>
+
+<p>Template repo for creating simple (or not so simple) Houdini Packages.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>This repo is meant to be a quick jumping off point for creating a Houdini
+package. You likely won’t need everything in here, but several common files and
+folders have been included as a good start.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<ol>
+  <li>
+    <p>Create a repository from this template</p>
+
+    <p><a href="/assets/projects/houdini-package-template/images/repo-from-template.gif"><img src="/assets/projects/houdini-package-template/images/repo-from-template.gif" alt="Creating a repo from a template" /></a></p>
+  </li>
+  <li>Clone your new repository to your local machine
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git clone git@github.com:jamesrobinsonvfx/demo_tool.git
+</code></pre></div>    </div>
+  </li>
+  <li>Open the repository and run <code class="language-plaintext highlighter-rouge">./initialize.py</code> (<a href="">See below for extra use instructions</a>)
+    <blockquote>
+      <p>This script sets the package name and title in files all around the package.
+You could totally just manually hunt for everything called
+<code class="language-plaintext highlighter-rouge">houdini_package_template</code>, and the tags <code class="language-plaintext highlighter-rouge">{% package_name %}</code>, <code class="language-plaintext highlighter-rouge">{% Package Title
+%}</code> and <code class="language-plaintext highlighter-rouge">{% PACKAGE_NAME_UPPER %}</code>, and replace them manually. Or you can
+use the script (just use the script).</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Start building your tool!</p>
+  </li>
+  <li>
+    <p>Zip it up and share it with others <em>(Optional)</em></p>
+
+    <p>Run the following to create a <code class="language-plaintext highlighter-rouge">.zip</code> archive without any of the extra git
+ fluff (See the included <code class="language-plaintext highlighter-rouge">.gitattributes</code> file for a list of excluded files)</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git archive <span class="nt">--format</span> zip <span class="nt">--output</span> ../demo_tool.zip main
+</code></pre></div>    </div>
+
+    <p>If you’d like to do an actual <a href="http://github.com/jamesrobinsonvfx/houdini_package_template/releases/latest">release</a>, read
+ about how to do that on the <a href="https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository">GitHub docs</a>. You’ll be able to add your  <code class="language-plaintext highlighter-rouge">.zip</code> archive as part of the release links.</p>
+
+    <p>You can tell people to grab it by pointing them to</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> https://github.com/jamesrobinsonvfx/demo_tool/releases/latest/download/demo_tool.zip
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="installing-your-package">Installing Your Package</h2>
+<p>At some point, you’ll want to install your package into a Houdini session for everyday use and testing.</p>
+
+<p>In order for Houdini to be able to include your tools in a session, it needs to
+be able to find them. Houdini looks in a set of <a href="https://www.sidefx.com/docs/houdini/basics/config.html#path">paths and
+locations</a> and
+loads in stuff that it finds along the way. Commonly, these would be things like
+Python libraries, HDAs, custom shelves, etc. You <em>could</em> just manually copy the
+contents of each of these to their respective folders (<code class="language-plaintext highlighter-rouge">python2.7libs</code>, <code class="language-plaintext highlighter-rouge">hda</code>,
+<code class="language-plaintext highlighter-rouge">toolbar</code>…), but keeping track of all that can become a nightmare! With
+Houdini Packages, you can keep all that stuff together in one location, and with
+a specially formatted <em>package</em> <code class="language-plaintext highlighter-rouge">.json</code> file, you can tell Houdini where to look
+for it.</p>
+
+<p>There’s a multitude of ways you can configure your packages to load. I highly recommend visiting the
+<a href="https://www.sidefx.com/docs/houdini/ref/plugins.html">Houdini Packages documentation</a> for more detailed info.</p>
+
+<p>Outlined below are two favorite ways of setting up and loading packages. Package
+<code class="language-plaintext highlighter-rouge">.json</code> files can be placed in any <code class="language-plaintext highlighter-rouge">packages</code> folder within a <a href="">Houdini Location</a>.
+For studio-wide tools, that’s usually best located at your facility’s <code class="language-plaintext highlighter-rouge">$HSITE</code>.
+For single users you’ll probably want to use your <code class="language-plaintext highlighter-rouge">$HOUDINI_USER_PREF_DIR</code> if
+you don’t have <code class="language-plaintext highlighter-rouge">$HSITE</code> set up. I will be using <code class="language-plaintext highlighter-rouge">$HOUDINI_USER_PREF_DIR</code> to make
+it easy to follow along.</p>
+
+<h3 id="method-1-packages-live-in-the-packages-directory">Method 1: Packages live in the <code class="language-plaintext highlighter-rouge">packages</code> directory</h3>
+
+<p>With this method, package folders and their <code class="language-plaintext highlighter-rouge">.json</code> package files live directly inside
+<code class="language-plaintext highlighter-rouge">$HOUDINI_USER_PREF_DIR/packages</code>.</p>
+
+<blockquote>
+  <p>Houdini will <em>not</em> automatically search for <code class="language-plaintext highlighter-rouge">.json</code> files inside of subfolders
+within the <code class="language-plaintext highlighter-rouge">packages</code> directory.</p>
+</blockquote>
+
+<h4 id="setup">Setup</h4>
+
+<p>Assuming your package is called <code class="language-plaintext highlighter-rouge">demo_tool</code>.</p>
+
+<ol>
+  <li>Copy your Houdini Package folder to <code class="language-plaintext highlighter-rouge">$HOUDINI_USER_PREF_DIR/packages/demo_tool</code></li>
+  <li>Copy <code class="language-plaintext highlighter-rouge">demo_tool.json</code> from
+<code class="language-plaintext highlighter-rouge">$HOUDINI_USER_PREF_DIR/packages/demo_tool</code> to <code class="language-plaintext highlighter-rouge">$HOUDINI_USER_PREF_DIR/packages</code></li>
+</ol>
+
+<p>Your <code class="language-plaintext highlighter-rouge">$HOUDINI_USER_PREF_DIR</code> directory structure should now resemble:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>houdini18.5
+└── packages/
+    ├── some_other_package/
+    │   ├── houdini18.5/
+    │   └── some_other_package.json
+    ├── demo_tool/
+    │   ├── houdini18.5/
+    │   └── demo_tool.json
+    ├── some_other_package.json
+    └── demo_tool.json
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">demo_tool.json</code> can be quite simple:</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$HOUDINI_PACKAGE_PATH/demo_tool/houdini18.5"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">path</code> is a shorthand keyword we can use to insert a location to the <code class="language-plaintext highlighter-rouge">$HOUDINI_PATH</code>.</p>
+
+<p>When used in a package <code class="language-plaintext highlighter-rouge">.json</code> file, the
+<code class="language-plaintext highlighter-rouge">$HOUDINI_PACKAGE_PATH</code> variable refers to the location of the package that is
+currently being read.</p>
+
+<p>There are certain conditional statements (if/then) we can add to load different
+folders based on the Houdini version. See the actual
+<code class="language-plaintext highlighter-rouge">houdini_package_template.json</code> file for a more detailed package definition that
+does that.</p>
+
+<h3 id="method-2-packages-live-somewhere-else">Method 2: Packages live somewhere else</h3>
+
+<p>It’s not uncommon to have a separate location on disk that holds 3rd party tools. In
+this case, we can <em>dynamically</em> add locations to tell Houdini to search in using
+the <code class="language-plaintext highlighter-rouge">package_path</code> keyword.</p>
+
+<p>This this scenario, we have a <code class="language-plaintext highlighter-rouge">packages</code> folder located inside a known Houdini
+location, like <code class="language-plaintext highlighter-rouge">$HOUDINI_USER_PREF_DIR</code>. There is just one <code class="language-plaintext highlighter-rouge">.json</code> file inside.
+Its job is to point to other places where packages might live:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>houdini18.5
+└── packages/
+    └── packages.json
+</code></pre></div></div>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"STUDIO_TOOLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/prod_server/studio_tools"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+
+    </span><span class="nl">"package_path"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"$STUDIO_TOOLS/cool_solver"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"$STUDIO_TOOLS/demo_tool"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"$STUDIO_TOOLS/qlib"</span><span class="p">,</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Elsewhere on disk, we have a folder called <code class="language-plaintext highlighter-rouge">studio_tools</code>, filled with 3rd party
+Houdini Packages.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>prod_server
+└── studio_tools/
+    ├── cool_solver/
+    ├── demo_tool/
+    ├── qlib/
+    ├── render_engine/
+    └── some_other_package/
+</code></pre></div></div>
+
+<p>Each Houdini Package keeps its <code class="language-plaintext highlighter-rouge">[package_name].json</code> file inside. No need to
+move/copy it like <a href="#method-1-packages-live-in-the-packages-directory">Method 1</a>.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$HOUDINI_PACKAGE_PATH/houdini18.5"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This method can be a great way to keep a bunch of 3rd party tools organized.
+It also makes it easy to programatically add/remove packages, or even have
+multiple locations, such as a set of “production” packages and another set of
+“experimental” or “dev” pacakges.</p>
+
+<p>As you can see, both ways have their pros and cons. And these certainly <em>are not</em> the only possible configurations!</p>
+
+<h3 id="caveats">Caveats</h3>
+<p>If you notice that HDAs/OTLs aren’t loading, but everything else in your package
+is, you might need to explicitly set <code class="language-plaintext highlighter-rouge">$HOUDINI_OTLSCAN_PATH</code>. While this
+<em>shouldn’t</em> be necesary, I’ve found that some tools/wrappers can block OTLs being
+loaded from custom additions to <code class="language-plaintext highlighter-rouge">$HOUDINI_PATH</code>. Setting this environment
+variable in your package is pretty straightforward:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$DEMO_TOOL_INSTALL_DIR"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"DEMO_TOOL_INSTALL_DIR"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"houdini_version &gt;= '18.0' and houdini_version &lt; '18.5'"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$HOUDINI_PACKAGE_PATH/demo_tool/houdini18.0"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"houdini_version &gt;= '18.5' and houdini_version &lt; '19.0'"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$HOUDINI_PACKAGE_PATH/demo_tool/houdini18.5"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"HOUDINI_OTLSCAN_PATH"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$DEMO_TOOL_INSTALL_DIR/hda"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"append"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>This used to be included in the template, but this should be more of an edge
+case, so it has been removed.</p>
+</blockquote>
+
+<h2 id="tools-for-different-houdini-versions">Tools for Different Houdini Versions</h2>
+<p>Every year, SideFX releases a new minor version of Houdini (18.<strong>0</strong>, 18.<strong>5</strong>,
+etc.). Sometimes they make pretty sweeping changes that can cause your tools not
+to work between versions.</p>
+
+<p>Rather than fighting this and trying to make your tool work for every release of
+Houdini, you can just create a new version of your tool to work with the next release.</p>
+
+<p>The easiest way to release your stuff for a new version is to simply copy your
+latest <code class="language-plaintext highlighter-rouge">houdiniX.Y</code> folder, update the number, and see if it works! For
+example, when Houdini 19.0 is released, you can do the following:</p>
+
+<ol>
+  <li>Copy <code class="language-plaintext highlighter-rouge">houdini18.5</code> and all of its contents</li>
+  <li>Paste it</li>
+  <li>Rename <code class="language-plaintext highlighter-rouge">houdini18.5</code> to <code class="language-plaintext highlighter-rouge">houdini19.0</code></li>
+  <li>
+    <p>Update the <code class="language-plaintext highlighter-rouge">demo_tool.json</code> file to load from that location
+when using <code class="language-plaintext highlighter-rouge">houdini19.0</code></p>
+
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"houdini_version &gt;= '19.0' and houdini_version &lt; '19.5'"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$HOUDINI_PACKAGE_PATH/demo_tool/houdini19.0"</span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="alternative-per-build-package">Alternative: Per-build package</h3>
+
+<p>In some cases, especially for tools that might depend on specific production
+builds (render engines, custom HDK nodes), it might be important to have a
+unique release of your tool per <em>build</em>.</p>
+
+<p>In this case, instead of having a <code class="language-plaintext highlighter-rouge">houdini18.5</code> folder, you might have multiple
+folders named for each build number, ie. <code class="language-plaintext highlighter-rouge">18.5.496</code>, <code class="language-plaintext highlighter-rouge">18.5.593</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>demo_tool
+├── 18.5.496/
+└── 18.5.596/
+    ├── dso/
+    └── hda/
+...
+</code></pre></div></div>
+
+<p>Instead of writing conditional statements for <em>every single build</em>, there’s actually an
+undocumented shorthand we can use:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$HOUDINI_PACKAGE_PATH/${HOUDINI_VERSION}"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<h3 id="another-alternative-who-cares-about-the-build-version">Another Alternative: Who cares about the build version?</h3>
+
+<p>It’s not actually necessary to have separate versions of your tool for different
+Houdini versions. As long as you have properly named folders that follow the
+structure of <code class="language-plaintext highlighter-rouge">$HFS/houdini</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>demo_tool
+├── hda/
+│   └── studio_cooltool.hda
+└── python3.7libs/
+    └── package_utils.py
+</code></pre></div></div>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$HOUDINI_PACKAGE_PATH/demo_tool"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This also works, but remember it could be a little trickier to maintain across
+Houdini versions.</p>
+
+<h2 id="template-contents">Template Contents</h2>
+
+<p>This Houdini Package structure mimics the one you’d find in <code class="language-plaintext highlighter-rouge">$HH</code> (aka
+<code class="language-plaintext highlighter-rouge">$HFS/houdini</code>). This makes it easy for Houdini to pick up its contents. When
+you tell Houdini to add a directory to the <code class="language-plaintext highlighter-rouge">$HOUDINI_PATH</code>, any folders that
+match the name/structure found in <code class="language-plaintext highlighter-rouge">$HH</code> will be made available to you in your houdini
+session.</p>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">$HFS</code> is the location of the Houdini installation. You can type this in a
+File Browser from within Houdini to see exactly where this is.</p>
+</blockquote>
+
+<p>If you ever want to add more folders inside, check out the contents of <code class="language-plaintext highlighter-rouge">$HH</code>.
+For example, if you wanted to add some testing geometry to your package, refer
+to <code class="language-plaintext highlighter-rouge">$HH</code> for where that might be (probably<code class="language-plaintext highlighter-rouge">geo</code>). Or maybe you
+want to extend the Gear Menu in the parameter editor with some of your own custom functionality. In <code class="language-plaintext highlighter-rouge">$HH</code> you
+see that there is a <code class="language-plaintext highlighter-rouge">ParmGearMenu.xml</code> file. To mimic the structure, you would
+simply add your own <code class="language-plaintext highlighter-rouge">ParmGearMenu.xml</code> file right inside the
+<code class="language-plaintext highlighter-rouge">houdini18.5</code> directory. I think you get the point!</p>
+
+<p>Several common directories and files have been included. Any of the files/folders inside <code class="language-plaintext highlighter-rouge">houdiniX.Y</code> can be removed if they aren’t
+needed for your project. At a bare minimum, like a package with a single HDA, your package structure should
+probably look something like this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>demo_tool
+├── houdini18.5/
+│   └── hda/
+│       └── jamesr_cooltool.hda
+└── demo_tool.json
+</code></pre></div></div>
+
+<h3 id="package-json">Package <code class="language-plaintext highlighter-rouge">.json</code></h3>
+<p>This is the file that tells Houdini how to load your tool.</p>
+
+<p>Houdini will search folders called <code class="language-plaintext highlighter-rouge">packages</code> for <code class="language-plaintext highlighter-rouge">.json</code> files. These <code class="language-plaintext highlighter-rouge">.json</code>
+files can be used to set environment variables when Houdini launches, and add
+things to the <code class="language-plaintext highlighter-rouge">$HOUDINI_PATH</code> so that they are made available to you in the
+Houdini session.</p>
+
+<p>Think of it like <code class="language-plaintext highlighter-rouge">houdini.env</code>, but easier to deal with.</p>
+
+<h3 id="houdinixy">houdiniX.Y</h3>
+<p>Directory that mirrors <code class="language-plaintext highlighter-rouge">$HFS/houdini</code>. By naming it after each minor release, we
+can easily maintain our tools for forward and backward compatibility.</p>
+
+<h3 id="pythonx7libs">pythonX.7libs</h3>
+
+<p>With Python 3 being the current VFX standard, and more and more DCCs supporting
+it, <code class="language-plaintext highlighter-rouge">python3.7libs</code> has been added to this template as a starting point. A few
+things to note:</p>
+
+<ul>
+  <li>You can have both <code class="language-plaintext highlighter-rouge">python2.7libs</code> and <code class="language-plaintext highlighter-rouge">python3.7libs</code> in the same project.
+Depending on your Houdini installation, if you’re launching with a Python 3
+build, Houdini will use the packages/modules found in <code class="language-plaintext highlighter-rouge">python3.7libs</code>.</li>
+  <li>Python 3 does not necessary require an <code class="language-plaintext highlighter-rouge">__init__.py</code> file like Python 2.7 does.</li>
+</ul>
+
+<h4 id="packages">Packages</h4>
+<ul>
+  <li>You might want a whole Python package that you can import, so one named after
+the Houdini package has been included.</li>
+</ul>
+
+<h4 id="modules">Modules</h4>
+<ul>
+  <li>If your Houdini package only needs a single python module (<code class="language-plaintext highlighter-rouge">.py</code> file), you can delete
+the folder inside <code class="language-plaintext highlighter-rouge">pythonX.7libs</code>, and simply put your python file directly in
+there.</li>
+</ul>
+
+<h3 id="mainmenucommonxml">MainMenuCommon.xml</h3>
+<p>Not every tool needs a dropdown menu (nor should they all get one!), but
+included is a simple template example for where it would need to go, as well as some
+boilerplate XML that creates a menu named after your package.</p>
+
+<h3 id="toolbar">toolbar</h3>
+<p><code class="language-plaintext highlighter-rouge">houdiniX.Y/toolbar</code> is where any <code class="language-plaintext highlighter-rouge">.shelf</code> files live. Some packages really benefit from
+having artist-friendly shelf tools to help make using your tools a bit easier. Inside
+is some more boilerplate XML to setup a simple shelf named after your package.</p>
+
+<blockquote>
+  <p>Remember if you add any tools to you custom shelf in Houdini, make sure to set
+the save location to your shelf! Unfortunately, Houdini does <em>not</em> remember
+your save choices, and will default to saving to the default shelf in your preferences directory!</p>
+
+  <p><a href="/assets/projects/houdini-package-template/images/save-shelf-tool.png"><img src="/assets/projects/houdini-package-template/images/save-shelf-tool.png" alt="Saving a shelf tool" /></a></p>
+</blockquote>
+
+<h3 id="helpnodes">help/nodes</h3>
+<p>Help cards for any of your tools/assets can live either directly on the assets
+themselves, or someplace on disk. Included is the structure for where you need
+to store custom help card docs, as well as a basic starting template.</p>
+
+<blockquote>
+  <p>Take note of the naming scheme- if you’re following <a href="https://www.sidefx.com/docs/houdini/assets/namespaces.html">SideFX’s recommended
+naming and versioning
+scheme</a>, you’ll
+probably have tools named like this:</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jamesr::inspectnodedata::1.00
+</code></pre></div>  </div>
+  <p>where <code class="language-plaintext highlighter-rouge">jamesr</code> is the <em>namespace</em>. The help file for such a node would be called</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jamesr--inspectnodedata.txt
+</code></pre></div>  </div>
+</blockquote>
+
+    </article>
+</section>
+
+
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+      <li>
+        <a href="/houdini/2021/09/24/import-images-from-the-web/">
+          Import Images From The Web
+          <small><time datetime="2021-09-24T00:00:00-07:00">24 Sep 2021</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/houdini/2021/09/24/custom-hda-icons/">
+          Custom Hda Icons
+          <small><time datetime="2021-09-24T00:00:00-07:00">24 Sep 2021</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tips/2021/09/11/attribute-bindings/">
+          Attribute Bindings
+          <small><time datetime="2021-09-11T00:00:00-07:00">11 Sep 2021</time></small>
+        </a>
+      </li>
+    
+  </ul>
+</aside>
+
+
+      </main>
+
+      <footer class="footer">
+        <small>
+          &copy; <time datetime="2021-09-26T22:56:33-07:00">2021</time>. All rights reserved.
+        </small>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>
