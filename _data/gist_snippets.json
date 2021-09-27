@@ -1,5 +1,12 @@
 [
     {
+        "description": "Wildcard for camelCased paths in Houdini parameters",
+        "id": "95ace113a1e24cd3e4d4817f5e2ef0a3",
+        "html_url": "https://gist.github.com/95ace113a1e24cd3e4d4817f5e2ef0a3",
+        "created_at": "2021-09-24T18:14:29Z",
+        "filename": "wildcard_camelcase.hscript"
+    },
+    {
         "description": "Toggle Manual Mode in Houdini",
         "id": "2d773b45c61452a592dc6fff28db6fbc",
         "html_url": "https://gist.github.com/2d773b45c61452a592dc6fff28db6fbc",
