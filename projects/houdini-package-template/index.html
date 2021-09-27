@@ -61,7 +61,7 @@
       <main style="padding-top: 3em">
         <!-- <hr> -->
         <h1 class="post-title">Houdini Package Template</h1>
-<time datetime="2021-09-26T23:00:47-07:00" class="post-date">26 Sep 2021</time>
+<time datetime="2021-09-26T23:40:24-07:00" class="post-date">26 Sep 2021</time>
 <section class="sheet">
   <article class="post">
       
@@ -91,14 +91,8 @@ folders have been included as a good start.</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git clone git@github.com:jamesrobinsonvfx/demo_tool.git
 </code></pre></div>    </div>
   </li>
-  <li>Open the repository and run <code class="language-plaintext highlighter-rouge">./initialize.py</code> (<a href="">See below for extra use instructions</a>)
-    <blockquote>
-      <p>This script sets the package name and title in files all around the package.
-You could totally just manually hunt for everything called
-<code class="language-plaintext highlighter-rouge">houdini_package_template</code>, and the tags <code class="language-plaintext highlighter-rouge">{% package_name %}</code>, <code class="language-plaintext highlighter-rouge">{% Package Title
-%}</code> and <code class="language-plaintext highlighter-rouge">{% PACKAGE_NAME_UPPER %}</code>, and replace them manually. Or you can
-use the script (just use the script).</p>
-    </blockquote>
+  <li>
+    <p>Open the repository and run <code class="language-plaintext highlighter-rouge">./initialize.py</code> (<a href="">See below for extra use instructions</a>)</p>
   </li>
   <li>
     <p>Start building your tool!</p>
@@ -139,7 +133,7 @@ for it.</p>
 <a href="https://www.sidefx.com/docs/houdini/ref/plugins.html">Houdini Packages documentation</a> for more detailed info.</p>
 
 <p>Outlined below are two favorite ways of setting up and loading packages. Package
-<code class="language-plaintext highlighter-rouge">.json</code> files can be placed in any <code class="language-plaintext highlighter-rouge">packages</code> folder within a <a href="">Houdini Location</a>.
+<code class="language-plaintext highlighter-rouge">.json</code> files can be placed in any <code class="language-plaintext highlighter-rouge">packages</code> folder within a <a href="https://www.sidefx.com/docs/houdini/basics/config.html#path">Houdini Location</a>.
 For studio-wide tools, that’s usually best located at your facility’s <code class="language-plaintext highlighter-rouge">$HSITE</code>.
 For single users you’ll probably want to use your <code class="language-plaintext highlighter-rouge">$HOUDINI_USER_PREF_DIR</code> if
 you don’t have <code class="language-plaintext highlighter-rouge">$HSITE</code> set up. I will be using <code class="language-plaintext highlighter-rouge">$HOUDINI_USER_PREF_DIR</code> to make
@@ -462,6 +456,34 @@ probably have tools named like this:</p>
 </code></pre></div>  </div>
 </blockquote>
 
+<h3 id="initializepy"><code class="language-plaintext highlighter-rouge">initialize.py</code></h3>
+
+<p>This script runs a short command-line wizard that lets you set the package name
+and title. It should be run before making any additions/changes to the template.</p>
+
+<p><strong>macOS / Linux</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./initialize.py
+</code></pre></div></div>
+
+<p><strong>Windows</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python initialize.py
+</code></pre></div></div>
+
+<p>If you prefer to do it in one line, you can add the package name and title as
+command-line arguments:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./initialize.py [title] [package_name]
+</code></pre></div></div>
+<p>ie.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./initialize.py "Demo Tool" demo_tool
+</code></pre></div></div>
+
+<p><a href="/assets/projects/houdini-package-template/images/initialize.gif"><img src="/assets/projects/houdini-package-template/images/initialize.gif" alt="Initialize" /></a></p>
+
+<p>You could totally just manually hunt for everything called <code class="language-plaintext highlighter-rouge">houdini_package_template</code>, and the tags <code class="language-plaintext highlighter-rouge">{% package_name %}</code>, <code class="language-plaintext highlighter-rouge">{% Package Title
+%}</code> and <code class="language-plaintext highlighter-rouge">{% PACKAGE_NAME_UPPER %}</code>, and replace them manually. Or you can
+use the script (just use the script).</p>
+
     </article>
 </section>
 
@@ -499,7 +521,7 @@ probably have tools named like this:</p>
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2021-09-26T23:00:47-07:00">2021</time>. All rights reserved.
+          &copy; <time datetime="2021-09-26T23:40:24-07:00">2021</time>. All rights reserved.
         </small>
       </footer>
     </div>
