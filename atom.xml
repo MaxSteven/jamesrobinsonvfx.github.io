@@ -4,7 +4,7 @@
  <title>James Robinson</title>
  <link href="https://jamesrobinsonvfx.com/atom.xml" rel="self"/>
  <link href="https://jamesrobinsonvfx.com/"/>
- <updated>2021-12-13T14:48:09-08:00</updated>
+ <updated>2021-12-13T15:04:24-08:00</updated>
  <id>https://jamesrobinsonvfx.com</id>
  <author>
    <name>James Robinson</name>
@@ -14,28 +14,27 @@
  
  <entry>
    <title>Multi-Output Display Hotkeys</title>
-   <link href="https://jamesrobinsonvfx.com/houdini/tip/ui/2021/12/13/multi-output-display-hotkeys/"/>
+   <link href="https://jamesrobinsonvfx.com/tip/2021/12/13/multi-output-display-hotkeys/"/>
    <updated>2021-12-13T00:00:00-08:00</updated>
-   <id>https://jamesrobinsonvfx.com/houdini/tip/ui/2021/12/13/multi-output-display-hotkeys</id>
+   <id>https://jamesrobinsonvfx.com/tip/2021/12/13/multi-output-display-hotkeys</id>
    <content type="html">
-&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
-
 &lt;p&gt;&lt;a href=&quot;/assets/posts/multi-output-display-hotkeys/images/preview.png&quot;&gt;&lt;img src=&quot;/assets/posts/multi-output-display-hotkeys/images/preview.png&quot; alt=&quot;Cover Photo&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;In the past few releases, SideFX has been going pretty hard with the
-multi-output workflow style nodes, particularly with Vellum and RBD SOPs.&lt;/p&gt;
+&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;In the past few releases, SideFX has been going pretty hard with the multi-output workflow style nodes, particularly with Vellum and RBD SOPs.&lt;/p&gt;
 
 &lt;p&gt;The most common way to view the outputs of these nodes is to just drop a null
 down and display it.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;/assets/posts/multi-output-display-hotkeys/images/drop-a-null.png&quot;&gt;&lt;img src=&quot;/assets/posts/multi-output-display-hotkeys/images/drop-a-null.png&quot; alt=&quot;Drop a Null SOP&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/multi-output-display-hotkeys/images/drop-a-null.png&quot;&gt;&lt;img src=&quot;/assets/posts/multi-output-display-hotkeys/images/drop-a-null.png&quot; alt=&quot;Drop a Null&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;This can be useful for other things, but sometimes you just want a quicker way,
 with less clutter!&lt;/p&gt;
 
 &lt;h2 id=&quot;output-for-view&quot;&gt;Output for View&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&quot;/assets/posts/multi-output-display-hotkeys/images/rmb-menu.png&quot;&gt;&lt;img src=&quot;/assets/posts/multi-output-display-hotkeys/images/rmb-menu.png&quot; alt=&quot;Output for View Flag&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/multi-output-display-hotkeys/images/rmb-menu.png&quot;&gt;&lt;img src=&quot;/assets/posts/multi-output-display-hotkeys/images/rmb-menu.png&quot; alt=&quot;Output for View&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;RMB &amp;gt; Flags &amp;gt; Output for View&lt;/p&gt;
@@ -45,13 +44,13 @@ with less clutter!&lt;/p&gt;
 by changing a flag from the menu.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;This will not affect the actual output result of the node!&lt;/em&gt;&lt;/strong&gt; This is
-important to note, because it only affects the &lt;em&gt;display&lt;/em&gt;, not what is actually
+important to note, because it only affects the display, not what is actually
 being passed through the outputs.&lt;/p&gt;
 
 &lt;h2 id=&quot;assigning-a-hotkey&quot;&gt;Assigning a Hotkey&lt;/h2&gt;
 
-&lt;p&gt;Since this option is in a menu (like a lot of other useful options!), we can actually
-bind this to a hotkey.&lt;/p&gt;
+&lt;p&gt;Since this option is in a menu (like a lot of other useful options!), we can
+actually bind this to a hotkey.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;/assets/posts/multi-output-display-hotkeys/images/hotkey-editor.png&quot;&gt;&lt;img src=&quot;/assets/posts/multi-output-display-hotkeys/images/hotkey-editor.png&quot; alt=&quot;Hotkey Editor&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -61,23 +60,23 @@ bind this to a hotkey.&lt;/p&gt;
       &lt;p&gt;Edit &amp;gt; Hotkeys&lt;/p&gt;
     &lt;/blockquote&gt;
   &lt;/li&gt;
-  &lt;li&gt;Search for &lt;em&gt;Set View Output&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Search for Set View Output&lt;/li&gt;
   &lt;li&gt;Assign a hotkey for outputs 1 - 4&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;On Linux/Windows, I find that &lt;strong&gt;Ctrl + Alt + 1&lt;/strong&gt; (1 through 4) works nicely.&lt;/p&gt;
+  &lt;p&gt;On Linux/Windows, I find that Ctrl + Alt + 1 (1 through 4) works nicely.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;This post was written on a macbook, so here it’s just &lt;strong&gt;Option + Cmd + 1-4&lt;/strong&gt;&lt;/p&gt;
+  &lt;p&gt;This post was written on a macbook, so here it’s just Option + Cmd + 1-4&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Now, changing the displayed output is as easy as selecting the node and cycling
 through your new hotkeys!&lt;/p&gt;
 
 &lt;video width=&quot;720&quot; height=&quot;405&quot; autoplay=&quot;&quot; loop=&quot;&quot;&gt;
-	&lt;source src=&quot;/assets/posts/multi-output-display-hotkeys/images/cycle-output-display.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+    &lt;source src=&quot;/assets/posts/multi-output-display-hotkeys/images/cycle-output-display.mp4&quot; type=&quot;video/mp4&quot; /&gt;
 &lt;/video&gt;
 </content>
  </entry>

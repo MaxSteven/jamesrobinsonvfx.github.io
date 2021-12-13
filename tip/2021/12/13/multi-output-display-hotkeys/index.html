@@ -11,7 +11,7 @@
 
   <title>
     
-      VDB Reshape SDF Close &middot; James Robinson
+      Multi-Output Display Hotkeys &middot; James Robinson
     
   </title>
 
@@ -60,45 +60,71 @@
 
       <main style="padding-top: 3em">
         <!-- <hr> -->
-        <h1 class="post-title">VDB Reshape SDF Close</h1>
-<time datetime="2021-07-29T00:00:00-07:00" class="post-date">29 Jul 2021</time>
+        <h1 class="post-title">Multi-Output Display Hotkeys</h1>
+<time datetime="2021-12-13T00:00:00-08:00" class="post-date">13 Dec 2021</time>
 <section class="sheet">
   <article class="post">
-      <p><a href="/assets/posts/vdb-reshape-sdf-close/images/preview.jpg"><img src="/assets/posts/vdb-reshape-sdf-close/images/preview.jpg" alt="Cover Photo" /></a></p>
+      
+<p><a href="/assets/posts/multi-output-display-hotkeys/images/preview.png"><img src="/assets/posts/multi-output-display-hotkeys/images/preview.png" alt="Cover Photo" /></a></p>
 
-<blockquote style="border-color: #d08770">
-  <p>Hipfile: <a href="/assets/posts/vdb-reshape-sdf-close/jamesr_vdbreshapesdfclose.hiplc">jamesr_vdbreshapesdfclose.hip</a></p>
+<h2 id="overview">Overview</h2>
+
+<p>In the past few releases, SideFX has been going pretty hard with the multi-output workflow style nodes, particularly with Vellum and RBD SOPs.</p>
+
+<p>The most common way to view the outputs of these nodes is to just drop a null
+down and display it.</p>
+
+<p><a href="/assets/posts/multi-output-display-hotkeys/images/drop-a-null.png"><img src="/assets/posts/multi-output-display-hotkeys/images/drop-a-null.png" alt="Drop a Null" /></a></p>
+
+<p>This can be useful for other things, but sometimes you just want a quicker way,
+with less clutter!</p>
+
+<h2 id="output-for-view">Output for View</h2>
+
+<p><a href="/assets/posts/multi-output-display-hotkeys/images/rmb-menu.png"><img src="/assets/posts/multi-output-display-hotkeys/images/rmb-menu.png" alt="Output for View" /></a></p>
+
+<blockquote>
+  <p>RMB &gt; Flags &gt; Output for View</p>
 </blockquote>
 
-<h3 id="dilate-and-erode-old">Dilate and Erode (Old)</h3>
-<p>Most people are probably familiar with the following workflow for sealing up
-gaps and holes in an SDF using 2 <strong>VDB Reshape SDF</strong> nodes:</p>
+<p>Right-click menu to the rescue! You can actually set the output you want to view
+by changing a flag from the menu.</p>
+
+<p><strong><em>This will not affect the actual output result of the node!</em></strong> This is
+important to note, because it only affects the display, not what is actually
+being passed through the outputs.</p>
+
+<h2 id="assigning-a-hotkey">Assigning a Hotkey</h2>
+
+<p>Since this option is in a menu (like a lot of other useful options!), we can
+actually bind this to a hotkey.</p>
+
+<p><a href="/assets/posts/multi-output-display-hotkeys/images/hotkey-editor.png"><img src="/assets/posts/multi-output-display-hotkeys/images/hotkey-editor.png" alt="Hotkey Editor" /></a></p>
 
 <ol>
-  <li>Set the first one to <strong>Dilate</strong></li>
-  <li>Set the second one to <strong>Erode</strong></li>
-  <li>Channel reference the <strong>Offset</strong> parameter from the dilating node to the
-<strong>Offset</strong> parameter of the eroding node.</li>
-  <li>Adjust the offset until you’re happy</li>
+  <li>Open the hotkey editor
+    <blockquote>
+      <p>Edit &gt; Hotkeys</p>
+    </blockquote>
+  </li>
+  <li>Search for Set View Output</li>
+  <li>Assign a hotkey for outputs 1 - 4</li>
 </ol>
 
 <blockquote>
-  <p>If you want to keep a filled interior, don’t forget to set the <strong>Trim</strong>
-parameter to <strong>None</strong> (Houdini 18.5+)!</p>
+  <p>On Linux/Windows, I find that Ctrl + Alt + 1 (1 through 4) works nicely.</p>
 </blockquote>
 
-<p><a href="/assets/posts/vdb-reshape-sdf-close/images/old-way.jpg"><img src="/assets/posts/vdb-reshape-sdf-close/images/old-way.jpg" alt="Old way" /></a></p>
+<blockquote>
+  <p>This post was written on a macbook, so here it’s just Option + Cmd + 1-4</p>
+</blockquote>
 
-<h3 id="close-new">Close (New)</h3>
-<p>Not sure when this was added (or maybe it has been here the whole time!), but
-there is another method that does the exact same thing in one go: <strong>Close</strong>.</p>
+<p>Now, changing the displayed output is as easy as selecting the node and cycling
+through your new hotkeys!</p>
 
-<p><a href="/assets/posts/vdb-reshape-sdf-close/images/new-way.jpg"><img src="/assets/posts/vdb-reshape-sdf-close/images/new-way.jpg" alt="New way" /></a></p>
-
-<h3 id="conclusion">Conclusion</h3>
-<p>A side-by-side comparison of the two looks like you get the same result!</p>
-
-<p><a href="/assets/posts/vdb-reshape-sdf-close/images/side-by-side.gif"><img src="/assets/posts/vdb-reshape-sdf-close/images/side-by-side.gif" alt="Side by side" /></a></p>
+<video width="720" height="405" autoplay="" loop="">
+    <source src="/assets/posts/multi-output-display-hotkeys/images/cycle-output-display.mp4" type="video/mp4" />
+</video>
 
     </article>
 </section>
@@ -107,13 +133,6 @@ there is another method that does the exact same thing in one go: <strong>Close<
 <aside class="related">
   <h3>Related posts</h3>
   <ul class="related-posts">
-    
-      <li>
-        <a href="/tip/2021/12/13/multi-output-display-hotkeys/">
-          Multi-Output Display Hotkeys
-          <small><time datetime="2021-12-13T00:00:00-08:00">13 Dec 2021</time></small>
-        </a>
-      </li>
     
       <li>
         <a href="/tips/2021/09/11/attribute-bindings/">
@@ -126,6 +145,13 @@ there is another method that does the exact same thing in one go: <strong>Close<
         <a href="/tips/2021/09/10/vex-source/">
           Vex Source
           <small><time datetime="2021-09-10T00:00:00-07:00">10 Sep 2021</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tips/2021/08/22/decay-values/">
+          Decay Values
+          <small><time datetime="2021-08-22T00:00:00-07:00">22 Aug 2021</time></small>
         </a>
       </li>
     
