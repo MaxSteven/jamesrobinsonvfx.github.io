@@ -126,6 +126,17 @@ through your new hotkeys!</p>
     <source src="/assets/posts/multi-output-display-hotkeys/images/cycle-output-display.mp4" type="video/mp4" />
 </video>
 
+<h2 id="bonus-python">Bonus: Python</h2>
+
+<p>If you’re interesting in doing something scripty with this, you can use the
+following snippet to change the output:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Outputs are a zero-based index
+</span><span class="n">node</span> <span class="o">=</span> <span class="n">hou</span><span class="p">.</span><span class="n">node</span><span class="p">(</span><span class="s">"/obj/geo1/vellumtetrahedral"</span><span class="p">)</span>
+<span class="n">node</span><span class="p">.</span><span class="n">setOutputForViewFlag</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+
     </article>
 </section>
 
@@ -163,7 +174,7 @@ through your new hotkeys!</p>
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2021-12-13T15:04:24-08:00">2021</time>. All rights reserved.
+          &copy; <time datetime="2021-12-13T15:19:35-08:00">2021</time>. All rights reserved.
         </small>
       </footer>
     </div>
