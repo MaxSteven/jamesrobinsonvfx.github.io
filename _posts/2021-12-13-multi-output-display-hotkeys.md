@@ -60,3 +60,15 @@ through your new hotkeys!
 <video width="720" height="405" autoplay loop>
     <source src="{{ images }}/cycle-output-display.mp4" type="video/mp4">
 </video>
+
+## Bonus: Python
+
+If you're interesting in doing something scripty with this, you can use the
+following snippet to change the output:
+
+```python
+# Outputs are a zero-based index
+node = hou.node("/obj/geo1/vellumtetrahedral")
+node.setOutputForViewFlag(1)
+```
+
