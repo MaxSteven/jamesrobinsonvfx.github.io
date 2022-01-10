@@ -1,5 +1,12 @@
 [
     {
+        "description": "Wrap an ftrim() function around channel refs",
+        "id": "f17a0ec451428fbe71f9e58c1800225f",
+        "html_url": "https://gist.github.com/f17a0ec451428fbe71f9e58c1800225f",
+        "created_at": "2022-01-10T00:22:18Z",
+        "filename": "ftrimify.py"
+    },
+    {
         "description": "Wildcard for camelCased paths in Houdini parameters",
         "id": "95ace113a1e24cd3e4d4817f5e2ef0a3",
         "html_url": "https://gist.github.com/95ace113a1e24cd3e4d4817f5e2ef0a3",
