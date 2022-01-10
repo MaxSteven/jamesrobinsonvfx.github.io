@@ -4,7 +4,7 @@
  <title>James Robinson</title>
  <link href="https://jamesrobinsonvfx.com/atom.xml" rel="self"/>
  <link href="https://jamesrobinsonvfx.com/"/>
- <updated>2021-12-13T15:19:35-08:00</updated>
+ <updated>2022-01-09T16:33:18-08:00</updated>
  <id>https://jamesrobinsonvfx.com</id>
  <author>
    <name>James Robinson</name>
@@ -681,7 +681,16 @@ nice clean value, pretty much as you typed it!&lt;/p&gt;
 
 &lt;p&gt;Of course, this also works in a &lt;strong&gt;Font SOP&lt;/strong&gt; too.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;/assets/posts/ftrim-function/images/font-sop.png&quot;&gt;&lt;img src=&quot;/assets/posts/ftrim-function/images/font-sop.png&quot; alt=&quot;Font SOP&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/posts/ftrim-function/images/font-sop.png&quot;&gt;&lt;img src=&quot;/assets/posts/ftrim-function/images/font-sop.png&quot; alt=&quot;Font
+SOP&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;update-9-jan-2022&quot;&gt;&lt;em&gt;Update 9 Jan 2022&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;Here’s a handy snippet for programmatically wrapping channel references in
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ftrim()&lt;/code&gt;. Taken from the &lt;a href=&quot;https://github.com/jamesrobinsonvfx/linewriter&quot;&gt;Linewriter&lt;/a&gt; tool.&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/f17a0ec451428fbe71f9e58c1800225f.js&quot;&gt; &lt;/script&gt;
+
 </content>
  </entry>
  
