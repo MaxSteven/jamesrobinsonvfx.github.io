@@ -55,4 +55,11 @@ Some Parameter Value: `ftrim(ch("/some/parameter"))`
 
 Of course, this also works in a **Font SOP** too.
 
-[![Font SOP](/assets/posts/ftrim-function/images/font-sop.png)](/assets/posts/ftrim-function/images/font-sop.png)
+[![Font
+SOP](/assets/posts/ftrim-function/images/font-sop.png)](/assets/posts/ftrim-function/images/font-sop.png)
+
+## *Update 9 Jan 2022*
+Here's a handy snippet for programmatically wrapping channel references in
+`ftrim()`. Taken from the [Linewriter](https://github.com/jamesrobinsonvfx/linewriter) tool.
+
+{% gist f17a0ec451428fbe71f9e58c1800225f %}
