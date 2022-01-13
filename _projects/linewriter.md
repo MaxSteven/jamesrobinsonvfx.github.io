@@ -9,7 +9,7 @@ repo: linewriter
 
 {% capture images %}/assets/projects/{{ page.shortname }}/images{% endcapture %}
 
-[![Cover Photo]({{ page.thumbnail }})]({{ page.thumbnail }})
+[![Cover Photo]({{ page.thumbnail }})](https://vimeo.com/665385717)
 
 > Get it [here]({{ site.socials.github }}/{{ page.repo }}) <a class="fab fa-github" href="{{ site.socials.github }}/{{ page.repo }}"></a>
 
@@ -42,8 +42,6 @@ parameter values when flipbooking wedges etc.
     - [Method 1: Houdini Packages](#method-1-houdini-packages)
     - [Method 2: Manual Installation](#method-2-manual-installation)
     - [Method 3: Install to Current Hipfile](#method-3-install-to-current-hipfile)
-
-{% include vimeo-player.html id=665385717 %}
 
 ## Problems with built-in Font SOP
 
