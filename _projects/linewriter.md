@@ -124,7 +124,7 @@ whole slew of data for your overlay, this can be a little bit of a bottleneck.
 Linewriter optimizes this by splitting out lines that are time-dependent from
 the ones that aren't, so only lines with animated data will recook.
 
-[![ftrimify line]({{ images }}/split-timedep-lines.png)]({{ images }}/split-timedep-lines.png)
+[![Split Time Dependent]({{ images }}/split-timedep-lines.png)]({{ images }}/split-timedep-lines.png)
 
 ## Other Features
 
