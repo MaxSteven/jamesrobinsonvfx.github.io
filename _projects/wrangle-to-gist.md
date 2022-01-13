@@ -129,6 +129,4 @@ Any parameter named `snippet`, `code` or `python` will have this option in its
 **Right Click** menu.
 
 ## Usage
-<video width="720" height="405" autoplay loop>
-	<source src="{{ images }}/demo.mp4" type="video/mp4">
-</video>
+<video width="720" height="405" autoplay loop muted playsinline src="{{ images }}/demo.mp4"></video>

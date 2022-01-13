@@ -57,9 +57,7 @@ actually bind this to a hotkey.
 Now, changing the displayed output is as easy as selecting the node and cycling
 through your new hotkeys!
 
-<video width="720" height="405" autoplay loop>
-    <source src="{{ images }}/cycle-output-display.mp4" type="video/mp4">
-</video>
+<video width="720" height="405" autoplay loop muted playsinline src="{{ images }}/cycle-output-display.mp4"></video>
 
 ## Bonus: Python
 

@@ -1,20 +1,21 @@
 ---
 layout: post
 title: Transform RBD Pieces with Alembic Layering
+shortname: xform-pieces-alembic-layering
 description: Create two separate Alembic caches for geometry and transforms and combine them later
 thumbnail: /assets/posts/xform-pieces-alembic-layering/images/preview.png
 categories: tips
 tags: houdini rbd alembic
 ---
 
+{% capture images %}/assets/posts/{{ page.shortname }}/images{% endcapture %}
+
 > Hipfile: [jamesr_alembicrbdlayers.hip](/assets/posts/xform-pieces-alembic-layering/jamesr_alembicrbdlayers.hiplc)
 >
 > Or follow along on [hdbp.io](https://hdbp.io/xsx5HQz2)
 
-![](/assets/posts/xform-pieces-alembic-layering/images/xform-pieces.mp4)
-<video width="720" height="405" autoplay loop>
-	<source src="/assets/posts/xform-pieces-alembic-layering/images/xform-pieces.mp4" type="video/mp4">
-</video>
+<video width="720" height="405" autoplay loop muted playsinline src="{{ images }}/xform-pieces.mp4"></video>
+
 
 ## Overview
 There are plenty of ways to transfer RBD data from one application to another.

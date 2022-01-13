@@ -179,10 +179,7 @@ it.
 
 Take this for example:
 
-![]({{ images }}/attribs-to-create-scenario.mp4)
-<video width="720" height="405" autoplay loop>
-	<source src="{{ images }}/attribs-to-create-scenario.mp4" type="video/mp4">
-</video>
+<video width="720" height="405" autoplay loop muted playsinline src="{{ images }}/attribs-to-create-scenario.mp4"></video>
 
 We have a setup that modifies the thickness of some curves. By default, the code
 will apply some randomness. The user is also given the option to provide an

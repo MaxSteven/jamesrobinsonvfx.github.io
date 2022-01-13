@@ -1,11 +1,14 @@
 ---
 layout: post
 title: Vex Source
+shortname: vex-source
 description: Use one VOP network or VEX wrangle to drive many others without channel referencing
 thumbnail: /assets/posts/vex-source/images/preview.png
 categories: tips
 tags: houdini vex vops
 ---
+
+{% capture images %}/assets/posts/{{ page.shortname }}/images{% endcapture %}
 
 > Hipfile: [jamesr_vexsource.hiplc](/assets/posts/vex-source/jamesr_vexsource.hiplc)
 {:style="border-color: #d08770"}
@@ -26,10 +29,8 @@ change them all at once?
 
 ## Scenario
 
-![](/assets/posts/vex-source/images/noisey-flippy.mp4)
-<video width="720" height="405" autoplay loop>
-	<source src="/assets/posts/vex-source/images/noisey-flippy.mp4" type="video/mp4">
-</video>
+<video width="720" height="405" autoplay loop muted playsinline src="{{ images }}/noisey-flippy.mp4"></video>
+
 
 Let's say we have a VOP network that applies some noisey displacement animation
 to a character (see hipfile above). There are several other characters in the
