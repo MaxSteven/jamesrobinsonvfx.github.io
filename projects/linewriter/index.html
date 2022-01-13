@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab:300|Roboto:500" rel="stylesheet">
+  </head>
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Linewriter &middot; James Robinson
+    
+  </title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+</head>
+
+
+  <body>
+
+    <div class="container content">
+      <header class="masthead">
+        <!-- <h3 class="masthead-title">
+          <a href="/" title="Home">James Robinson</a>
+          <small>Houdini FX TD</small>
+        </h3> -->
+        <nav class="navbar">
+  <span>
+  <h3 class="masthead-title">
+    <a href="/" title="Home">James Robinson</a>
+    <small>Houdini FX TD</small>
+  </h3>
+    <span style="display: block;">
+    <a class="fab fa-vimeo" href="https://vimeo.com/jamesrobinsonvfx"></a>
+    <a class="fab fa-linkedin" href="https://www.linkedin.com/in/jamesrobinsonvfx/"></a>
+    <a class="fab fa-github" href="https://github.com/jamesrobinsonvfx"></a>
+    <a class="fab fa-instagram" href="https://www.instagram.com/jamesrobinsonvfx/"></a>
+    </span>
+  </span>
+
+  <span>
+  <a href="/" class="navlink">Blog</a>
+  <a href="/snippets" class="navlink">Snippets</a>
+  <a href="/projects" class="navlink">Projects</a>
+  <a href="/work" class="navlink">Work</a>
+  <a href="/links" class="navlink">Links</a>
+  <a href="/about" class="navlink">About</a>
+  </span>
+</nav>
+      </header>
+
+      <main style="padding-top: 3em">
+        <!-- <hr> -->
+        <h1 class="post-title">Linewriter</h1>
+<time datetime="2022-01-12T19:02:35-08:00" class="post-date">12 Jan 2022</time>
+<section class="sheet">
+  <article class="post">
+      
+<p><a href="/assets/projects/linewriter/images/preview.jpg"><img src="/assets/projects/linewriter/images/preview.jpg" alt="Cover Photo" /></a></p>
+
+<blockquote>
+  <p>Get it <a href="https://github.com/jamesrobinsonvfx/linewriter">here</a> <a class="fab fa-github" href="https://github.com/jamesrobinsonvfx/linewriter"></a></p>
+</blockquote>
+
+<h1 id="linewriter">Linewriter</h1>
+
+<p>Linewriter is a simple SOP that adds some functionality around the built-in Font
+SOP. It is most useful for creating text labels in the viewport for recording
+parameter values when flipbooking wedges etc.</p>
+
+<blockquote>
+  <p>This node was built in <code class="language-plaintext highlighter-rouge">Houdini 19.0.455</code>. While there is a version for
+Houdini 18.5, it will look and perform best in Houdini 19+</p>
+</blockquote>
+
+<blockquote>
+  <p>On macOS with UI scaling on, some parameters may not line up in a pretty way in
+Houdni 19.0. This has been reported to SideFX.</p>
+</blockquote>
+
+<ul>
+  <li><a href="#linewriter">Linewriter</a>
+    <ul>
+      <li><a href="#problems-with-built-in-font-sop">Problems with built-in Font SOP</a>
+        <ul>
+          <li><a href="#1-font-sop-doesnt-play-well-with-channel-references">1. Font SOP doesn’t play well with channel references</a></li>
+          <li><a href="#2-float-values-are-over-precise">2. Float values are over-precise</a></li>
+          <li><a href="#3-font-artifacts">3. Font artifacts</a></li>
+          <li><a href="#4-limited-coloring-options">4. Limited coloring options</a></li>
+          <li><a href="#5-no-background-color-options">5. No background color options</a></li>
+          <li><a href="#6-performance">6. Performance</a></li>
+        </ul>
+      </li>
+      <li><a href="#other-features">Other Features</a>
+        <ul>
+          <li><a href="#transform-into-camera">Transform into Camera</a></li>
+          <li><a href="#help-card">Help Card</a></li>
+          <li><a href="#embedded-example-setup">Embedded example setup</a></li>
+          <li><a href="#constant-shader">Constant Shader</a></li>
+        </ul>
+      </li>
+      <li><a href="#installation">Installation</a>
+        <ul>
+          <li><a href="#method-1-houdini-packages">Method 1: Houdini Packages</a></li>
+          <li><a href="#method-2-manual-installation">Method 2: Manual Installation</a></li>
+          <li><a href="#method-3-install-to-current-hipfile">Method 3: Install to Current Hipfile</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div class="vimeo-container">
+    <iframe src="https://player.vimeo.com/video/665385717" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+    </iframe>
+</div>
+
+<h2 id="problems-with-built-in-font-sop">Problems with built-in Font SOP</h2>
+
+<p>There are a few slightly annoying gotchas when making HUDs/Overlays out of the
+Font SOP for recoding parameter values etc.</p>
+
+<h3 id="1-font-sop-doesnt-play-well-with-channel-references">1. Font SOP doesn’t play well with channel references</h3>
+
+<p>When you’re building a HUD/Overlay with the default Font SOP, it can be tedious
+adding channel references, since when you RMB &gt; Paste Relative References, it
+tends to blast away everything you had in there already. So instead, you need to
+copy the path to the parm someplace else, and paste it in.</p>
+
+<video width="720" height="405" autoplay="" loop="" muted="" playsinline="" src="/assets/projects/linewriter/images/channelref-font-sop.mp4"></video>
+
+<p>Linewriter uses a single-line string parameter, where this doesn’t seem to be an
+issue.</p>
+
+<video width="720" height="405" autoplay="" loop="" muted="" playsinline="" src="/assets/projects/linewriter/images/channelref-linewriter.mp4"></video>
+
+<h3 id="2-float-values-are-over-precise">2. Float values are over-precise</h3>
+
+<p><a href="https://www.jamesrobinsonvfx.com/tips/2021/08/19/ftrim-function/">This blog post</a>
+goes over this more, but in short - a lot of times you see what should be a simple
+parm value like <code class="language-plaintext highlighter-rouge">0.025</code> being represented in a string parm as
+<code class="language-plaintext highlighter-rouge">0.025000000000000001</code>. This is distracting, and wastes a lot of on-screen space.</p>
+
+<p>Each line of line-writer has a button that tries to “ftrimify” your line.
+<a href="/assets/projects/linewriter/images/ftrimify-line.png"><img src="/assets/projects/linewriter/images/ftrimify-line.png" alt="ftrimify line" /></a>
+<!-- [![ftrimify line](/assets/projects/linewriter/images/sesi-vop-floattoint.png)](/assets/projects/linewriter/images/sesi-vop-floattoint.png) -->
+It looks for each <code class="language-plaintext highlighter-rouge">ch()</code> or <code class="language-plaintext highlighter-rouge">chs()</code>, and wraps them up in an <code class="language-plaintext highlighter-rouge">ftrim()</code>.
+This helps cut down the numbers to max of six floating point digits. There is
+also a button under the <strong>Extra</strong> folder that will run it over all the lines
+at once.</p>
+
+<p><a href="/assets/projects/linewriter/images/ftrimify-all.png"><img src="/assets/projects/linewriter/images/ftrimify-all.png" alt="ftrimify all" /></a></p>
+
+<video width="720" height="405" autoplay="" loop="" muted="" playsinline="" src="/assets/projects/linewriter/images/ftrimify.mp4"></video>
+
+<h3 id="3-font-artifacts">3. Font artifacts</h3>
+
+<p>Sometimes you’ll make a nice looking overlay, only to have a few B’s or D’s get
+their holes filled in. They look fine at the origin, but when parented to the
+camera, they look all wrong.</p>
+
+<p>I’m not sure what the exact cause is (some sort of precision thing I imagine),
+but the solution is simple: Pack up your Font SOP at the end. All the
+characters with holes will appear as they did before transforming (Linewriter
+does this per-line, as well as one final pack at the end).</p>
+
+<p>Other times, the artifacts are a direct result of the Font SOP itself. In this
+case, there is also an option to fix these holes, though it does decrease performance.</p>
+
+<video width="720" height="405" autoplay="" loop="" muted="" playsinline="" src="/assets/projects/linewriter/images/hole-fix.mp4"></video>
+
+<h3 id="4-limited-coloring-options">4. Limited coloring options</h3>
+
+<p>If you have a few key lines that you want to stand out, you have to either make a few
+extra Font SOPs, or group the characters manually and color them later.
+Linewriter lets you set a base color for the whole block, and override per-line as needed.</p>
+
+<h3 id="5-no-background-color-options">5. No background color options</h3>
+
+<p>Look at Nuke’s Text node options and you’ll see a tab called Background. This is
+very useful for when your text is occluding some of your scene, and becomes
+difficult to read. Linewriter adds an optional background behind each line to
+make sure the text stands out.</p>
+
+<p><a href="/assets/projects/linewriter/images/title-card-hou.png"><img src="/assets/projects/linewriter/images/title-card-hou.png" alt="Background and Colors" /></a></p>
+
+<h3 id="6-performance">6. Performance</h3>
+
+<p>In a single Font SOP, if even one of your referenced parameters is animated
+(time-dependent), it will cause the whole thing to recook each frame. For single
+lines, this isn’t a big deal. But with bigger, monolithic Font SOPs holding a
+whole slew of data for your overlay, this can be a little bit of a bottleneck.</p>
+
+<p>Linewriter optimizes this by splitting out lines that are time-dependent from
+the ones that aren’t, so only lines with animated data will recook.</p>
+
+<p><a href="/assets/projects/linewriter/images/split-timedep-lines.png"><img src="/assets/projects/linewriter/images/split-timedep-lines.png" alt="ftrimify line" /></a></p>
+
+<h2 id="other-features">Other Features</h2>
+
+<h3 id="transform-into-camera">Transform into Camera</h3>
+
+<p>If you provide a camera object, you can parent your text to a camera directly
+in SOPs from Linewriter.</p>
+
+<p>Look through the camera, select the Linewriter node, and hit enter in the
+viewport to activate the transform handle and move the text into place.</p>
+
+<video width="720" height="405" autoplay="" loop="" muted="" playsinline="" src="/assets/projects/linewriter/images/cam-xform.mp4"></video>
+
+<h3 id="help-card">Help Card</h3>
+
+<p>Check the help card for extra info about each parameter</p>
+
+<h3 id="embedded-example-setup">Embedded example setup</h3>
+
+<blockquote>
+  <p>Extra &gt; Load Example Setup</p>
+</blockquote>
+
+<p>A demo setup is included to show how this node can be used</p>
+
+<p><a href="/assets/projects/linewriter/images/load-example-setup.png"><img src="/assets/projects/linewriter/images/load-example-setup.png" alt="Load Example Setup" /></a></p>
+
+<h3 id="constant-shader">Constant Shader</h3>
+
+<p>There is a simple constant shader inside that is applied to the all of the
+Linewriter geometry. This ensures that it doesn’t receive shadows, and that the
+text colors are as bright as possible in the viewport.</p>
+
+<h2 id="installation">Installation</h2>
+
+<h3 id="method-1-houdini-packages">Method 1: Houdini Packages</h3>
+
+<p>Installation is simple with <a href="https://www.sidefx.com/docs/houdini/ref/plugins.html">Houdini Packages</a>.</p>
+
+<ol>
+  <li>Download the latest release <a href="https://github.com/jamesrobinsonvfx/linewriter/releases/latest/download/linewriter.zip">here</a>.
+    <blockquote>
+      <p>You can clone the repo if you’d like instead.</p>
+    </blockquote>
+  </li>
+  <li>Navigate to your houdini user preferences folder and into the <code class="language-plaintext highlighter-rouge">packages</code>
+directory (if the <code class="language-plaintext highlighter-rouge">packages</code> folder does not exist, create it).
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$HOUDINI_USER_PREF_DIR/packages
+</code></pre></div>    </div>
+  </li>
+  <li>Copy the zip archive here and extact its contents.</li>
+  <li>Move (or copy) the <code class="language-plaintext highlighter-rouge">linewriter.json</code> file to the parent directory
+<code class="language-plaintext highlighter-rouge">$HOUDINI_USER_PREF_DIR/packages</code>. Your <code class="language-plaintext highlighter-rouge">packages</code> folder should now look
+something like this:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>packages/
+├── linewriter
+│   ├── houdini18.5
+│   │   └── hda
+│   │       └── jamesr_linewriter.hda
+│   └── houdini19.0
+│       └── hda
+│           └── jamesr_linewriter.hda
+└── linewriter.json
+</code></pre></div>    </div>
+  </li>
+  <li>Launch Houdini.</li>
+</ol>
+
+<h3 id="method-2-manual-installation">Method 2: Manual Installation</h3>
+
+<ol>
+  <li>Download the latest release <a href="https://github.com/jamesrobinsonvfx/linewriter/releases/latest/download/linewriter.zip">here</a>.
+    <blockquote>
+      <p>You can clone the repo if you’d like instead.</p>
+    </blockquote>
+  </li>
+  <li>Navigate to wherever you load digital assets from
+    <blockquote>
+      <p><code class="language-plaintext highlighter-rouge">$HIP/otls</code>, <code class="language-plaintext highlighter-rouge">$HOUDINI_USER_PREF_DIR/hda</code>, <code class="language-plaintext highlighter-rouge">$HOUDINI_USER_PREF_DIR/otls</code> etc.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Copy <code class="language-plaintext highlighter-rouge">jamesr_linewriter.hda</code> from <code class="language-plaintext highlighter-rouge">houdiniX.Y/hda</code> into the location you chose in Step 2.</p>
+  </li>
+  <li>Launch Houdini.</li>
+</ol>
+
+<h3 id="method-3-install-to-current-hipfile">Method 3: Install to Current Hipfile</h3>
+
+<ol>
+  <li>Launch Houdini.</li>
+  <li>From the main title bar, select <strong>Assets &gt; Install Asset Library</strong>.</li>
+  <li>Navigate to wherever you downloaded the repo/zip archive and select the HDA for your version of Houdini from <code class="language-plaintext highlighter-rouge">houdiniX.Y/hda/jamesr_linewriter.hda</code></li>
+  <li>Select <strong>Install</strong> or <strong>Install and Create</strong>.</li>
+</ol>
+
+    </article>
+</section>
+
+
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+      <li>
+        <a href="/tip/2021/12/13/multi-output-display-hotkeys/">
+          Multi-Output Display Hotkeys
+          <small><time datetime="2021-12-13T00:00:00-08:00">13 Dec 2021</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tips/2021/09/11/attribute-bindings/">
+          Attribute Bindings
+          <small><time datetime="2021-09-11T00:00:00-07:00">11 Sep 2021</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/tips/2021/09/10/vex-source/">
+          Vex Source
+          <small><time datetime="2021-09-10T00:00:00-07:00">10 Sep 2021</time></small>
+        </a>
+      </li>
+    
+  </ul>
+</aside>
+
+
+      </main>
+
+      <footer class="footer">
+        <small>
+          &copy; <time datetime="2022-01-12T19:02:35-08:00">2022</time>. All rights reserved.
+        </small>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

@@ -4,7 +4,7 @@
  <title>James Robinson</title>
  <link href="https://jamesrobinsonvfx.com/atom.xml" rel="self"/>
  <link href="https://jamesrobinsonvfx.com/"/>
- <updated>2022-01-09T16:33:18-08:00</updated>
+ <updated>2022-01-12T19:02:35-08:00</updated>
  <id>https://jamesrobinsonvfx.com</id>
  <author>
    <name>James Robinson</name>
@@ -75,9 +75,7 @@ actually bind this to a hotkey.&lt;/p&gt;
 &lt;p&gt;Now, changing the displayed output is as easy as selecting the node and cycling
 through your new hotkeys!&lt;/p&gt;
 
-&lt;video width=&quot;720&quot; height=&quot;405&quot; autoplay=&quot;&quot; loop=&quot;&quot;&gt;
-    &lt;source src=&quot;/assets/posts/multi-output-display-hotkeys/images/cycle-output-display.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-&lt;/video&gt;
+&lt;video width=&quot;720&quot; height=&quot;405&quot; autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; src=&quot;/assets/posts/multi-output-display-hotkeys/images/cycle-output-display.mp4&quot;&gt;&lt;/video&gt;
 
 &lt;h2 id=&quot;bonus-python&quot;&gt;Bonus: Python&lt;/h2&gt;
 
@@ -262,10 +260,7 @@ it.&lt;/p&gt;
 
 &lt;p&gt;Take this for example:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/attribute-bindings/images/attribs-to-create-scenario.mp4&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;video width=&quot;720&quot; height=&quot;405&quot; autoplay=&quot;&quot; loop=&quot;&quot;&gt;
-	&lt;source src=&quot;/assets/posts/attribute-bindings/images/attribs-to-create-scenario.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-&lt;/video&gt;
+&lt;video width=&quot;720&quot; height=&quot;405&quot; autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; src=&quot;/assets/posts/attribute-bindings/images/attribs-to-create-scenario.mp4&quot;&gt;&lt;/video&gt;
 
 &lt;p&gt;We have a setup that modifies the thickness of some curves. By default, the code
 will apply some randomness. The user is also given the option to provide an
@@ -374,7 +369,8 @@ Parameter&lt;/strong&gt;!&lt;/p&gt;
    <link href="https://jamesrobinsonvfx.com/tips/2021/09/10/vex-source/"/>
    <updated>2021-09-10T00:00:00-07:00</updated>
    <id>https://jamesrobinsonvfx.com/tips/2021/09/10/vex-source</id>
-   <content type="html">&lt;blockquote style=&quot;border-color: #d08770&quot;&gt;
+   <content type="html">
+&lt;blockquote style=&quot;border-color: #d08770&quot;&gt;
   &lt;p&gt;Hipfile: &lt;a href=&quot;/assets/posts/vex-source/jamesr_vexsource.hiplc&quot;&gt;jamesr_vexsource.hiplc&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -396,10 +392,7 @@ change them all at once?&lt;/p&gt;
 
 &lt;h2 id=&quot;scenario&quot;&gt;Scenario&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/vex-source/images/noisey-flippy.mp4&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;video width=&quot;720&quot; height=&quot;405&quot; autoplay=&quot;&quot; loop=&quot;&quot;&gt;
-	&lt;source src=&quot;/assets/posts/vex-source/images/noisey-flippy.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-&lt;/video&gt;
+&lt;video width=&quot;720&quot; height=&quot;405&quot; autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; src=&quot;/assets/posts/vex-source/images/noisey-flippy.mp4&quot;&gt;&lt;/video&gt;
 
 &lt;p&gt;Let’s say we have a VOP network that applies some noisey displacement animation
 to a character (see hipfile above). There are several other characters in the
@@ -742,16 +735,14 @@ there is another method that does the exact same thing in one go: &lt;strong&gt;
    <link href="https://jamesrobinsonvfx.com/tips/2021/07/06/xform-pieces-alembic-layering/"/>
    <updated>2021-07-06T00:00:00-07:00</updated>
    <id>https://jamesrobinsonvfx.com/tips/2021/07/06/xform-pieces-alembic-layering</id>
-   <content type="html">&lt;blockquote&gt;
+   <content type="html">
+&lt;blockquote&gt;
   &lt;p&gt;Hipfile: &lt;a href=&quot;/assets/posts/xform-pieces-alembic-layering/jamesr_alembicrbdlayers.hiplc&quot;&gt;jamesr_alembicrbdlayers.hip&lt;/a&gt;&lt;/p&gt;
 
   &lt;p&gt;Or follow along on &lt;a href=&quot;https://hdbp.io/xsx5HQz2&quot;&gt;hdbp.io&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/xform-pieces-alembic-layering/images/xform-pieces.mp4&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;video width=&quot;720&quot; height=&quot;405&quot; autoplay=&quot;&quot; loop=&quot;&quot;&gt;
-	&lt;source src=&quot;/assets/posts/xform-pieces-alembic-layering/images/xform-pieces.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-&lt;/video&gt;
+&lt;video width=&quot;720&quot; height=&quot;405&quot; autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; src=&quot;/assets/posts/xform-pieces-alembic-layering/images/xform-pieces.mp4&quot;&gt;&lt;/video&gt;
 
 &lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
 &lt;p&gt;There are plenty of ways to transfer RBD data from one application to another.
