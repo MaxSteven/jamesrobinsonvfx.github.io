@@ -45,6 +45,7 @@ collections:
     output: true
     order:
       - /mplay-batch.md
+      - /linewriter.md
       - /wrangle-to-gist.md
       - /inspect-node-data.md
       - /hair-cards-to-guide-curves.md
