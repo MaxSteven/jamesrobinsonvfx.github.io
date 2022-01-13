@@ -57,12 +57,12 @@ adding channel references, since when you RMB > Paste Relative References, it
 tends to blast away everything you had in there already. So instead, you need to
 copy the path to the parm someplace else, and paste it in.
 
-<video width="720" height="405" autoplay loop muted playsinline src="{{ images }}/channelref_font_sop.mp4"></video>
+<video width="720" height="405" autoplay loop muted playsinline src="{{ images }}/channelref-font-sop.mp4"></video>
 
 Linewriter uses a single-line string parameter, where this doesn't seem to be an
 issue.
 
-<video width="720" height="405" autoplay loop muted playsinline src="{{ images }}/channelref_linewriter.mp4"></video>
+<video width="720" height="405" autoplay loop muted playsinline src="{{ images }}/channelref-linewriter.mp4"></video>
 
 ### 2. Float values are over-precise
 
@@ -72,14 +72,14 @@ parm value like `0.025` being represented in a string parm as
 `0.025000000000000001`. This is distracting, and wastes a lot of on-screen space.
 
 Each line of line-writer has a button that tries to "ftrimify" your line.
-[![ftrimify line]({{ images }}/ftrimify_line.png)]({{ images }}/ftrimify_line.png)
-<!-- [![ftrimify line]({{ images }}/sesi_vop_floattoint.png)]({{ images }}/sesi_vop_floattoint.png) -->
+[![ftrimify line]({{ images }}/ftrimify-line.png)]({{ images }}/ftrimify-line.png)
+<!-- [![ftrimify line]({{ images }}/sesi-vop-floattoint.png)]({{ images }}/sesi-vop-floattoint.png) -->
 It looks for each `ch()` or `chs()`, and wraps them up in an `ftrim()`.
 This helps cut down the numbers to max of six floating point digits. There is
 also a button under the **Extra** folder that will run it over all the lines
 at once.
 
-[![ftrimify all]({{ images }}/ftrimify_all.png)]({{ images }}/ftrimify_all.png)
+[![ftrimify all]({{ images }}/ftrimify-all.png)]({{ images }}/ftrimify-all.png)
 
 <video width="720" height="405" autoplay loop muted playsinline src="{{ images }}/ftrimify.mp4"></video>
 
@@ -97,7 +97,7 @@ does this per-line, as well as one final pack at the end).
 Other times, the artifacts are a direct result of the Font SOP itself. In this
 case, there is also an option to fix these holes, though it does decrease performance.
 
-<video width="720" height="405" autoplay loop muted playsinline src="{{ images }}/hole_fix.mp4"></video>
+<video width="720" height="405" autoplay loop muted playsinline src="{{ images }}/hole-fix.mp4"></video>
 
 ### 4. Limited coloring options
 
@@ -112,7 +112,7 @@ very useful for when your text is occluding some of your scene, and becomes
 difficult to read. Linewriter adds an optional background behind each line to
 make sure the text stands out.
 
-[![Background and Colors]({{ images }}/title_card_hou.png)]({{ images }}/title_card_hou.png)
+[![Background and Colors]({{ images }}/title-card-hou.png)]({{ images }}/title-card-hou.png)
 
 ### 6. Performance
 
@@ -124,7 +124,7 @@ whole slew of data for your overlay, this can be a little bit of a bottleneck.
 Linewriter optimizes this by splitting out lines that are time-dependent from
 the ones that aren't, so only lines with animated data will recook.
 
-[![ftrimify line]({{ images }}/split_timedep_lines.png)]({{ images }}/split_timedep_lines.png)
+[![ftrimify line]({{ images }}/split-timedep-lines.png)]({{ images }}/split-timedep-lines.png)
 
 ## Other Features
 
@@ -136,7 +136,7 @@ in SOPs from Linewriter.
 Look through the camera, select the Linewriter node, and hit enter in the
 viewport to activate the transform handle and move the text into place.
 
-<video width="720" height="405" autoplay loop muted playsinline src="{{ images }}/cam_xform.mp4"></video>
+<video width="720" height="405" autoplay loop muted playsinline src="{{ images }}/cam-xform.mp4"></video>
 
 ### Help Card
 
@@ -148,7 +148,7 @@ Check the help card for extra info about each parameter
 
 A demo setup is included to show how this node can be used
 
-[![Load Example Setup]({{ images }}/load_example_setup.png)]({{ images }}/load_example_setup.png)
+[![Load Example Setup]({{ images }}/load-example-setup.png)]({{ images }}/load-example-setup.png)
 
 ### Constant Shader
 
