@@ -23,12 +23,9 @@ line string parameter (the default), and a larger input field.
 
 This could be done on a single parameter by messing around with the Parameter
 Template, but a) that's always a bit of a faff and b) won't work for multiparms
-when you might only one one string collapsed, and the others expanded.
+when you might only one one string collapsed and the others expanded.
 
 In this post, I'll walk through setting this up using *two* string parameters,
-and invisible toggle, and some Action Buttons. We'll start by building it on a
+an invisible toggle, and some Action Buttons. We'll start by building it on a
 single string parameter, and finish by seeing how we can add it to a multiparm
 block. Let's get started!
-
-
-
