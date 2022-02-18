@@ -23,7 +23,7 @@ don't need to run over geometry (so the Python SOP is out). Luckily, it's really
 easy create a simple preset that lets us run some Python code from a string
 parameter on any node.
 
-This is useful for creating small scripts to run in your scene, debug stuff, 
+This is useful for creating small scripts to run in your scene, debug stuff,
 prototype some code, and even for creating code for parameter callbacks on the
 fly without needing to write your code to disk, or embed into an HDA.
 
@@ -61,7 +61,7 @@ Setting the language to Python doesn't really do anything special, aside from gi
 
 [![Python string parameter]({{ images }}/06_python_string_parm.png)]({{ images }}/06_python_string_parm.png)
 
-Nice, looking a lot better! Now just need to hook it all up so that when we press the button, the code executes. We do this by adding a *Callback* to the button we created (called "Execute").
+Nice, looking a lot better! Now we just need to hook it all up so that when we press the button, the code executes. We do this by adding a *Callback* to the button we created.
 
 The callback code for this one is simple:
 
@@ -79,7 +79,7 @@ And that's it! Pressing the **Execute** button works just as a expected and prin
 
 ### A Quick Detour: `kwargs`
 
-Now `kwargs` is a whole topic in itself (see the [documentation](https://www.sidefx.com/docs/houdini/hom/locations.html))! Basically, whenever you're running code on a node in Houdini, whether through a callback, an Action Button, a menu script, an OnCreated script ... and so on, Houdini usually passes you a really useful object called `kwargs`. `kwargs` generally stands for *Keyword Arguments*, and is a simple Python dictionary with some key/value pairs that can be really useful to you! I don't want to make this a post about kwargs, but just so we can understand it a little better, let's quickly erase the callback code that's currently in there, and replace it with:
+Now `kwargs` is a whole topic in itself (see the [documentation](https://www.sidefx.com/docs/houdini/hom/locations.html))! Basically, whenever you're running code on a node in Houdini, whether through a callback, an Action Button, a menu script, an OnCreated script ... and so on, Houdini usually passes you a really useful object called `kwargs`. `kwargs` generally stands for *Keyword Arguments*, and is a simple Python dictionary with some key/value pairs that can be really useful to you. I don't want to make this a post about kwargs, but just so we can understand it a little better, let's quickly erase the callback code that's currently in there, and replace it with:
 
 ```python
 print(kwargs)
@@ -97,7 +97,9 @@ node. So use `kwargs` if it's available!
 
 ### Advanced: Complex Callbacks on the Fly
 
-Now that we know how to run code on a node, and have some idea of what we get from `kwargs`, it's possible for us to actually write some more complicated code in a string parameter, and use it to run callback that does something else.
+Now that we know how to run code on a node, and have some idea of what we get
+from `kwargs`, it's possible for us to actually write some more complicated code
+in a string parameter, and use it to run a callback that does something else.
 
 The interesting part about this is that when we execute our code with the snippet above:
 
@@ -109,7 +111,7 @@ the `kwargs` dictionary is made available to us in our code block!
 
 [![`kwargs` in parm]({{ images }}/09_kwargs_in_parm.png)]({{ images }}/09_kwargs_in_parm.png)
 
-If we look closely, we can see that the `'parm_name'` key's value is `'execute'`, meaning that the kwargs dictionary was passed through from our button! This means we can write code in our string parameter and run it like a callback just like you can do on HDAs using the PythonModule script section! This can be extremely useful for creating scripts on the fly that run over multiple items in multiparm blocks. I'll include an example of that in the hipfile.
+If we look closely, we can see that the `'parm_name'` key's value is `'execute'`, meaning that the `kwargs` dictionary was passed through from our button! This means we can write code in our string parameter and run it like a callback just like you can do on HDAs using the PythonModule script section! This can be extremely useful for creating scripts on the fly that run over multiple items in multiparm blocks. I'll include an example of that in the hipfile.
 
 [![Advanced mode]({{ images }}/10_advanced_mode.png)]({{ images }}/10_advanced_mode.png)
 
