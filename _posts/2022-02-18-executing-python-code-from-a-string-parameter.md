@@ -77,6 +77,12 @@ And that's it! Pressing the **Execute** button works just as a expected and prin
 
 [![Shell output]({{ images }}/08_shell_output.png)]({{ images }}/08_shell_output.png)
 
+To finish it off, we can store this as a preset so that it's super quick to set up when we need it:
+
+[![Save preset]({{ images }}/11_save_preset.png)]({{ images }}/11_save_preset.png)
+
+[![Save preset dialog]({{ images }}/12_save_preset_dialog.png)]({{ images }}/12_save_preset_dialog.png)
+
 ### A Quick Detour: `kwargs`
 
 Now `kwargs` is a whole topic in itself (see the [documentation](https://www.sidefx.com/docs/houdini/hom/locations.html))! Basically, whenever you're running code on a node in Houdini, whether through a callback, an Action Button, a menu script, an OnCreated script ... and so on, Houdini usually passes you a really useful object called `kwargs`. `kwargs` generally stands for *Keyword Arguments*, and is a simple Python dictionary with some key/value pairs that can be really useful to you. I don't want to make this a post about kwargs, but just so we can understand it a little better, let's quickly erase the callback code that's currently in there, and replace it with:
